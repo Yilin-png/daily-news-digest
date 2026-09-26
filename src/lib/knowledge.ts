@@ -1,18 +1,22 @@
 import { concepts, type Concept } from "@/lib/concepts";
-import { articles, type Article } from "@/lib/news";
-import { studies, type Study } from "@/lib/study";
+import { allArticles, editions, type Article } from "@/lib/news";
+import type { Study } from "@/lib/study";
 
 export type Segment = string | { conceptId: string; text: string };
 
 const conceptMap = new Map(concepts.map((c) => [c.id, c]));
 const LINK_RE = /\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g;
 
+export function articleKey(article: Pick<Article, "date" | "id">): string {
+  return `${article.date}/${article.id}`;
+}
+
 export function getConcept(id: string): Concept | undefined {
   return conceptMap.get(id);
 }
 
-export function getStudy(articleId: string): Study | undefined {
-  return studies[articleId];
+export function getStudy(article: Pick<Article, "date" | "id">): Study | undefined {
+  return editions.find((edition) => edition.date === article.date)?.studies[article.id];
 }
 
 export function parseLinks(text: string): Segment[] {
@@ -39,15 +43,17 @@ function uniq<T>(xs: T[]): T[] {
 }
 
 /** All concepts an article links to: its study terms plus inline refs in the background. */
-export function articleConceptIds(articleId: string): string[] {
-  const study = studies[articleId];
+export function articleConceptIds(article: Pick<Article, "date" | "id">): string[] {
+  const study = getStudy(article);
   if (!study) return [];
   return uniq([...study.terms, ...study.background.flatMap(extractRefs)]).filter((id) =>
     conceptMap.has(id),
   );
 }
 
-const articleConceptIndex = new Map(articles.map((a) => [a.id, articleConceptIds(a.id)]));
+const articleConceptIndex = new Map(
+  allArticles.map((article) => [articleKey(article), articleConceptIds(article)]),
+);
 
 export function conceptOutgoing(id: string): Concept[] {
   const c = conceptMap.get(id);
@@ -60,36 +66,45 @@ export function conceptOutgoing(id: string): Concept[] {
 
 export function conceptBacklinks(id: string): { articles: Article[]; concepts: Concept[] } {
   return {
-    articles: articles.filter((a) => articleConceptIndex.get(a.id)?.includes(id)),
+    articles: allArticles
+      .filter((article) => articleConceptIndex.get(articleKey(article))?.includes(id))
+      .sort((a, b) => b.date.localeCompare(a.date) || Number(a.id) - Number(b.id)),
     concepts: concepts.filter((c) => c.id !== id && extractRefs(c.detail).includes(id)),
   };
 }
 
 export function conceptMentionCount(id: string): number {
-  return articles.filter((a) => articleConceptIndex.get(a.id)?.includes(id)).length;
+  return allArticles.filter((article) => articleConceptIndex.get(articleKey(article))?.includes(id))
+    .length;
 }
 
 export function relatedByConcepts(
-  articleId: string,
+  article: Article,
   limit = 6,
 ): { article: Article; shared: Concept[] }[] {
-  const mine = new Set(articleConceptIndex.get(articleId) ?? []);
-  return articles
-    .filter((a) => a.id !== articleId)
-    .map((a) => ({
-      article: a,
-      shared: (articleConceptIndex.get(a.id) ?? [])
+  const mine = new Set(articleConceptIndex.get(articleKey(article)) ?? []);
+  return allArticles
+    .filter((item) => articleKey(item) !== articleKey(article))
+    .map((item) => ({
+      article: item,
+      shared: (articleConceptIndex.get(articleKey(item)) ?? [])
         .filter((id) => mine.has(id))
         .map((id) => conceptMap.get(id)!),
     }))
-    .filter((x) => x.shared.length > 0)
-    .sort((a, b) => b.shared.length - a.shared.length || Number(a.article.id) - Number(b.article.id))
+    .filter((item) => item.shared.length > 0)
+    .sort((a, b) => {
+      const sameA = a.article.date === article.date ? 1 : 0;
+      const sameB = b.article.date === article.date ? 1 : 0;
+      if (sameA !== sameB) return sameB - sameA;
+      if (b.shared.length !== a.shared.length) return b.shared.length - a.shared.length;
+      return b.article.date.localeCompare(a.article.date) || Number(a.article.id) - Number(b.article.id);
+    })
     .slice(0, limit);
 }
 
 /** Auto-link the first mention of each of the article's concepts in its body paragraphs. */
 export function linkifyArticle(article: Article): Segment[][] {
-  const pending = new Set(articleConceptIndex.get(article.id) ?? []);
+  const pending = new Set(articleConceptIndex.get(articleKey(article)) ?? []);
   const aliasList = [...pending]
     .flatMap((id) => conceptMap.get(id)!.aliases.map((alias) => ({ id, alias })))
     .sort((a, b) => b.alias.length - a.alias.length);

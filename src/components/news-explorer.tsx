@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
-  articles,
   sources,
   topics,
+  type Article,
   type SourceId,
   type Topic,
 } from "@/lib/news";
@@ -83,7 +83,7 @@ function Chip({
   );
 }
 
-export function NewsExplorer() {
+export function NewsExplorer({ articles }: { articles: Article[] }) {
   const source = useSyncExternalStore(subscribeSource, readSource, () => "all" as SourceFilter);
   const [topic, setTopic] = useState<TopicFilter>("all");
   const [query, setQuery] = useState("");
@@ -103,14 +103,14 @@ export function NewsExplorer() {
         a.paragraphs.some((p) => p.toLowerCase().includes(q))
       );
     });
-  }, [source, topic, query]);
+  }, [articles, source, topic, query]);
 
   const topicCounts = useMemo(() => {
     const scoped = articles.filter((a) => source === "all" || a.source === source);
     return Object.fromEntries(
       topics.map((t) => [t, scoped.filter((a) => a.topic === t).length]),
     ) as Record<Topic, number>;
-  }, [source]);
+  }, [articles, source]);
 
   const filtered = source !== "all" || topic !== "all" || query.trim() !== "";
 

@@ -1,37 +1,23 @@
 import Link from "next/link";
-import { articles, edition, sources } from "@/lib/news";
-
-const nav = [
-  { href: "/#all", label: "全部新闻" },
-  { href: "/learn", label: "知识库" },
-  { href: "/#highlight", label: "今日看点" },
-  { href: "/#lead", label: "头条" },
-  { href: "/#links", label: "原站链接" },
-];
+import { DateSwitcher } from "@/components/date-switcher";
+import { FooterSourceLinks } from "@/components/footer-sources";
+import { HeaderNav } from "@/components/header-nav";
+import { editions } from "@/lib/news";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="group flex items-baseline gap-2">
-          <span className="font-heading text-lg font-black tracking-tight sm:text-xl">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="flex min-w-0 items-center gap-3">
+          <Link href="/" className="shrink-0 font-heading text-lg font-black tracking-tight sm:text-xl">
             每日聚合新闻
-          </span>
-          <span className="hidden font-mono text-xs text-muted-foreground sm:inline">
-            {edition.date}
-          </span>
-        </Link>
-        <nav className="flex items-center gap-1 text-sm">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-md px-2 py-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground max-sm:[&:nth-child(n+3)]:hidden"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          </Link>
+          <DateSwitcher className="hidden md:flex" />
+        </div>
+        <HeaderNav />
+      </div>
+      <div className="border-t px-4 py-2 md:hidden">
+        <DateSwitcher />
       </div>
     </header>
   );
@@ -44,17 +30,13 @@ export function SiteFooter() {
         <div className="space-y-2">
           <p className="font-heading text-base font-bold text-foreground">每日聚合新闻</p>
           <p>
-            {edition.label} · 共 {articles.length} 条 · 八源各 3 篇 · 标题全中文 · 全文深度总结
+            已收录 {editions.length} 期 · 每期 {editions[0]?.articles.length ?? 0} 条 · 八源各 3 篇 · 标题全中文 ·
+            全文深度总结
           </p>
+          <p>按日期切换阅读，往期内容会保留。</p>
           <p>本站内容为对原报道的中文摘要整理，观点与事实以原站为准。</p>
         </div>
-        <div className="flex flex-wrap content-start gap-x-4 gap-y-2 sm:justify-end">
-          {sources.map((s) => (
-            <Link key={s.id} href={`/?source=${s.id}#all`} className="hover:text-foreground">
-              {s.name}
-            </Link>
-          ))}
-        </div>
+        <FooterSourceLinks />
       </div>
     </footer>
   );

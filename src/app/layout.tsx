@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
-import { edition } from "@/lib/news";
 import "./globals.css";
 
 const sans = Noto_Sans_SC({
@@ -25,11 +24,11 @@ const mono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `每日聚合新闻｜${edition.date}`,
+    default: "每日聚合新闻",
     template: "%s｜每日聚合新闻",
   },
   description:
-    "八家国际与华文媒体各选三篇，24 条中文深度总结：中美峰会、人工智能、能源、宏观经济与俄乌战事。",
+    "八家国际与华文媒体每日各选三篇，中文深度总结按日期归档，可切换阅读。",
 };
 
 export const viewport: Viewport = {

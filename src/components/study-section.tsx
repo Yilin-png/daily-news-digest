@@ -9,7 +9,7 @@ import {
   getConcept,
   relatedByConcepts,
 } from "@/lib/knowledge";
-import type { Article } from "@/lib/news";
+import { articleHref, type Article } from "@/lib/news";
 import type { Study } from "@/lib/study";
 
 export const studyAnchors = [
@@ -83,8 +83,8 @@ function ConceptOrbit({ article, ids }: { article: Article; ids: string[] }) {
 }
 
 export function StudySection({ article, study }: { article: Article; study: Study }) {
-  const ids = articleConceptIds(article.id);
-  const related = relatedByConcepts(article.id);
+  const ids = articleConceptIds(article);
+  const related = relatedByConcepts(article);
   const terms = study.terms.map((id) => getConcept(id)!);
 
   return (
@@ -171,7 +171,7 @@ export function StudySection({ article, study }: { article: Article; study: Stud
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.summary}</p>
                   <p className="mt-auto pt-3 text-xs text-muted-foreground/80">
-                    {count > 1 ? `今日共 ${count} 篇报道涉及 · 查看反向链接 →` : "查看词条详情 →"}
+                    {count > 1 ? `各期共 ${count} 篇报道涉及 · 查看反向链接 →` : "查看词条详情 →"}
                   </p>
                 </Link>
               );
@@ -194,10 +194,13 @@ export function StudySection({ article, study }: { article: Article; study: Stud
               {related.length > 0 ? (
                 <ul className="mt-3 space-y-3">
                   {related.map(({ article: a, shared }) => (
-                    <li key={a.id} className="rounded-xl border bg-card p-3.5">
-                      <SourceLabel id={a.source} className="text-muted-foreground" />
+                    <li key={`${a.date}-${a.id}`} className="rounded-xl border bg-card p-3.5">
+                      <span className="flex items-center gap-2">
+                        <SourceLabel id={a.source} className="text-muted-foreground" />
+                        <span className="text-[11px] text-muted-foreground">{a.date}</span>
+                      </span>
                       <Link
-                        href={`/article/${a.id}#study`}
+                        href={articleHref(a, "#study")}
                         className="mt-1 block leading-snug font-semibold hover:text-brand"
                       >
                         {a.title}
@@ -218,7 +221,7 @@ export function StudySection({ article, study }: { article: Article; study: Stud
                 </ul>
               ) : (
                 <p className="mt-3 rounded-xl border border-dashed p-4 text-sm text-muted-foreground">
-                  今日暂无其他报道与本文共享概念，可从上方词条进入知识库继续探索。
+                  各期报道里还没有与本文共享概念的文章，可从上方词条进入知识库继续探索。
                 </p>
               )}
             </div>

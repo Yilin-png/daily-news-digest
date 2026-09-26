@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { concepts } from "@/lib/concepts";
 import { conceptBacklinks, conceptOutgoing, getConcept, getStudy } from "@/lib/knowledge";
+import { articleHref } from "@/lib/news";
 
 export function generateStaticParams() {
   return concepts.map((c) => ({ id: c.id }));
@@ -92,17 +93,18 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
         {back.articles.length > 0 ? (
           <ul className="mt-4 space-y-3">
             {back.articles.map((a) => {
-              const study = getStudy(a.id);
+              const study = getStudy(a);
               const inTerms = study?.terms.includes(concept.id);
               return (
-                <li key={a.id}>
+                <li key={`${a.date}-${a.id}`}>
                   <Link
-                    href={`/article/${a.id}#study`}
+                    href={articleHref(a, "#study")}
                     className="group flex items-start justify-between gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-foreground/25"
                   >
                     <span>
-                      <span className="flex items-center gap-2">
+                      <span className="flex flex-wrap items-center gap-2">
                         <SourceLabel id={a.source} className="text-muted-foreground" />
+                        <span className="text-[11px] text-muted-foreground">{a.date}</span>
                         <span className="text-[11px] text-muted-foreground">
                           {inTerms ? "关键术语" : "背景中提及"}
                         </span>
@@ -119,7 +121,7 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
           </ul>
         ) : (
           <p className="mt-4 rounded-xl border border-dashed p-4 text-sm text-muted-foreground">
-            今日报道中暂未直接提及，本词条通过其他词条进入知识网络。
+            各期报道中暂未直接提及，本词条通过其他词条进入知识网络。
           </p>
         )}
       </section>

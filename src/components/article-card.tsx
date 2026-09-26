@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { SourceLabel } from "@/components/source-label";
-import { readingMinutes, type Article } from "@/lib/news";
+import { articleHref, readingMinutes, type Article } from "@/lib/news";
 
 export function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
-      href={`/article/${article.id}`}
+      href={articleHref(article)}
       className="group flex h-full flex-col rounded-xl border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <div className="mb-3 flex items-center justify-between gap-2">
