@@ -23,7 +23,7 @@ export function ConceptLink({
         render={
           <Link
             href={`/concept/${id}`}
-            className="rounded-sm text-foreground underline decoration-brand/50 decoration-dotted decoration-2 underline-offset-[5px] transition-colors hover:bg-brand/8 hover:decoration-brand"
+            className="rounded-sm text-foreground underline decoration-brand/80 decoration-dotted decoration-2 underline-offset-[5px] transition-colors hover:bg-brand/8 hover:decoration-brand"
           />
         }
       >
