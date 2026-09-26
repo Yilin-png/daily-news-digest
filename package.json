@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start -p 4317",
     "lint": "eslint",
-    "check:links": "npx -y tsx scripts/check-knowledge.ts"
+    "check:links": "npx -y tsx scripts/check-knowledge.ts",
+    "deploy": "wrangler deploy",
+    "deploy:preview": "wrangler deploy --temporary"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -28,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.141.0"
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { SearchIcon, XIcon } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,28 @@ import {
 type SourceFilter = SourceId | "all";
 type TopicFilter = Topic | "all";
 
+const SOURCE_EVENT = "news-source-filter";
+
+function readSource(): SourceFilter {
+  const param = new URLSearchParams(window.location.search).get("source");
+  return sources.some((s) => s.id === param) ? (param as SourceId) : "all";
+}
+
 function syncUrl(source: SourceFilter) {
   const url = new URL(window.location.href);
   if (source === "all") url.searchParams.delete("source");
   else url.searchParams.set("source", source);
   window.history.replaceState(null, "", url);
+  window.dispatchEvent(new Event(SOURCE_EVENT));
+}
+
+function subscribeSource(onChange: () => void) {
+  window.addEventListener(SOURCE_EVENT, onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener(SOURCE_EVENT, onChange);
+    window.removeEventListener("popstate", onChange);
+  };
 }
 
 function Chip({
@@ -66,16 +83,12 @@ function Chip({
   );
 }
 
-export function NewsExplorer({ initialSource }: { initialSource?: string }) {
-  const valid = sources.some((s) => s.id === initialSource);
-  const [source, setSource] = useState<SourceFilter>(
-    valid ? (initialSource as SourceId) : "all",
-  );
+export function NewsExplorer() {
+  const source = useSyncExternalStore(subscribeSource, readSource, () => "all" as SourceFilter);
   const [topic, setTopic] = useState<TopicFilter>("all");
   const [query, setQuery] = useState("");
 
   const pickSource = (next: SourceFilter) => {
-    setSource(next);
     syncUrl(next);
   };
 

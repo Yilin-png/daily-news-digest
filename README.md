@@ -23,6 +23,15 @@ npm run dev      # http://localhost:4317
 生产构建：
 
 ```bash
-npm run build
-npm start        # http://localhost:4317
+npm run build    # 静态导出到 out/
 ```
+
+部署到 Cloudflare Workers（静态资源）：
+
+```bash
+npm run build
+npx wrangler login          # 使用自己的 Cloudflare 账号
+npx wrangler deploy
+```
+
+没有登录时可以用 `npx wrangler deploy --temporary`，Wrangler 会创建一个临时预览账号并给出认领链接。

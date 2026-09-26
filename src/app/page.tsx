@@ -18,8 +18,7 @@ import {
   topics,
 } from "@/lib/news";
 
-export default async function Home({ searchParams }: PageProps<"/">) {
-  const { source } = await searchParams;
+export default function Home() {
   const lead = getArticle("1")!;
   const summit = articles.filter((a) => a.topic === "中美峰会" && a.id !== lead.id);
   const hubs = [...concepts]
@@ -158,7 +157,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <p className="mt-1 text-sm text-muted-foreground">按来源、主题筛选，或直接搜索关键词</p>
           </div>
         </div>
-        <NewsExplorer initialSource={typeof source === "string" ? source : undefined} />
+        <NewsExplorer />
       </section>
 
       <section id="links" className="scroll-mt-20 pt-16">
