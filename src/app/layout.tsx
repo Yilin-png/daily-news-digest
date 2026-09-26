@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { edition } from "@/lib/news";
 import "./globals.css";
 
 const sans = Noto_Sans_SC({
@@ -24,7 +25,7 @@ const mono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "每日聚合新闻｜2026-09-25",
+    default: `每日聚合新闻｜${edition.date}`,
     template: "%s｜每日聚合新闻",
   },
   description:
