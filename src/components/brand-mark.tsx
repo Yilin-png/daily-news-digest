@@ -1,18 +1,40 @@
 import { cn } from "@/lib/utils";
 
-/** 朱红方印，中间是「日」。小尺寸仍能辨认，对应每日一刊。 */
+/** 金黄日轮。漆面般的两层金色，中间是一笔写成的「日」。 */
 export function BrandMark({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 32 32"
+      viewBox="0 0 64 64"
+      fill="none"
       className={cn("shrink-0", className)}
       aria-hidden
       focusable="false"
     >
-      <rect width="32" height="32" rx="8" fill="#C4452D" />
+      <circle cx="32" cy="32" r="31.5" fill="#E2AE34" />
+      <circle cx="32" cy="32" r="28" fill="#F6D56A" />
+      <circle cx="32" cy="32" r="27.4" stroke="#C8922A" strokeWidth="0.8" opacity="0.65" />
       <path
-        fill="#F7F3EC"
-        d="M8 8h16v3.2H8V8zm0 6.4h16v3.2H8v-3.2zm0 6.4h16V24H8v-3.2zM8 8h3.2v16H8V8zm12.8 0H24v16h-3.2V8z"
+        d="M18.5 24.5A16.5 16.5 0 0 1 33 14"
+        stroke="#FFF8E4"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+        opacity="0.8"
+      />
+      <rect
+        x="20.6"
+        y="18.2"
+        width="22.8"
+        height="27.6"
+        rx="1.6"
+        stroke="#3C2912"
+        strokeWidth="3.15"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M23.1 32.2h17.8"
+        stroke="#3C2912"
+        strokeWidth="3.15"
+        strokeLinecap="round"
       />
     </svg>
   );
