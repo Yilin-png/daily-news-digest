@@ -11,7 +11,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex min-w-0 items-center gap-3">
           <Link href="/" className="flex shrink-0 items-center gap-2 font-heading text-lg font-black tracking-tight sm:text-xl">
-            <BrandMark className="size-7 sm:size-8" />
+            <BrandMark className="size-8 sm:size-9" />
             每日聚合新闻
           </Link>
           <DateSwitcher className="hidden md:flex" />
@@ -31,7 +31,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 text-sm text-muted-foreground sm:grid-cols-2 sm:px-6">
         <div className="space-y-2">
           <p className="flex items-center gap-2 font-heading text-base font-bold text-foreground">
-            <BrandMark className="size-6" />
+            <BrandMark className="size-7" />
             每日聚合新闻
           </p>
           <p>
