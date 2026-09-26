@@ -2,9 +2,10 @@ import Link from "next/link";
 import { articles, edition, sources } from "@/lib/news";
 
 const nav = [
+  { href: "/#all", label: "全部新闻" },
+  { href: "/learn", label: "知识库" },
   { href: "/#highlight", label: "今日看点" },
   { href: "/#lead", label: "头条" },
-  { href: "/#all", label: "全部新闻" },
   { href: "/#links", label: "原站链接" },
 ];
 

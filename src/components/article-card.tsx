@@ -22,7 +22,7 @@ export function ArticleCard({ article }: { article: Article }) {
         {article.paragraphs[0]}
       </p>
       <div className="mt-auto flex items-center justify-between pt-4 text-xs text-muted-foreground">
-        <span>约 {readingMinutes(article)} 分钟读完</span>
+        <span>约 {readingMinutes(article)} 分钟 · 含深度学习</span>
         <span className="font-medium text-foreground/70 transition-transform group-hover:translate-x-0.5">
           阅读全文 →
         </span>

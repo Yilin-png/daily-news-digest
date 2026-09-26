@@ -5,6 +5,8 @@ import { SourceLabel } from "@/components/source-label";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { concepts } from "@/lib/concepts";
+import { conceptMentionCount } from "@/lib/knowledge";
 import {
   articles,
   edition,
@@ -20,6 +22,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
   const { source } = await searchParams;
   const lead = getArticle("1")!;
   const summit = articles.filter((a) => a.topic === "中美峰会" && a.id !== lead.id);
+  const hubs = [...concepts]
+    .map((c) => ({ c, n: conceptMentionCount(c.id) }))
+    .sort((a, b) => b.n - a.n)
+    .slice(0, 6);
   const topicStats = topics
     .map((t) => ({ topic: t, count: articles.filter((a) => a.topic === t).length }))
     .filter((t) => t.count > 0);
@@ -116,6 +122,33 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             ))}
           </ol>
         </aside>
+      </section>
+
+      <section className="pt-14">
+        <div className="grid gap-6 rounded-2xl border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.25em] text-brand">DEEP LEARNING</p>
+            <h2 className="mt-1 text-2xl font-black sm:text-3xl">每篇新闻都有深度学习</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              历史背景、来龙去脉时间线、关键术语和思考题。{concepts.length} 个知识库词条以双向链接串起今日 {articles.length} 条报道：从一篇新闻跳到一个概念，再从概念找到所有提及它的报道。
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {hubs.map(({ c, n }) => (
+                <Link
+                  key={c.id}
+                  href={`/concept/${c.id}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm hover:border-brand hover:text-brand"
+                >
+                  {c.name}
+                  <span className="text-xs text-muted-foreground">{n}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <Link href="/learn" className={buttonVariants({ size: "lg" })}>
+            进入知识库
+          </Link>
+        </div>
       </section>
 
       <section id="all" className="scroll-mt-20 pt-14">

@@ -3,10 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
+import { Segments } from "@/components/rich-text";
+import { StudySection, studyAnchors } from "@/components/study-section";
 import { SourceLabel } from "@/components/source-label";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { getConcept, getStudy, linkifyArticle } from "@/lib/knowledge";
 import { articles, edition, getArticle, getSource, readingMinutes } from "@/lib/news";
 
 export function generateStaticParams() {
@@ -35,6 +38,8 @@ export default async function ArticlePage({ params }: PageProps<"/article/[id]">
   const prev = articles[index - 1];
   const next = articles[index + 1];
   const sameSource = articles.filter((a) => a.source === article.source && a.id !== article.id);
+  const study = getStudy(article.id);
+  const linked = linkifyArticle(article);
   const related = articles
     .filter((a) => a.topic === article.topic && a.source !== article.source)
     .slice(0, 3);
@@ -65,7 +70,7 @@ export default async function ArticlePage({ params }: PageProps<"/article/[id]">
           <div className="mt-6 h-1 w-16 rounded-full" style={{ backgroundColor: source.color }} />
 
           <div className="mt-8 space-y-6 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
-            {article.paragraphs.map((p, i) => (
+            {linked.map((segments, i) => (
               <p
                 key={i}
                 className={
@@ -74,10 +79,13 @@ export default async function ArticlePage({ params }: PageProps<"/article/[id]">
                     : undefined
                 }
               >
-                {p}
+                <Segments segments={segments} />
               </p>
             ))}
           </div>
+          <p className="mt-6 text-xs text-muted-foreground">
+            虚线下划线为知识库词条，悬停可预览释义，点击查看词条与反向链接。
+          </p>
 
           <div className="mt-10 rounded-2xl border bg-card p-5">
             <p className="text-sm text-muted-foreground">
@@ -95,6 +103,8 @@ export default async function ArticlePage({ params }: PageProps<"/article/[id]">
               {article.url}
             </p>
           </div>
+
+          {study && <StudySection article={article} study={study} />}
 
           <nav className="mt-10 grid gap-3 sm:grid-cols-2" aria-label="上一篇与下一篇">
             {prev ? (
@@ -129,6 +139,36 @@ export default async function ArticlePage({ params }: PageProps<"/article/[id]">
         </article>
 
         <aside className="space-y-6 lg:sticky lg:top-20 lg:self-start">
+          {study && (
+            <div className="rounded-2xl border bg-card p-5">
+              <p className="font-heading font-bold">深度学习</p>
+              <Separator className="my-3" />
+              <ul className="space-y-1">
+                {studyAnchors.map(({ id, label, icon: Icon }) => (
+                  <li key={id}>
+                    <a
+                      href={`#${id}`}
+                      className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+                    >
+                      <Icon className="size-4" />
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {study.terms.map((id) => (
+                  <Link
+                    key={id}
+                    href={`/concept/${id}`}
+                    className="rounded-md bg-brand/8 px-2 py-0.5 text-xs text-brand hover:bg-brand/15"
+                  >
+                    {getConcept(id)!.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="rounded-2xl border bg-card p-5">
             <p className="font-heading font-bold">{source.name}今日另两篇</p>
             <Separator className="my-3" />
