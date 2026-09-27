@@ -164,18 +164,31 @@ export function beijingSunLabel(year: number, month: number, day: number) {
   };
 }
 
-export const skyBootScript = `(()=>{${[
-  rad,
-  degFromRad,
-  wrap,
-  dayOfYear,
-  addCalendarDays,
-  sunLocalHours,
-  beijingParts,
-  beijingInstant,
-  skyPhase,
-  readThemeChoice,
-  applySkyTheme,
-]
-  .map((fn) => fn.toString())
-  .join("\n")};applySkyTheme();})();`;
+type BootFn = { toString(): string; name: string };
+const bootFns: Array<[string, BootFn]> = [
+  ["rad", rad],
+  ["degFromRad", degFromRad],
+  ["wrap", wrap],
+  ["dayOfYear", dayOfYear],
+  ["addCalendarDays", addCalendarDays],
+  ["sunLocalHours", sunLocalHours],
+  ["beijingParts", beijingParts],
+  ["beijingInstant", beijingInstant],
+  ["skyPhase", skyPhase],
+  ["readThemeChoice", readThemeChoice],
+  ["applySkyTheme", applySkyTheme],
+];
+
+function bootStatement(fallback: string, fn: BootFn) {
+  const src = fn.toString().trim();
+  if (/^function\s*\(/.test(src)) {
+    const name = fn.name || fallback;
+    return { name, src: src.replace(/^function\s*\(/, `function ${name}(`) };
+  }
+  const named = src.match(/^function\s+([A-Za-z0-9_$]+)\s*\(/);
+  return { name: named?.[1] ?? fallback, src };
+}
+
+const bootParts = bootFns.map(([name, fn]) => bootStatement(name, fn));
+
+export const skyBootScript = `(()=>{${bootParts.map((part) => part.src).join("\n")};${bootParts[bootParts.length - 1]?.name ?? "applySkyTheme"}();})();`;
