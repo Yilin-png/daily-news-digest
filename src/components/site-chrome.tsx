@@ -3,6 +3,7 @@ import { BrandMark } from "@/components/brand-mark";
 import { DateSwitcher } from "@/components/date-switcher";
 import { FooterSourceLinks } from "@/components/footer-sources";
 import { HeaderNav } from "@/components/header-nav";
+import { ReadingMenu } from "@/components/reading-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { editions } from "@/lib/news";
 import { SITE_NAME } from "@/lib/site";
@@ -20,6 +21,7 @@ export function SiteHeader() {
         </div>
         <div className="flex shrink-0 items-center gap-1">
           <HeaderNav />
+          <ReadingMenu />
           <ThemeToggle />
         </div>
       </div>

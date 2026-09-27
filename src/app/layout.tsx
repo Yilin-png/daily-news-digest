@@ -3,6 +3,7 @@ import { Geist_Mono, Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { SkyTheme } from "@/components/sky-theme";
 import { skyBootScript } from "@/lib/beijing-sky";
+import { readingBootScript } from "@/lib/reading-prefs";
 import { SITE_NAME } from "@/lib/site";
 import "./globals.css";
 
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <script dangerouslySetInnerHTML={{ __html: skyBootScript }} />
+        <script dangerouslySetInnerHTML={{ __html: readingBootScript }} />
         <SkyTheme />
         <SiteHeader />
         <main className="flex-1">{children}</main>
