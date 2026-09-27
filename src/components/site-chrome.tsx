@@ -14,17 +14,20 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-3">
           <Link href="/" className="flex min-w-0 items-center gap-2 font-heading text-[15px] font-black tracking-tight whitespace-nowrap sm:text-lg">
             <BrandMark className="size-8 shrink-0 sm:size-9" />
-            {SITE_NAME}
+            <span className="truncate">{SITE_NAME}</span>
           </Link>
-          <DateSwitcher className="hidden md:flex" />
+          <DateSwitcher className="hidden shrink-0 flex-nowrap md:flex" />
         </div>
         <div className="flex shrink-0 items-center gap-1">
           <HeaderNav />
           <ThemeToggle />
         </div>
       </div>
-      <div className="border-t px-4 py-2 md:hidden">
-        <DateSwitcher />
+      <div className="flex items-center gap-2 border-t px-4 py-2 md:hidden">
+        <DateSwitcher className="min-w-0" />
+        <Link href="/learn" className="ml-auto shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
+          知识库
+        </Link>
       </div>
     </header>
   );

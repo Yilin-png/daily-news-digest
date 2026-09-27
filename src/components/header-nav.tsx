@@ -18,12 +18,12 @@ export function HeaderNav() {
   ];
 
   return (
-    <nav className="flex items-center gap-1 text-sm">
+    <nav className="hidden items-center gap-1 text-sm sm:flex">
       {nav.map((item) => (
         <Link
           key={item.label}
           href={item.href}
-          className="rounded-md px-2 py-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground max-sm:[&:nth-child(n+3)]:hidden"
+          className="rounded-md px-2 py-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground max-lg:[&:nth-child(n+3)]:hidden"
         >
           {item.label}
         </Link>
