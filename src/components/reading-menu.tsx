@@ -116,11 +116,11 @@ export function ReadingMenu() {
             label="字号"
             value={prefs.size}
             options={[
-              ["sm", "小"],
-              ["md", "标准"],
-              ["lg", "大"],
-              ["xl", "特大"],
-              ["xxl", "超大"],
+              ["sm", "最小"],
+              ["md", "小"],
+              ["lg", "标准"],
+              ["xl", "大"],
+              ["xxl", "特大"],
             ]}
             onChange={(size) => update({ size: size as ReadingSize })}
           />
