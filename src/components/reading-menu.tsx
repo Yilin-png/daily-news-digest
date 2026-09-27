@@ -75,7 +75,7 @@ export function ReadingMenu() {
           id={panelId}
           role="dialog"
           aria-label="阅读排版"
-          className="absolute top-[calc(100%+0.5rem)] right-0 w-64 rounded-xl border bg-popover p-3 text-popover-foreground shadow-lg"
+          className="absolute top-[calc(100%+0.5rem)] right-0 max-h-[min(28rem,calc(100dvh-6rem))] w-[min(16rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border bg-popover p-3 text-popover-foreground shadow-lg"
         >
           <p className="px-1 text-xs font-semibold tracking-[0.16em] text-muted-foreground">阅读排版</p>
           <p

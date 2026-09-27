@@ -56,7 +56,7 @@ export function EditionHome({ edition }: { edition: Edition }) {
         <div className="relative overflow-hidden rounded-2xl bg-dusk p-6 text-dusk-foreground sm:p-10">
           <div className="absolute inset-y-0 left-0 w-1.5 bg-brand" aria-hidden />
           <p className="text-xs font-semibold tracking-[0.25em] text-dusk-foreground/65">今日看点</p>
-          <p className="reading mt-4 font-heading text-lg leading-relaxed font-semibold sm:text-2xl sm:leading-relaxed">
+          <p className="reading reading-display mt-4 font-heading font-semibold">
             {edition.highlight}
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
@@ -80,11 +80,11 @@ export function EditionHome({ edition }: { edition: Edition }) {
             <span className="text-xs text-muted-foreground">约 {readingMinutes(lead)} 分钟</span>
           </div>
           <Link href={articleHref(lead)} className="group mt-4">
-            <h2 className="text-3xl leading-tight font-black text-balance group-hover:text-brand sm:text-4xl">
+            <h2 className="reading-title leading-tight font-black text-balance group-hover:text-brand">
               {lead.title}
             </h2>
           </Link>
-          <div className="reading mt-5 space-y-4 text-[15px] leading-8 text-foreground/85">
+          <div className="reading reading-lead mt-5 space-y-4 text-foreground/85">
             <p>{lead.paragraphs[0]}</p>
             <p className="hidden sm:block">{lead.paragraphs[1]}</p>
           </div>

@@ -38,8 +38,8 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
         </Link>
       </div>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
-        <article>
+      <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
+        <article className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             <SourceLabel id={article.source} className="text-sm" />
             <Badge variant="secondary">{article.topic}</Badge>
@@ -47,12 +47,12 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
               {date} · 约 {readingMinutes(article)} 分钟读完
             </span>
           </div>
-          <h1 className="mt-4 text-3xl leading-tight font-black text-balance sm:text-[2.6rem] sm:leading-[1.2]">
+          <h1 className="reading-title mt-4 leading-tight font-black text-balance">
             {article.title}
           </h1>
           <div className="mt-6 h-1 w-16 rounded-full" style={{ backgroundColor: source.color }} />
 
-          <div className="reading mt-8 space-y-6 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
+          <div className="reading reading-body mt-8 space-y-6 text-foreground/90">
             {linked.map((segments, i) => (
               <p
                 key={i}

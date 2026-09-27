@@ -65,8 +65,8 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
             被 {back.articles.length} 篇报道、{back.concepts.length} 个词条引用
           </span>
         </div>
-        <h1 className="mt-4 text-3xl font-black text-balance sm:text-5xl">{concept.name}</h1>
-        <p className="reading mt-5 font-heading text-lg leading-relaxed font-semibold text-foreground/85 sm:text-xl">
+        <h1 className="reading-title mt-4 font-black text-balance">{concept.name}</h1>
+        <p className="reading reading-display mt-5 font-heading font-semibold text-foreground/85">
           {concept.summary}
         </p>
       </header>
@@ -75,7 +75,7 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
 
       <section>
         <h2 className="text-lg font-black">详细解释</h2>
-        <p className="reading mt-3 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
+        <p className="reading reading-body mt-3 text-foreground/90">
           <RichText text={concept.detail} />
         </p>
         {concept.aliases.length > 0 && (

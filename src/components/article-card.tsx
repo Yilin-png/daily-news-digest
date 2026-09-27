@@ -15,10 +15,10 @@ export function ArticleCard({ article }: { article: Article }) {
           {article.topic}
         </Badge>
       </div>
-      <h3 className="text-lg leading-snug font-bold text-balance group-hover:text-brand">
+      <h3 className="reading-title-sm leading-snug font-bold text-balance group-hover:text-brand">
         {article.title}
       </h3>
-      <p className="reading mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+      <p className="reading reading-note mt-3 line-clamp-4 text-muted-foreground">
         {article.paragraphs[0]}
       </p>
       <div className="mt-auto flex items-center justify-between pt-4 text-xs text-muted-foreground">
