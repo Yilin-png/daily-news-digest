@@ -5,25 +5,29 @@ export type ReadingFont = "sans" | "serif";
 export type ReadingSize = "sm" | "md" | "lg" | "xl";
 export type ReadingLeading = "tight" | "md" | "loose";
 export type ReadingTracking = "tight" | "md" | "wide";
+export type ReadingAlign = "justify" | "start";
 
 export type ReadingPrefs = {
   font: ReadingFont;
   size: ReadingSize;
   leading: ReadingLeading;
   tracking: ReadingTracking;
+  align: ReadingAlign;
 };
 
 export const defaultReading: ReadingPrefs = {
-  font: "sans",
+  font: "serif",
   size: "md",
-  leading: "md",
-  tracking: "md",
+  leading: "tight",
+  tracking: "tight",
+  align: "justify",
 };
 
 const fonts = new Set<ReadingFont>(["sans", "serif"]);
 const sizes = new Set<ReadingSize>(["sm", "md", "lg", "xl"]);
 const leadings = new Set<ReadingLeading>(["tight", "md", "loose"]);
 const trackings = new Set<ReadingTracking>(["tight", "md", "wide"]);
+const aligns = new Set<ReadingAlign>(["justify", "start"]);
 
 export function normalizeReading(value: Partial<ReadingPrefs> | null | undefined): ReadingPrefs {
   return {
@@ -33,6 +37,7 @@ export function normalizeReading(value: Partial<ReadingPrefs> | null | undefined
     tracking: trackings.has(value?.tracking as ReadingTracking)
       ? (value?.tracking as ReadingTracking)
       : defaultReading.tracking,
+    align: aligns.has(value?.align as ReadingAlign) ? (value?.align as ReadingAlign) : defaultReading.align,
   };
 }
 
@@ -56,6 +61,7 @@ function writeDataset(prefs: ReadingPrefs) {
   set("size", prefs.size, defaultReading.size);
   set("leading", prefs.leading, defaultReading.leading);
   set("tracking", prefs.tracking, defaultReading.tracking);
+  set("align", prefs.align, defaultReading.align);
 }
 
 export function applyReadingPrefs(prefs: ReadingPrefs) {
@@ -76,4 +82,4 @@ export function saveReadingPrefs(prefs: ReadingPrefs) {
 }
 
 export const readingBootScript =
-  '(()=>{try{var r=localStorage.getItem("reading-prefs");if(!r)return;var p=JSON.parse(r);var d=document.documentElement;if(p.font==="serif")d.dataset.font="serif";if(p.size==="sm"||p.size==="lg"||p.size==="xl")d.dataset.size=p.size;if(p.leading==="tight"||p.leading==="loose")d.dataset.leading=p.leading;if(p.tracking==="tight"||p.tracking==="wide")d.dataset.tracking=p.tracking;}catch(e){}})();';
+  '(()=>{try{var r=localStorage.getItem("reading-prefs");if(!r)return;var p=JSON.parse(r);var d=document.documentElement;if(p.font==="sans")d.dataset.font="sans";if(p.size==="sm"||p.size==="lg"||p.size==="xl")d.dataset.size=p.size;if(p.leading==="md"||p.leading==="loose")d.dataset.leading=p.leading;if(p.tracking==="md"||p.tracking==="wide")d.dataset.tracking=p.tracking;if(p.align==="start")d.dataset.align="start";}catch(e){}})();';

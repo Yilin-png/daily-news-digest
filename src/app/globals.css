@@ -145,8 +145,12 @@
   }
 }
 
-html[data-font="serif"] body {
+body {
   font-family: var(--font-serif), "Songti SC", serif;
+}
+
+html[data-font="sans"] body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 html[data-size="sm"] main {
@@ -159,22 +163,46 @@ html[data-size="xl"] main {
   zoom: 1.22;
 }
 
-html[data-leading="tight"] main :is(p, li) {
+main .reading {
   line-height: 1.65;
+  letter-spacing: -0.02em;
+  text-align: justify;
+  text-justify: inter-character;
 }
-html[data-leading="loose"] main :is(p, li) {
-  line-height: 2.2;
-}
-html[data-leading="tight"] main :is(.space-y-4, .space-y-6) > :not(:last-child) {
+
+main .reading:is(.space-y-4, .space-y-6) > :not(:last-child) {
   margin-block-end: 0.7rem;
 }
-html[data-leading="loose"] main :is(.space-y-4, .space-y-6) > :not(:last-child) {
+
+html[data-leading="md"] main .reading {
+  line-height: 2rem;
+}
+html[data-leading="loose"] main .reading {
+  line-height: 2.2;
+}
+@media (min-width: 40rem) {
+  html[data-leading="md"] main .reading {
+    line-height: 2.25rem;
+  }
+}
+html[data-leading="md"] main .reading.space-y-4 > :not(:last-child) {
+  margin-block-end: 1rem;
+}
+html[data-leading="md"] main .reading.space-y-6 > :not(:last-child) {
+  margin-block-end: 1.5rem;
+}
+html[data-leading="loose"] main .reading:is(.space-y-4, .space-y-6) > :not(:last-child) {
   margin-block-end: 2rem;
 }
 
-html[data-tracking="tight"] main :is(p, li) {
-  letter-spacing: -0.02em;
+html[data-tracking="md"] main .reading {
+  letter-spacing: normal;
 }
-html[data-tracking="wide"] main :is(p, li) {
+html[data-tracking="wide"] main .reading {
   letter-spacing: 0.08em;
+}
+
+html[data-align="start"] main .reading {
+  text-align: start;
+  text-justify: auto;
 }

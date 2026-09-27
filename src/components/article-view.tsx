@@ -52,7 +52,7 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
           </h1>
           <div className="mt-6 h-1 w-16 rounded-full" style={{ backgroundColor: source.color }} />
 
-          <div className="mt-8 space-y-6 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
+          <div className="reading mt-8 space-y-6 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
             {linked.map((segments, i) => (
               <p
                 key={i}

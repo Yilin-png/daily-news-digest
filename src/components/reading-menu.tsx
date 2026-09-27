@@ -10,6 +10,7 @@ import {
   normalizeReading,
   readReadingPrefs,
   saveReadingPrefs,
+  type ReadingAlign,
   type ReadingFont,
   type ReadingLeading,
   type ReadingPrefs,
@@ -80,13 +81,18 @@ export function ReadingMenu() {
           <p
             className="mt-2 px-1"
             style={{
-              fontFamily: prefs.font === "serif" ? "var(--font-serif), Songti SC, serif" : undefined,
+              fontFamily:
+                prefs.font === "sans"
+                  ? "var(--font-sans), ui-sans-serif, sans-serif"
+                  : "var(--font-serif), Songti SC, serif",
               fontSize: prefs.size === "sm" ? "13px" : prefs.size === "lg" ? "16px" : prefs.size === "xl" ? "18px" : "14px",
               lineHeight: prefs.leading === "tight" ? 1.65 : prefs.leading === "loose" ? 2.2 : 1.9,
               letterSpacing: prefs.tracking === "tight" ? "-0.02em" : prefs.tracking === "wide" ? "0.08em" : "0",
+              textAlign: prefs.align === "start" ? "start" : "justify",
+              textJustify: prefs.align === "start" ? "auto" : "inter-character",
             }}
           >
-            水中月，疏影横斜。
+            栏外疏影横斜，水中月色正满，暗香浮动不散。
           </p>
           <Choice
             label="字体"
@@ -127,6 +133,15 @@ export function ReadingMenu() {
               ["wide", "松"],
             ]}
             onChange={(tracking) => update({ tracking: tracking as ReadingTracking })}
+          />
+          <Choice
+            label="对齐"
+            value={prefs.align}
+            options={[
+              ["justify", "两端对齐"],
+              ["start", "左对齐"],
+            ]}
+            onChange={(align) => update({ align: align as ReadingAlign })}
           />
           <button
             type="button"

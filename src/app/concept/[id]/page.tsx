@@ -66,7 +66,7 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
           </span>
         </div>
         <h1 className="mt-4 text-3xl font-black text-balance sm:text-5xl">{concept.name}</h1>
-        <p className="mt-5 font-heading text-lg leading-relaxed font-semibold text-foreground/85 sm:text-xl">
+        <p className="reading mt-5 font-heading text-lg leading-relaxed font-semibold text-foreground/85 sm:text-xl">
           {concept.summary}
         </p>
       </header>
@@ -75,7 +75,7 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
 
       <section>
         <h2 className="text-lg font-black">详细解释</h2>
-        <p className="mt-3 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
+        <p className="reading mt-3 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
           <RichText text={concept.detail} />
         </p>
         {concept.aliases.length > 0 && (

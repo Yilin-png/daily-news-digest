@@ -117,7 +117,7 @@ export function StudySection({ article, study }: { article: Article; study: Stud
           <SectionTitle id="study-background" icon={HistoryIcon}>
             历史背景
           </SectionTitle>
-          <div className="mt-4 space-y-4 text-[15px] leading-8 text-foreground/90">
+          <div className="reading mt-4 space-y-4 text-[15px] leading-8 text-foreground/90">
             {study.background.map((p, i) => (
               <p key={i}>
                 <RichText text={p} />
@@ -143,7 +143,7 @@ export function StudySection({ article, study }: { article: Article; study: Stud
                     aria-hidden
                   />
                   <p className="font-mono text-xs font-semibold text-muted-foreground">{item.time}</p>
-                  <p className={"mt-0.5 leading-relaxed " + (last ? "font-semibold" : "")}>{item.event}</p>
+                  <p className={"reading mt-0.5 leading-relaxed " + (last ? "font-semibold" : "")}>{item.event}</p>
                 </li>
               );
             })}
@@ -169,7 +169,7 @@ export function StudySection({ article, study }: { article: Article; study: Stud
                       {c.category}
                     </Badge>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.summary}</p>
+                  <p className="reading mt-2 text-sm leading-relaxed text-muted-foreground">{c.summary}</p>
                   <p className="mt-auto pt-3 text-xs text-muted-foreground/80">
                     {count > 1 ? `各期共 ${count} 篇报道涉及 · 查看反向链接 →` : "查看词条详情 →"}
                   </p>
@@ -236,7 +236,7 @@ export function StudySection({ article, study }: { article: Article; study: Stud
             {study.questions.map((q, i) => (
               <li key={i} className="flex gap-3 rounded-xl bg-background p-4">
                 <span className="font-heading text-lg leading-none font-black text-brand">{i + 1}</span>
-                <span className="leading-relaxed">{q}</span>
+                <span className="reading leading-relaxed">{q}</span>
               </li>
             ))}
           </ol>
