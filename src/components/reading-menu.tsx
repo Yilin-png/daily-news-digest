@@ -8,6 +8,7 @@ import {
   READING_KEY,
   defaultReading,
   normalizeReading,
+  readReadingPrefs,
   saveReadingPrefs,
   type ReadingFont,
   type ReadingLeading,
@@ -53,7 +54,7 @@ export function ReadingMenu() {
   }, [open]);
 
   function update(patch: Partial<ReadingPrefs>) {
-    saveReadingPrefs({ ...prefs, ...patch });
+    saveReadingPrefs({ ...readReadingPrefs(), ...patch });
   }
 
   return (
@@ -76,7 +77,17 @@ export function ReadingMenu() {
           className="absolute top-[calc(100%+0.5rem)] right-0 w-64 rounded-xl border bg-popover p-3 text-popover-foreground shadow-lg"
         >
           <p className="px-1 text-xs font-semibold tracking-[0.16em] text-muted-foreground">阅读排版</p>
-          <p className="mt-2 px-1 text-sm leading-6">水中月，疏影横斜。</p>
+          <p
+            className="mt-2 px-1"
+            style={{
+              fontFamily: prefs.font === "serif" ? "var(--font-serif), Songti SC, serif" : undefined,
+              fontSize: prefs.size === "sm" ? "13px" : prefs.size === "lg" ? "16px" : prefs.size === "xl" ? "18px" : "14px",
+              lineHeight: prefs.leading === "tight" ? 1.65 : prefs.leading === "loose" ? 2.2 : 1.9,
+              letterSpacing: prefs.tracking === "tight" ? "-0.02em" : prefs.tracking === "wide" ? "0.08em" : "0",
+            }}
+          >
+            水中月，疏影横斜。
+          </p>
           <Choice
             label="字体"
             value={prefs.font}
