@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
-import Script from "next/script";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { SkyTheme } from "@/components/sky-theme";
 import { skyBootScript } from "@/lib/beijing-sky";
@@ -47,9 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
-        <Script id="sky-theme" strategy="beforeInteractive">
-          {skyBootScript}
-        </Script>
+        <script dangerouslySetInnerHTML={{ __html: skyBootScript }} />
         <SkyTheme />
         <SiteHeader />
         <main className="flex-1">{children}</main>
