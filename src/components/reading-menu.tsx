@@ -75,7 +75,7 @@ export function ReadingMenu() {
           id={panelId}
           role="dialog"
           aria-label="阅读排版"
-          className="absolute top-[calc(100%+0.5rem)] right-0 max-h-[min(28rem,calc(100dvh-6rem))] w-[min(16rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border bg-popover p-3 text-popover-foreground shadow-lg"
+          className="absolute top-[calc(100%+0.5rem)] right-0 max-h-[min(28rem,calc(100dvh-6rem))] w-[min(18rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border bg-popover p-3 text-popover-foreground shadow-lg"
         >
           <p className="px-1 text-xs font-semibold tracking-[0.16em] text-muted-foreground">阅读排版</p>
           <p
@@ -85,7 +85,16 @@ export function ReadingMenu() {
                 prefs.font === "sans"
                   ? "var(--font-sans), ui-sans-serif, sans-serif"
                   : "var(--font-serif), Songti SC, serif",
-              fontSize: prefs.size === "sm" ? "13px" : prefs.size === "lg" ? "16px" : prefs.size === "xl" ? "18px" : "14px",
+              fontSize:
+                prefs.size === "sm"
+                  ? "13px"
+                  : prefs.size === "md"
+                    ? "14px"
+                    : prefs.size === "xl"
+                      ? "18px"
+                      : prefs.size === "xxl"
+                        ? "21px"
+                        : "16px",
               lineHeight: prefs.leading === "tight" ? 1.65 : prefs.leading === "loose" ? 2.2 : 1.9,
               letterSpacing: prefs.tracking === "tight" ? "-0.02em" : prefs.tracking === "wide" ? "0.08em" : "0",
               textAlign: prefs.align === "start" ? "start" : "justify",
@@ -111,6 +120,7 @@ export function ReadingMenu() {
               ["md", "标准"],
               ["lg", "大"],
               ["xl", "特大"],
+              ["xxl", "超大"],
             ]}
             onChange={(size) => update({ size: size as ReadingSize })}
           />

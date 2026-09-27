@@ -154,16 +154,22 @@ html[data-font="sans"] body {
 }
 
 :root {
-  --reading-scale: 1;
+  --reading-scale: 1.15;
 }
 html[data-size="sm"] {
   --reading-scale: 0.92;
+}
+html[data-size="md"] {
+  --reading-scale: 1;
 }
 html[data-size="lg"] {
   --reading-scale: 1.15;
 }
 html[data-size="xl"] {
   --reading-scale: 1.3;
+}
+html[data-size="xxl"] {
+  --reading-scale: 1.5;
 }
 
 main,
