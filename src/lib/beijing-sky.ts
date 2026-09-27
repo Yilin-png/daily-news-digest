@@ -118,15 +118,37 @@ export function skyPhase(now: Date = new Date()): SkyPhase {
   return { night: stamp < sunrise || stamp >= sunset, nextMs: Math.max(1000, next - stamp + 1000) };
 }
 
-/** Toggles `.dark` on `<html>` from Beijing sunrise and sunset. */
+function readThemeChoice(): "light" | "dark" | null {
+  try {
+    if (typeof localStorage === "undefined") return null;
+    const saved = localStorage.getItem("sky-theme");
+    if (saved === "light" || saved === "dark") return saved;
+  } catch {
+    /* private mode */
+  }
+  return null;
+}
+
+/** Toggles `.dark` on `<html>`. A saved choice wins; otherwise Beijing sunrise and sunset. */
 export function applySkyTheme(now: Date = new Date()): SkyPhase {
   const phase = skyPhase(now);
+  const choice = readThemeChoice();
+  const night = choice === "dark" ? true : choice === "light" ? false : phase.night;
   if (typeof document !== "undefined") {
-    document.documentElement.classList.toggle("dark", phase.night);
+    document.documentElement.classList.toggle("dark", night);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", phase.night ? "#3d342c" : "#faf7f2");
+    if (meta) meta.setAttribute("content", night ? "#3d342c" : "#faf7f2");
   }
-  return phase;
+  return { night, nextMs: phase.nextMs };
+}
+
+export function setThemeChoice(choice: "light" | "dark") {
+  try {
+    localStorage.setItem("sky-theme", choice);
+  } catch {
+    /* private mode */
+  }
+  return applySkyTheme();
 }
 
 export function beijingSunLabel(year: number, month: number, day: number) {
@@ -152,6 +174,7 @@ export const skyBootScript = `(()=>{${[
   beijingParts,
   beijingInstant,
   skyPhase,
+  readThemeChoice,
   applySkyTheme,
 ]
   .map((fn) => fn.toString())

@@ -84,7 +84,7 @@ export function EditionHome({ edition }: { edition: Edition }) {
               {lead.title}
             </h2>
           </Link>
-          <div className="mt-5 space-y-4 text-[15px] leading-8 text-foreground/85">
+          <div className="reading mt-5 max-w-[40rem] space-y-6 text-foreground/90">
             <p>{lead.paragraphs[0]}</p>
             <p className="hidden sm:block">{lead.paragraphs[1]}</p>
           </div>

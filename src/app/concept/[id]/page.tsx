@@ -75,7 +75,7 @@ export default async function ConceptPage({ params }: PageProps<"/concept/[id]">
 
       <section>
         <h2 className="text-lg font-black">详细解释</h2>
-        <p className="mt-3 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
+        <p className="reading mt-4 max-w-[40rem] text-foreground/92">
           <RichText text={concept.detail} />
         </p>
         {concept.aliases.length > 0 && (
