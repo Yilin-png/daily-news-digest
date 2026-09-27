@@ -10,7 +10,7 @@ import { editionHref, editionShortLabel, editions, latestEdition } from "@/lib/n
 export function activeEditionDate(pathname: string): string | null {
   const dated = pathname.match(/^\/d\/(\d{4}-\d{2}-\d{2})(?:\/|$)/);
   if (dated) return dated[1];
-  if (pathname === "/" || pathname.startsWith("/article/")) return latestEdition.date;
+  if (pathname.startsWith("/article/")) return latestEdition.date;
   return null;
 }
 
@@ -43,10 +43,6 @@ export function DateSwitcher({
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   return (
     <div className={className}>

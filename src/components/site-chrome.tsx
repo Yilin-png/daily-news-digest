@@ -27,7 +27,10 @@ export function SiteHeader() {
       </div>
       <div className="flex items-center gap-2 border-t px-4 py-2 md:hidden">
         <DateSwitcher className="min-w-0" />
-        <Link href="/learn" className="ml-auto shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
+        <Link href="/" className="ml-auto shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
+          首页
+        </Link>
+        <Link href="/learn" className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
           知识库
         </Link>
       </div>

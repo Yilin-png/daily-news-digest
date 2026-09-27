@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { activeEditionDate } from "@/components/date-switcher";
-import { editionHref } from "@/lib/news";
+import { editionHref, latestEdition } from "@/lib/news";
 
 export function HeaderNav() {
   const pathname = usePathname();
-  const date = activeEditionDate(pathname);
-  const base = date ? editionHref(date) : "/";
+  const base = editionHref(activeEditionDate(pathname) ?? latestEdition.date);
   const nav = [
+    { href: "/", label: "首页" },
     { href: `${base}#all`, label: "全部新闻" },
     { href: "/learn", label: "知识库" },
     { href: `${base}#highlight`, label: "今日看点" },

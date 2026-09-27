@@ -125,9 +125,8 @@ export function articleHref(article: Pick<Article, "date" | "id">, hash = ""): s
   return `/d/${article.date}/article/${article.id}${hash}`;
 }
 
-/** The latest edition lives at `/`; earlier dates live at `/d/yyyy-mm-dd`. */
 export function editionHref(date: string): string {
-  return date === latestEdition.date ? "/" : `/d/${date}`;
+  return `/d/${date}`;
 }
 
 export function editionShortLabel(edition: Pick<Edition, "date" | "weekday">): string {
