@@ -43,8 +43,8 @@ export function EditionHome({ edition }: { edition: Edition }) {
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
           {edition.label} · 共 {edition.articles.length} 条 · 八源各 3 篇 · 全文深度总结
         </p>
-        <DateSwitcher current={edition.date} className="mt-5 justify-center" />
-        <p className="mt-3 text-xs text-muted-foreground">已收录 {editions.length} 期，点日期阅读其他日子</p>
+        <DateSwitcher current={edition.date} className="mt-5 flex justify-center" />
+        <p className="mt-3 text-xs text-muted-foreground">已收录 {editions.length} 期</p>
         <div className="mx-auto mt-6 flex max-w-3xl flex-wrap justify-center gap-x-5 gap-y-2">
           {sources.map((source) => (
             <SourceLabel key={source.id} id={source.id} className="text-muted-foreground" />
@@ -129,34 +129,6 @@ export function EditionHome({ edition }: { edition: Edition }) {
         </aside>
       </section>
 
-      <section className="pt-14">
-        <div className="grid gap-6 rounded-2xl border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.25em] text-brand">DEEP LEARNING</p>
-            <h2 className="mt-1 text-2xl font-black sm:text-3xl">每篇新闻都有深度学习</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              历史背景、来龙去脉时间线、关键术语和思考题。{concepts.length}{" "}
-              个知识库词条以双向链接串起全部 {editions.length} 期报道：从一篇新闻跳到一个概念，再从概念找到各日期提及它的报道。
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {hubs.map(({ concept, n }) => (
-                <Link
-                  key={concept.id}
-                  href={`/concept/${concept.id}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm hover:border-brand hover:text-brand"
-                >
-                  {concept.name}
-                  <span className="text-xs text-muted-foreground">{n}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <Link href="/learn" className={buttonVariants({ size: "lg" })}>
-            进入知识库
-          </Link>
-        </div>
-      </section>
-
       <section id="all" className="scroll-mt-20 pt-14">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
@@ -198,6 +170,34 @@ export function EditionHome({ edition }: { edition: Edition }) {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="pt-16">
+        <div className="grid gap-6 rounded-2xl border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.25em] text-brand">DEEP LEARNING</p>
+            <h2 className="mt-1 text-2xl font-black sm:text-3xl">每篇新闻都有深度学习</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              历史背景、来龙去脉时间线、关键术语和思考题。{concepts.length}{" "}
+              个知识库词条以双向链接串起全部 {editions.length} 期报道：从一篇新闻跳到一个概念，再从概念找到各日期提及它的报道。
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {hubs.map(({ concept, n }) => (
+                <Link
+                  key={concept.id}
+                  href={`/concept/${concept.id}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm hover:border-brand hover:text-brand"
+                >
+                  {concept.name}
+                  <span className="text-xs text-muted-foreground">{n}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <Link href="/learn" className={buttonVariants({ size: "lg" })}>
+            进入知识库
+          </Link>
+        </div>
       </section>
     </div>
   );
