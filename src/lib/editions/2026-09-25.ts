@@ -348,7 +348,7 @@ export const studies: Record<string, Study> = {
   "3": {
     background: [
       "大模型厂商与开发者之间的数据边界一直敏感。2023 年起，OpenAI 等公司先后承诺 API 数据默认不用于训练，企业客户的「零留存」逐渐成为标准合同条款。编程类工具需要读取整个代码库，[[data-retention|数据留存]]争议因此更易发生。[[zhipu|智谱]]源自清华大学，是中国头部大模型公司之一，2025 年被美国列入实体清单。",
-      "与此同时，[[ai-data-center|AI 数据中心]]的耗电耗水引发地方反弹。加州 2025 年已通过 SB 53 前沿 AI 透明度法，本次 7 项法案把监管延伸到基础设施成本分摊。模型发布节奏也愈发密集，[[open-weight-model|开源]]与闭源路线并行，[[moe|MoE]] 架构成为大参数模型的主流做法，头部公司则开始面对 [[antitrust|反垄断]]诉讼。",
+      "与此同时，[[ai-data-center|AI 数据中心]]的耗电耗水引发地方反弹。加州 2025 年已通过 SB 53 前沿 AI 透明度法，本次 7 项法案把监管延伸到基础设施成本分摊。同一周的模型发布里，OpenAI 推出了 [[gpt-6|GPT-6]]。[[open-weight-model|开源]]与闭源路线并行，[[moe|MoE]] 架构成为大参数模型的主流做法，头部公司则开始面对 [[antitrust|反垄断]]诉讼。",
     ],
     timeline: [
       { time: "2023-03", event: "OpenAI 宣布 API 数据默认不用于模型训练" },
@@ -358,7 +358,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09", event: "加州签署 7 项数据中心监管法案" },
       { time: "2026-10-15", event: "阶跃 Step 5 计划开源" },
     ],
-    terms: ["data-retention", "zhipu", "ai-data-center", "moe", "open-weight-model", "antitrust"],
+    terms: ["data-retention", "zhipu", "gpt-6", "ai-data-center", "moe", "open-weight-model", "antitrust"],
     questions: [
       "AI 编程工具在「需要读取代码」与「承诺不留存」之间应如何划定边界？",
       "要求数据中心自担电网与供水成本，会如何改变 AI 基础设施的选址逻辑？",
@@ -425,8 +425,8 @@ export const studies: Record<string, Study> = {
   },
   "7": {
     background: [
-      "2025 年 1 月 OpenAI、软银、Oracle 宣布 [[stargate|星际之门]]计划，拟在美国建设大规模 AI 算力；同年 7 月 OpenAI 与 Oracle 约定新增约 4.5GW 容量，9 月又传出五年约 3000 亿美元的云合同，Oracle 股价一度暴涨。",
-      "为求速度，AI 园区普遍采用「开发商建设、云厂商长期租用、银行与私募资本融资」的模式。租约中的 [[take-or-pay|照付不议]]条款保护出资方，但当供电和许可卡住时，承租人只能诉诸 [[force-majeure|不可抗力]]条款延后付款。自建 [[fuel-cell|燃料电池]]等电源是绕开电网排队的常见办法；高负债扩张则让 Oracle 的信用评级逼近 [[junk-rating|垃圾级]]。",
+      "2025 年 1 月 OpenAI、软银、Oracle 宣布 [[stargate|星际之门]]计划，拟在美国建设大规模 AI 算力；同年 7 月 OpenAI 与 Oracle 约定新增约 [[gigawatt|4.5GW]] 容量，9 月又传出五年约 3000 亿美元的云合同，Oracle 股价一度暴涨。",
+      "为求速度，AI 园区普遍采用「开发商建设、云厂商长期租用、银行与私募资本融资」的模式。股权出资方包括 [[blue-owl|Blue Owl]]。租约中的 [[take-or-pay|照付不议]]条款保护出资方，但当供电和许可卡住时，承租人只能诉诸 [[force-majeure|不可抗力]]条款延后付款。自建 [[fuel-cell|燃料电池]]等电源是绕开电网排队的常见办法；高负债扩张则让 Oracle 的信用评级逼近 [[junk-rating|垃圾级]]。",
     ],
     timeline: [
       { time: "2025-01", event: "星际之门计划宣布" },
@@ -436,7 +436,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09", event: "Oracle 就新墨西哥项目发出不可抗力通知" },
       { time: "2028 Q3", event: "新墨西哥园区一期原定完工时间" },
     ],
-    terms: ["stargate", "ai-data-center", "take-or-pay", "force-majeure", "fuel-cell", "junk-rating"],
+    terms: ["stargate", "gigawatt", "blue-owl", "ai-data-center", "take-or-pay", "force-majeure", "fuel-cell", "junk-rating"],
     questions: [
       "当电力成为 AI 扩张的瓶颈，风险在开发商、云厂商、模型公司和银行之间是如何分配的？",
       "银行折价出售贷款，释放了关于 AI 基建融资的什么信号？",
@@ -505,7 +505,7 @@ export const studies: Record<string, Study> = {
   "11": {
     background: [
       "美国核电建设在 1979 年三里岛事故后长期停滞。佐治亚州 [[vogtle|沃格特勒核电站]] 3、4 号机组是数十年来首批新建机组，于 2023—2024 年投运，但比计划晚约 7 年、成本翻倍，成为华尔街对新核电的阴影。",
-      "[[ai-data-center|AI 数据中心]]需要全天候稳定电力，科技巨头因此转向核电：2024 年微软与 Constellation 约定重启三里岛 1 号机组，谷歌与 Kairos、亚马逊与 X-energy 签署 [[smr|SMR]] 协议；2025 年 5 月特朗普签署行政令，目标 2050 年把美国核电装机增至约 400GW，约为当时的四倍。",
+      "[[ai-data-center|AI 数据中心]]需要全天候稳定电力，科技巨头因此转向核电：2024 年微软与 Constellation 约定重启三里岛 1 号机组，谷歌与 Kairos、亚马逊与 X-energy 签署 [[smr|SMR]] 协议；2025 年 5 月特朗普签署行政令，目标 2050 年把美国核电装机增至约 [[gigawatt|400GW]]，约为当时的四倍。",
     ],
     timeline: [
       { time: "1979-03", event: "三里岛核事故，美国新建核电陷入长期停滞" },
@@ -516,7 +516,7 @@ export const studies: Record<string, Study> = {
       { time: "2025-05", event: "特朗普签署核能行政令，目标 2050 年装机 400GW" },
       { time: "约 2035", event: "Bloomberg Intelligence 预计核能初创技术广泛商业化" },
     ],
-    terms: ["smr", "vogtle", "ai-data-center"],
+    terms: ["smr", "vogtle", "gigawatt", "ai-data-center"],
     questions: [
       "为什么「资金到得比项目成熟快」本身就是一种风险？",
       "在核电真正落地之前，数据中心的电力缺口可能由哪些方案填补？",
@@ -546,7 +546,7 @@ export const studies: Record<string, Study> = {
   "13": {
     background: [
       "特朗普第一任期把美国对华政策从「接触」转向「竞争」，发起关税战与科技封锁；拜登政府延续并强化了 [[chip-export-controls|芯片出口管制]]，形成两党对华强硬共识。",
-      "第二任期的特朗普更强调交易：2025 年曾允许英伟达 H20 对华销售并收取收入分成，在台湾问题上也更愿意把 [[taiwan-arms-sales|军售]]视为筹码。与此同时，[[rare-earths|稀土]]成为中国最有效的反制工具，[[us-china-trade-truce|贸易休战]]的核心交换之一正是稀土供应。国内政治日程——美国中期选举与 2027 年中共 [[party-congress|党代会]]——让双方都倾向维持平静；[[iran-war|伊朗冲突]]则是悬在峰会上方的变量。",
+      "第二任期的特朗普更强调交易：2025 年曾允许英伟达 [[h20|H20]] 对华销售并收取收入分成，在台湾问题上也更愿意把 [[taiwan-arms-sales|军售]]视为筹码。与此同时，[[rare-earths|稀土]]成为中国最有效的反制工具，[[us-china-trade-truce|贸易休战]]的核心交换之一正是稀土供应。国内政治日程——美国中期选举与 2027 年中共 [[party-congress|党代会]]——让双方都倾向维持平静；[[iran-war|伊朗冲突]]则是悬在峰会上方的变量。",
     ],
     timeline: [
       { time: "2018", event: "特朗普第一任期发起对华贸易战" },
@@ -558,6 +558,7 @@ export const studies: Record<string, Study> = {
     ],
     terms: [
       "chip-export-controls",
+      "h20",
       "rare-earths",
       "us-china-trade-truce",
       "taiwan-arms-sales",
@@ -646,7 +647,7 @@ export const studies: Record<string, Study> = {
   "18": {
     background: [
       "[[panda-diplomacy|熊猫外交]]始于 1972 年尼克松访华后，中国赠送美国国家动物园「玲玲」和「兴兴」。亚特兰大动物园自 1999 年起饲养大熊猫，2024 年 10 月全部归还中国，此次赠送意味着恢复。",
-      "国事访问礼仪本身就是外交信号：总统亲赴机场迎接、军机飞越和国宴都属最高规格。[[nixon-1972|1972 年尼克松访华]]开启了中美关系正常化，习近平在祝酒词中引用这一节点，把当下定位为可能的「再正常化」时刻，同时以 [[thucydides-trap|修昔底德陷阱]]划出竞争的边界。白宫记者采访权的争议，则延续了特朗普政府与主流媒体的长期紧张关系。",
+      "国事访问礼仪本身就是外交信号：总统亲赴机场迎接、[[b-2|B-2]] 与 [[f-22|F-22]] 飞越和国宴都属最高规格。[[nixon-1972|1972 年尼克松访华]]开启了中美关系正常化，习近平在祝酒词中引用这一节点，把当下定位为可能的「再正常化」时刻，同时以 [[thucydides-trap|修昔底德陷阱]]划出竞争的边界。白宫记者采访权的争议，则延续了特朗普政府与主流媒体的长期紧张关系。",
     ],
     timeline: [
       { time: "1972-04", event: "中国赠送美国国家动物园大熊猫玲玲、兴兴" },
@@ -654,7 +655,7 @@ export const studies: Record<string, Study> = {
       { time: "2024-10", event: "亚特兰大动物园的大熊猫全部归还中国" },
       { time: "2026-09-24", event: "习近平宣布向亚特兰大动物园赠送两只大熊猫" },
     ],
-    terms: ["panda-diplomacy", "nixon-1972", "thucydides-trap", "us-china-trade-truce", "iran-war"],
+    terms: ["panda-diplomacy", "b-2", "f-22", "nixon-1972", "thucydides-trap", "us-china-trade-truce", "iran-war"],
     questions: [
       "高规格礼仪与有限的政策成果之间，哪一个更能说明峰会的真实意义？",
       "习近平引用 1972 年而回避冷战最糟阶段，传达了怎样的历史叙事？",
@@ -682,7 +683,7 @@ export const studies: Record<string, Study> = {
   "20": {
     background: [
       "釜山休战后，中美关系进入「以一年为周期」的管理模式。中国在全球 [[rare-earths|稀土]]开采、精炼和永磁体制造上的主导地位，与美国在先进芯片上的 [[chip-export-controls|出口管制]]形成相互制衡；双方同时尝试建立 [[us-china-ai-dialogue|AI 对话]]机制。",
-      "2026 年是双方的「主场年」：中国在深圳主办 [[apec-g20|APEC]]，美国主办 G20；美国 11 月举行中期选举，中国将在 2027 年召开 [[party-congress|党代会]]。国内政治日程使双方都倾向「稳住局面」而非冒险突破；台湾问题上，美国的 [[strategic-ambiguity|战略模糊]]与待批的 [[taiwan-arms-sales|军售]]仍是最大变数。",
+      "2026 年是双方的「主场年」：中国在深圳主办 [[apec-g20|APEC]]，美国主办 G20；美国 11 月举行中期选举，中国将在 2027 年召开 [[party-congress|党代会]]。抵达当天的仪式包含 [[b-2|B-2]] 与四架 [[f-22|F-22]]。国内政治日程使双方都倾向「稳住局面」而非冒险突破；台湾问题上，美国的 [[strategic-ambiguity|战略模糊]]与待批的 [[taiwan-arms-sales|军售]]仍是最大变数。",
     ],
     timeline: [
       { time: "2025-10", event: "釜山会晤，达成一年期贸易休战" },
@@ -695,6 +696,8 @@ export const studies: Record<string, Study> = {
     terms: [
       "rare-earths",
       "chip-export-controls",
+      "b-2",
+      "f-22",
       "us-china-ai-dialogue",
       "taiwan-arms-sales",
       "strategic-ambiguity",
@@ -728,7 +731,7 @@ export const studies: Record<string, Study> = {
   "22": {
     background: [
       "2023 年 7 月，白宫与七家 AI 公司达成 [[voluntary-commitments|自愿安全承诺]]；同月 Anthropic、谷歌、微软、OpenAI 成立 [[frontier-model-forum|Frontier Model Forum]]。同年 11 月美国设立 AI 安全研究所，2025 年更名为 [[caisi|CAISI]]。",
-      "拜登 2023 年 10 月签署的 AI 行政令在 2025 年 1 月被特朗普撤销，联邦层面缺少统一的 [[frontier-model|前沿模型]]监管框架。于是行业尝试「自律组织」路线，类似金融业由行业出资、制定标准的自律机构，并认定 [[third-party-audit|第三方审计]]资质。[[openai|OpenAI]] 与 [[anthropic|Anthropic]] 都是发起方。",
+      "拜登 2023 年 10 月签署的 AI 行政令在 2025 年 1 月被特朗普撤销，联邦层面缺少统一的 [[frontier-model|前沿模型]]监管框架。于是行业尝试「自律组织」路线，类似金融业由行业出资、制定标准的自律机构，并认定 [[third-party-audit|第三方审计]]资质。[[openai|OpenAI]] 与 [[anthropic|Anthropic]] 都是发起方。近景包括测试中的智能体攻击 [[hugging-face|Hugging Face]]。",
     ],
     timeline: [
       { time: "2023-07", event: "白宫 AI 自愿承诺；Frontier Model Forum 成立" },
@@ -741,6 +744,7 @@ export const studies: Record<string, Study> = {
     terms: [
       "frontier-model",
       "caisi",
+      "hugging-face",
       "frontier-model-forum",
       "voluntary-commitments",
       "third-party-audit",
@@ -755,7 +759,7 @@ export const studies: Record<string, Study> = {
   "23": {
     background: [
       "2023 年 4 月谷歌合并 Google Brain 与 DeepMind，成立 [[deepmind|Google DeepMind]]，以应对 ChatGPT 带来的竞争压力。此后 [[gemini|Gemini]] 系列快速迭代，2025 年 11 月发布 Gemini 3，并同期推出 AI 编程工具 Antigravity。",
-      "大模型训练分为预训练与 [[post-training|后训练]]：前者用海量数据学习通用能力，后者通过指令微调、强化学习等方式让模型更可靠、更符合人类偏好。近年 [[anthropic|Anthropic]]、[[openai|OpenAI]] 与谷歌在 [[frontier-model|前沿模型]]上的竞争焦点，越来越多地转向后训练与推理能力。",
+      "大模型训练分为预训练与 [[post-training|后训练]]：前者用海量数据学习通用能力，后者通过指令微调、强化学习等方式让模型更可靠、更符合人类偏好。近年 [[anthropic|Anthropic]]、[[openai|OpenAI]] 的 [[gpt-6|GPT-6]] 与谷歌在 [[frontier-model|前沿模型]]上的竞争焦点，越来越多地转向后训练与推理能力。",
     ],
     timeline: [
       { time: "2023-04", event: "Google Brain 与 DeepMind 合并" },
@@ -766,7 +770,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-06", event: "原定发布的 Gemini 3.5 Pro 未出现" },
       { time: "2026 年底前", event: "Gemini 4 计划发布" },
     ],
-    terms: ["gemini", "deepmind", "post-training", "frontier-model", "anthropic", "openai"],
+    terms: ["gemini", "deepmind", "gpt-6", "post-training", "frontier-model", "anthropic", "openai"],
     questions: [
       "把资源从旗舰模型转向 Flash 小模型「以最大化学习速度」，这一策略的逻辑是什么？",
       "模型竞争中「先发布早期版本、再快速迭代」有哪些利弊？",

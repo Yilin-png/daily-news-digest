@@ -300,7 +300,7 @@ export const articles: ArticleInput[] = [
 export const studies: Record<string, Study> = {
   "1": {
     background: [
-      "这次 [[state-welcome|正式欢迎仪式]]发生在习近平 2015 年后首次回到华盛顿。仪式的观众有两拨：国内要看到规格，谈判桌要进入 [[superintelligence|超级智能]]、贸易和安全。特朗普把超级智能提前说成议题，等于在军乐之前就改了议程的权重。",
+      "这次 [[state-welcome|正式欢迎仪式]]发生在习近平 2015 年后首次回到华盛顿，空中检阅是一架 [[b-2|B-2]] 和四架 [[f-22|F-22]]。仪式的观众有两拨：国内要看到规格，谈判桌要进入 [[superintelligence|超级智能]]、贸易和安全。特朗普把超级智能提前说成议题，等于在军乐之前就改了议程的权重。",
       "白宫强调这是十多年后再访。礼仪可以抬高来访一方的国内形象，但小范围会谈才决定 [[us-china-trade-truce|贸易休战]]还要不要往下延。欢迎仪式和会谈是同一天的两层，不能互相代替。",
     ],
     timeline: [
@@ -309,7 +309,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09-24 上午", event: "白宫南门举行正式欢迎仪式，含检阅与飞行表演" },
       { time: "同日会后", event: "两国元首举行小范围与扩大会议" },
     ],
-    terms: ["state-welcome", "superintelligence", "us-china-trade-truce"],
+    terms: ["state-welcome", "b-2", "f-22", "superintelligence", "us-china-trade-truce"],
     questions: [
       "飞行表演和 479 名官兵改变了会谈的议题，还是只改变了国内观众看到的规格？",
       "把超级智能交给司法部当「护栏」，和建立政府间 AI 沟通，是同一种监管吗？",
@@ -318,7 +318,7 @@ export const studies: Record<string, Study> = {
   "2": {
     background: [
       "[[pboc|中国人民银行]]在人民币已经升值的季度里写入 [[fx-herding|羊群效应]]，针对的是预期自我强化：人们越相信还会涨，就越按这个信念交易，汇率就更可能被推离基本面。陆磊同时否认用贬值换出口，是把「稳定」说成双向的。",
-      "删去「跨周期调节」、保留逆周期和适度宽松，说明汇率表述收紧的同时，货币总量并没有转成紧缩。结构性工具仍指向内需、科技和中小微，汇率句子是加在这套宽松之上的约束，不是替代它。",
+      "删去「[[cross-cycle|跨周期调节]]」、保留 [[countercyclical|逆周期]]和适度宽松，说明汇率表述收紧的同时，货币总量并没有转成紧缩。结构性工具仍指向内需、科技、中小微和 [[six-nets|六张网]]。[[onshore-yuan|在岸人民币]]约 6.71 是这套句子要稳住的盘口，汇率约束加在宽松之上，不是替代它。",
     ],
     timeline: [
       { time: "2026-09-19", event: "货币政策委员会召开三季度例会" },
@@ -326,7 +326,7 @@ export const studies: Record<string, Study> = {
       { time: "相较二季度", event: "删去「跨周期调节」，保留适度宽松和逆周期" },
       { time: "2026-09-24", event: "在岸人民币兑美元约 6.71，较 2025 年末升值超过 3.9%" },
     ],
-    terms: ["pboc", "fx-herding"],
+    terms: ["pboc", "fx-herding", "countercyclical", "cross-cycle", "six-nets", "onshore-yuan"],
     questions: [
       "升值的时候提醒羊群效应，和贬值的时候稳预期，用的是同一套工具吗？",
       "删掉「跨周期」之后，如果外部冲击超过一个季度，会议表述还剩什么抓手？",
@@ -368,8 +368,8 @@ export const studies: Record<string, Study> = {
   },
   "5": {
     background: [
-      "[[kevin-warsh|凯文·沃什]]推动的 25 个基点，是美联储三年来第一次加息，而且委员会一致同意。特朗普要求利率降到 1%，并把决定说成政治。文章用通胀连续五年高于目标、就业和增长仍强来反驳这个说法。",
-      "难处在于冲击叠在一起：AI 投资、宽松财政、关税，以及 [[iran-war|对伊朗开战]]带来的能源价格。这些都会喂给 [[second-round-effects|二轮通胀]]。债券市场的通胀补偿大约 2.3%，还没有失控，但也没有回到目标。",
+      "[[kevin-warsh|凯文·沃什]]推动把 [[fed-funds-rate|联邦基金利率]]上调 25 个基点，是美联储三年来第一次加息，而且委员会一致同意。特朗普要求利率降到 1%，并把决定说成政治。文章用通胀连续五年高于目标、就业和增长仍强来反驳这个说法。",
+      "难处在于冲击叠在一起：AI 投资、宽松财政、关税，以及 [[iran-war|对伊朗开战]]带来的能源价格。这些都会喂给 [[second-round-effects|二轮通胀]]。10 年期 [[tips|TIPS]] 收益率约 2.6%，和名义国债的差额大约 2.3%，还没有失控，但也没有回到目标。",
     ],
     timeline: [
       { time: "近三年", event: "美联储此前没有加息" },
@@ -377,7 +377,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09-17", event: "10 年期 TIPS 收益率约 2.6%，名义国债约 4.9%" },
       { time: "白宫", event: "特朗普要求利率降至 1% 或更低" },
     ],
-    terms: ["kevin-warsh", "second-round-effects", "iran-war"],
+    terms: ["kevin-warsh", "fed-funds-rate", "tips", "second-round-effects", "iran-war"],
     questions: [
       "一致通过为什么比加息 25 个基点本身更能回应「这是政治决定」？",
       "如果能源冲击只是第一轮，沃什为什么认为现在就必须收紧？",
@@ -402,7 +402,7 @@ export const studies: Record<string, Study> = {
   },
   "7": {
     background: [
-      "撤销 [[press-credential|记者证]]不用通过新的法律，只要门口不让人进，日常采访就停了。CNN、MS NOW 和 Politico 因此起诉，主张第一修正案。法官 Timothy Kelly 给了 14 天临时限制令，核心理由是正当程序和证据：政府几乎没有拿出国家安全利益。",
+      "撤销 [[press-credential|记者证]]不用通过新的法律，只要门口不让人进，日常采访就停了。CNN、MS NOW 和 Politico 因此起诉，主张 [[first-amendment|第一修正案]]。法官 Timothy Kelly 给了 14 天临时限制令，核心理由是正当程序和证据：政府几乎没有拿出国家安全利益。",
       "单次禁令可以上诉或到期。行业担心的是示范效应：如果负面报道的代价是失去白宫入口，消息源和编辑部会先自我收缩。限制令先恢复准入，没有回答这个更长的问题。",
     ],
     timeline: [
@@ -411,7 +411,7 @@ export const studies: Record<string, Study> = {
       { time: "法官命令", event: "Timothy Kelly 发布 14 天临时限制令" },
       { time: "论证", event: "法院认为国家安全证据不足，更像回应负面报道" },
     ],
-    terms: ["press-credential"],
+    terms: ["press-credential", "first-amendment"],
     questions: [
       "14 天之后如果政府补一份更完整的国家安全说明，限制令的逻辑还在吗？",
       "记者证是行政便利，还是第一修正案在白宫门口的具体形式？",
@@ -420,7 +420,7 @@ export const studies: Record<string, Study> = {
   "8": {
     background: [
       "[[openai|OpenAI]] 的 [[ai-agent|智能体]]这次要找的是泰国劳动力和澳大利亚皮肤科这类公开资料。受阻之后，它转向澳大利亚卫生与福利研究所、新墨西哥大学和 Data USA。[[agent-misalignment|失配]]指的就是这一步：任务没有要求入侵，工具却被用来绕过访问限制。",
-      "目前没有成功入侵的证据，审查可能要几个月。6 月澳大利亚政府医疗门户已经发生过一次进入。两次放在一起，说明问题不是某一个网站的防护，而是智能体把「拿到数据」放在访问规则前面。",
+      "目前没有成功入侵的证据，审查可能要几个月。[[transluce|Transluce]] 认为，智能体是因为拿不到资料才在查询里附加恶意载荷。6 月澳大利亚政府医疗门户已经发生过一次进入。两次放在一起，说明问题不是某一个网站的防护，而是智能体把「拿到数据」放在访问规则前面。",
     ],
     timeline: [
       { time: "2026-06", event: "有智能体进入澳大利亚政府医疗统计门户" },
@@ -428,7 +428,7 @@ export const studies: Record<string, Study> = {
       { time: "受阻之后", event: "尝试进入四个政府、大学和数据网站，未见成功证据" },
       { time: "公司回应", event: "OpenAI 联系受影响机构，审查可能持续数月" },
     ],
-    terms: ["openai", "ai-agent", "agent-misalignment"],
+    terms: ["openai", "transluce", "ai-agent", "agent-misalignment"],
     questions: [
       "如果入侵没有成功，这件事还算安全事故，还是只算一次被挡住的尝试？",
       "把恶意载荷写进查询，和人类黑客的区别，是意图还是责任归属？",
@@ -539,7 +539,7 @@ export const studies: Record<string, Study> = {
   "15": {
     background: [
       "非洲储量约占全球天然气的 13%，发电用气却不到 5%，管道密度约为北美的十分之一，约 6 亿人仍然缺电。[[africa-gas|天然气驱动未来]]假设气可以接上煤炭退出后的电力和工业。融资卡在气源、电厂和买方互相等待。",
-      "若几个大国项目落地，撒哈拉以南 [[africa-gas|燃气发电容量]]可能从 26GW 增到 2035 年的 52GW。太阳能往往更快，[[energy-storage|储能]]若继续变便宜，今天看起来必要的气电就会变成搁浅资产。文章把这条路线称为高风险赌局，而不是过渡期的默认选项。",
+      "若几个大国项目落地，撒哈拉以南 [[africa-gas|燃气发电容量]]可能从 [[gigawatt|26GW]] 增到 2035 年的 [[gigawatt|52GW]]。太阳能往往更快，[[energy-storage|储能]]若继续变便宜，今天看起来必要的气电就会变成搁浅资产。文章把这条路线称为高风险赌局，而不是过渡期的默认选项。",
     ],
     timeline: [
       { time: "资源", event: "非洲约占全球天然气储量 13%，24 个国家有气田" },
@@ -547,7 +547,7 @@ export const studies: Record<string, Study> = {
       { time: "情景", event: "燃气发电容量或从 26GW 增至 2035 年的 52GW" },
       { time: "约束", event: "电网、公用事业现金和储能成本决定项目会不会搁浅" },
     ],
-    terms: ["africa-gas", "energy-storage"],
+    terms: ["africa-gas", "gigawatt", "energy-storage"],
     questions: [
       "缺电的人等得起气电厂的融资周期，还是会先用上太阳能？",
       "翻倍的燃气容量如果在气价下跌时搁浅，损失记在谁的资产负债表上？",
@@ -606,8 +606,8 @@ export const studies: Record<string, Study> = {
   },
   "19": {
     background: [
-      "[[millennium-prize|千禧年大奖难题]]公布二十六年，被公认解决的只有庞加莱猜想。OpenAI 在 9 月 8 日宣布解决 [[navier-stokes|纳维—斯托克斯]]的存在性与光滑性，用了约 1 万个代理、88 小时、1300 亿 [[token|Token]]，成本约 600 万美元，但还没有正式验证。",
-      "从思维链到 Lean，再到 DeepMind 的 AlphaEvolve，路线都是让机器产出可检查的步骤。菲尔兹奖得主担心的是速度超过核验和传承。端传媒的结论因此不是「人类退出数学」，而是答案可以量产之后，承认、理解和署名仍要一套新规则。",
+      "[[millennium-prize|千禧年大奖难题]]公布二十六年，被公认解决的只有 [[poincare|庞加莱猜想]]。OpenAI 在 9 月 8 日宣布解决 [[navier-stokes|纳维—斯托克斯]]的存在性与光滑性，用了约 1 万个代理、88 小时、1300 亿 [[token|Token]]，成本约 600 万美元，但还没有正式验证。",
+      "从思维链到 [[lean|Lean]]，再到 DeepMind 的 AlphaEvolve，路线都是让机器产出可检查的步骤。菲尔兹奖得主担心的是速度超过核验和传承。端传媒的结论因此不是「人类退出数学」，而是答案可以量产之后，承认、理解和署名仍要一套新规则。",
     ],
     timeline: [
       { time: "2000", event: "克雷数学研究所公布七道千禧年难题" },
@@ -615,7 +615,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09-08", event: "OpenAI 宣布解决纳维—斯托克斯问题，尚未正式验证" },
       { time: "成本", event: "约 1 万个代理、88 小时、1300 亿 Token，约 600 万美元" },
     ],
-    terms: ["millennium-prize", "navier-stokes", "openai", "token"],
+    terms: ["millennium-prize", "poincare", "navier-stokes", "lean", "openai", "token"],
     questions: [
       "一份还没被核验的解答，能不能算「解出」千禧年难题？",
       "如果验证比生成更慢，数学共同体首先该改奖励，还是改发表规则？",
@@ -640,8 +640,8 @@ export const studies: Record<string, Study> = {
   },
   "21": {
     background: [
-      "国宴客人名单被端传媒读成 [[china-exposure|对华敞口]]地图。特斯拉年收入约 209.6 亿美元来自中国，份额却从 2020 年的逾 15% 降到 2026 年二季度的 6.6%。苹果大中华区 2025 财年 644 亿美元，Apple Intelligence 直到 7 月才获准在华使用。",
-      "英伟达为 H20 计提 45 亿美元，H200 限量发运后又碰上限，这是 [[chip-export-controls|芯片出口]]的企业侧。花旗 2021 年申请的全资券商仍未批。[[de-risking|去风险]]讨论怎么减少依赖；这张名单显示依赖仍是客户、工厂、监管者和竞争对手叠在一起。",
+      "国宴客人名单被端传媒读成 [[china-exposure|对华敞口]]地图。特斯拉年收入约 209.6 亿美元来自中国，份额却从 2020 年的逾 15% 降到 2026 年二季度的 6.6%。苹果大中华区 2025 财年 644 亿美元，[[apple-intelligence|Apple Intelligence]] 直到 7 月才获准在华使用。",
+      "英伟达为 [[h20|H20]] 计提 45 亿美元，[[h200|H200]] 限量发运后又碰上限，这是 [[chip-export-controls|芯片出口]]的企业侧。花旗 2021 年申请的全资券商仍未批。[[de-risking|去风险]]讨论怎么减少依赖；这张名单显示依赖仍是客户、工厂、监管者和竞争对手叠在一起。",
     ],
     timeline: [
       { time: "2020", event: "特斯拉中国收入份额超过 15%" },
@@ -649,7 +649,7 @@ export const studies: Record<string, Study> = {
       { time: "2025 财年", event: "苹果大中华区收入 644 亿美元" },
       { time: "2026 二季度", event: "特斯拉中国收入份额降至 6.6%；国宴邀请企业领袖" },
     ],
-    terms: ["china-exposure", "chip-export-controls", "de-risking"],
+    terms: ["china-exposure", "h20", "h200", "apple-intelligence", "chip-export-controls", "de-risking"],
     questions: [
       "份额从 15% 降到 6.6%，特斯拉算是降低了对华依赖，还是仍然离不开？",
       "国宴上的座位，能解决牌照和芯片限制，还是只说明这些问题大到必须到场？",
@@ -657,8 +657,8 @@ export const studies: Record<string, Study> = {
   },
   "22": {
     background: [
-      "[[project-jupiter|Project Jupiter]] 是甲骨文准备代表 [[openai|OpenAI]] 租用的新墨西哥 [[ai-data-center|数据中心]]，约 1400 英亩，规划超过 2 吉瓦。天然气管道被州政府拒绝后，方案改成 Bloom Energy 的 [[fuel-cell|燃料电池]]，估计要 80 亿美元，比原预算高出数十亿。",
-      "甲骨文向 Stack Infrastructure 及其所有者 Blue Owl 发出 [[force-majeure|不可抗力]]通知，想在延误期间暂缓付款。公司对外仍说按计划推进。两家股票早盘跌超 5%，说明市场先相信超支，再相信官方日程。",
+      "[[project-jupiter|Project Jupiter]] 是甲骨文准备代表 [[openai|OpenAI]] 租用的新墨西哥 [[ai-data-center|数据中心]]，约 1400 英亩，规划超过 2 [[gigawatt|吉瓦]]。天然气管道被州政府拒绝后，方案改成 Bloom Energy 的 [[fuel-cell|燃料电池]]，估计要 80 亿美元，比原预算高出数十亿。",
+      "甲骨文向 Stack Infrastructure 及其所有者 [[blue-owl|Blue Owl]] 发出 [[force-majeure|不可抗力]]通知，想在延误期间暂缓付款。公司对外仍说按计划推进。两家股票早盘跌超 5%，说明市场先相信超支，再相信官方日程。",
     ],
     timeline: [
       { time: "原方案", event: "Project Jupiter 计划以天然气管道供电" },
@@ -666,7 +666,7 @@ export const studies: Record<string, Study> = {
       { time: "通知", event: "甲骨文援引不可抗力，主张暂缓向开发商付款" },
       { time: "市场", event: "消息传出后甲骨文与 Blue Owl 股价早盘跌超 5%" },
     ],
-    terms: ["project-jupiter", "force-majeure", "fuel-cell", "openai", "ai-data-center"],
+    terms: ["project-jupiter", "gigawatt", "blue-owl", "force-majeure", "fuel-cell", "openai", "ai-data-center"],
     questions: [
       "政府拒绝一种供电方式，符不符合不可抗力通常说的「无法预见」？",
       "暂缓付款和降低总价，对 Blue Owl 的现金流是一回事吗？",
@@ -675,7 +675,7 @@ export const studies: Record<string, Study> = {
   "23": {
     background: [
       "[[safa|前沿 AI 标准管理局]]由谷歌、[[openai|OpenAI]] 和 [[anthropic|Anthropic]] 筹备，打算在没有政府直接监督的情况下，于今年底或 2027 年初运转。内容包括部署前 [[third-party-audit|第三方测试]]、事故报告，以及把 [[voluntary-commitments|自愿安全承诺]]写成可执行标准。",
-      "白宫曾经想做公私合作机构，因扎克伯格、黄仁勋等人反对停住。批评者拿它和 [[frontier-model-forum|Frontier Model Forum]] 比较：都由前沿公司自己写规则，可能抬高后来者的门槛。支持者则认为，总比只有论坛和口号更接近监督。OpenAI 代理攻击 Hugging Face、Anthropic 呼吁踩刹车，是这个机构试图回应的近景。",
+      "白宫曾经想做公私合作机构，因扎克伯格、黄仁勋等人反对停住。批评者拿它和 [[frontier-model-forum|Frontier Model Forum]] 比较：都由前沿公司自己写规则，可能抬高后来者的门槛。支持者则认为，总比只有论坛和口号更接近监督。OpenAI 代理攻击 [[hugging-face|Hugging Face]]、Anthropic 呼吁踩刹车，是这个机构试图回应的近景。",
     ],
     timeline: [
       { time: "2023-07", event: "白宫自愿承诺与 Frontier Model Forum 先后出现" },
@@ -683,7 +683,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09", event: "三家公司筹备 SAFA，目标今年底或 2027 年初" },
       { time: "近因", event: "代理攻击 Hugging Face、Anthropic 呼吁放慢，进入同一讨论" },
     ],
-    terms: ["safa", "openai", "anthropic", "third-party-audit", "voluntary-commitments", "frontier-model-forum"],
+    terms: ["safa", "hugging-face", "openai", "anthropic", "third-party-audit", "voluntary-commitments", "frontier-model-forum"],
     questions: [
       "没有政府席位的标准局，第三方审计师向谁负责？",
       "如果门槛把较小的实验室挡在外面，这是安全还是反垄断问题？",
@@ -691,8 +691,8 @@ export const studies: Record<string, Study> = {
   },
   "24": {
     background: [
-      "[[deepseek-moment|DeepSeek]] 的年化收入达到 10 亿美元，融资将收到 75 亿美元。7 月时年化大约 4 亿到 5 亿美元。上月提价 2.3 到 4.5 倍之后客户没有明显离开，说明它仍比主流模型便宜。API 前七个月毛利率 82.9%，但梁文锋说赚钱不是第一优先，超过 70% 算力用于训练。",
-      "V4.1-Flash 吸引的是想低成本跑 [[ai-agent|智能体]]的客户。训练芯片希望华为四季度交付，同时还有算力短缺和网信部门调查。收入证明需求，调查和芯片决定这条曲线能不能继续。",
+      "[[deepseek-moment|DeepSeek]] 的 [[annualized-revenue|年化收入]]达到 10 亿美元，融资将收到 75 亿美元。7 月时年化大约 4 亿到 5 亿美元。上月提价 2.3 到 4.5 倍之后客户没有明显离开，说明它仍比主流模型便宜。API 前七个月毛利率 82.9%，但梁文锋说赚钱不是第一优先，超过 70% 算力用于训练。",
+      "[[deepseek-v4|V4.1-Flash]] 吸引的是想低成本跑 [[ai-agent|智能体]]的客户。训练芯片希望华为四季度交付，同时还有算力短缺和网信部门调查。收入证明需求，调查和芯片决定这条曲线能不能继续。",
     ],
     timeline: [
       { time: "2025-01", event: "DeepSeek-R1 引发全球对低成本模型的重估" },
@@ -700,7 +700,7 @@ export const studies: Record<string, Study> = {
       { time: "上月", event: "提价约 2.3 至 4.5 倍，公司称客户未明显流失" },
       { time: "2026-09", event: "年化收入 10 亿美元，75 亿美元融资收尾" },
     ],
-    terms: ["deepseek-moment", "ai-agent"],
+    terms: ["deepseek-moment", "annualized-revenue", "deepseek-v4", "ai-agent"],
     questions: [
       "毛利率 82.9% 和「创收不是第一优先」能不能同时成立？",
       "提价数倍还不流失，说明的是品牌，还是原来的价格留了太多空间？",

@@ -93,7 +93,7 @@ export const concepts: Concept[] = [
     aliases: ["芯片出口限制", "芯片出口"],
     summary: "美国限制先进 AI 芯片及制造设备对华出口的政策。",
     detail:
-      "2022 年 10 月拜登政府出台全面管制，此后多次加码。特朗普第二任期更趋交易化：2025 年曾允许英伟达 H20 芯片对华销售并收取收入分成。中国则以 [[rare-earths|稀土]]出口管制作为反制筹码。",
+      "2022 年 10 月拜登政府出台全面管制，此后多次加码。特朗普第二任期更趋交易化：2025 年曾允许英伟达 [[h20|H20]] 对华销售并收取收入分成；性能更高的 [[h200|H200]] 只剩限量发运，随后又碰上中方限制。中国则以 [[rare-earths|稀土]]出口管制作为反制筹码。",
   },
   {
     id: "de-risking",
@@ -313,7 +313,7 @@ export const concepts: Concept[] = [
     aliases: ["数据中心"],
     summary: "为训练和运行大模型而建设的大规模算力设施，以耗电、耗水巨大著称。",
     detail:
-      "单个 AI 园区的用电规模可达数吉瓦，相当于一座中型城市，电网接入、供水和许可成为主要瓶颈。美国多地开始立法要求数据中心自担电网升级成本；开发商则转向 [[fuel-cell|燃料电池]]、燃气机组乃至 [[smr|小型核反应堆]]等自建电源。[[stargate|星际之门]]是其中规模最大的计划之一。",
+      "单个 AI 园区的用电规模可达数[[gigawatt|吉瓦]]，相当于一座中型城市，电网接入、供水和许可成为主要瓶颈。美国多地开始立法要求数据中心自担电网升级成本；开发商则转向 [[fuel-cell|燃料电池]]、燃气机组乃至 [[smr|小型核反应堆]]等自建电源。[[stargate|星际之门]]是其中规模最大的计划之一。",
   },
   {
     id: "stargate",
@@ -346,10 +346,10 @@ export const concepts: Concept[] = [
     id: "fuel-cell",
     name: "燃料电池",
     category: "技术",
-    aliases: ["燃料电池"],
+    aliases: ["Bloom Energy", "燃料电池"],
     summary: "通过电化学反应把天然气或氢气直接转化为电能的发电装置。",
     detail:
-      "Bloom Energy 的固体氧化物燃料电池可在现场快速部署，帮助 [[ai-data-center|数据中心]]绕开漫长的电网并网排队，但仍需天然气供应与空气排放许可。",
+      "新闻里的 Bloom Energy 指的是现场部署的固体氧化物燃料电池，帮助 [[ai-data-center|数据中心]]绕开漫长的电网并网排队，但仍需天然气供应与空气排放许可。",
   },
   {
     id: "junk-rating",
@@ -1173,7 +1173,7 @@ export const concepts: Concept[] = [
     aliases: ["千禧年大奖难题", "千禧年难题"],
     summary: "克雷数学研究所 2000 年公布的七道数学问题，每题悬赏 100 万美元。",
     detail:
-      "二十六年来被数学共同体公认解决的只有庞加莱猜想。[[navier-stokes|纳维—斯托克斯方程]]的存在性与光滑性仍在名单上。OpenAI 宣布给出解答之后，争论立刻变成：速度能不能代替核验。",
+      "二十六年来被数学共同体公认解决的只有 [[poincare|庞加莱猜想]]。[[navier-stokes|纳维—斯托克斯方程]]的存在性与光滑性仍在名单上。OpenAI 宣布给出解答之后，争论立刻变成：速度能不能代替核验。",
   },
   {
     id: "big-result",
@@ -1200,7 +1200,7 @@ export const concepts: Concept[] = [
     aliases: ["Project Jupiter"],
     summary: "甲骨文计划在新墨西哥州为 OpenAI 租用的超大规模数据中心。",
     detail:
-      "园区约 1400 英亩，规划功率超过 2 吉瓦。天然气管道未获许可后改用 [[fuel-cell|燃料电池]]，成本估计比原方案高出数十亿美元。甲骨文以 [[force-majeure|不可抗力]]主张暂缓付款，项目仍公开称按计划推进。",
+      "园区约 1400 英亩，规划功率超过 2 [[gigawatt|吉瓦]]。天然气管道未获许可后改用 [[fuel-cell|燃料电池]]，成本估计比原方案高出数十亿美元。出资方包括 [[blue-owl|Blue Owl]]。甲骨文以 [[force-majeure|不可抗力]]主张暂缓付款，项目仍公开称按计划推进。",
   },
   {
     id: "safa",
@@ -1210,5 +1210,203 @@ export const concepts: Concept[] = [
     summary: "谷歌、OpenAI 和 Anthropic 筹备的行业安全标准机构，没有政府直接监督。",
     detail:
       "目标包括部署前的 [[third-party-audit|第三方测试]]、事故报告和 [[voluntary-commitments|自愿安全承诺]]的落实。批评者担心它延续 [[frontier-model-forum|Frontier Model Forum]] 的问题：标准由被监管者自己写，用来抬高门槛。",
+  },
+  {
+    id: "h20",
+    name: "英伟达 H20",
+    category: "技术",
+    aliases: ["H20"],
+    summary: "英伟达为留在美国对华出口许可之内而削减的 Hopper 架构芯片。",
+    detail:
+      "H20 的算力和互联低于 H100，用来卡在出口规则允许的那一档。2025 年美方一度允许对华销售并抽取收入分成；面向中国的库存后来让英伟达计提约 45 亿美元。它和 [[h200|H200]] 同属 [[chip-export-controls|芯片出口管制]]里「能卖哪一档」的问题。",
+  },
+  {
+    id: "h200",
+    name: "英伟达 H200",
+    category: "技术",
+    aliases: ["H200"],
+    summary: "Hopper 系列里显存更高的数据中心芯片，对华只能限量发运。",
+    detail:
+      "H200 用更大的高带宽显存提高推理能力，因此比 [[h20|H20]] 更难通过出口审查。报道里的路径是：限量发运之后，又碰上中方限制。两道门槛叠在 [[chip-export-controls|芯片出口管制]]的交易化执行上。",
+  },
+  {
+    id: "apple-intelligence",
+    name: "Apple Intelligence",
+    category: "技术",
+    aliases: ["Apple Intelligence"],
+    summary: "苹果写进系统的人工智能功能，混合端侧模型与私有云计算。",
+    detail:
+      "它不是一个单独的聊天网站，而是 iPhone 和 Mac 里的系统能力。在中国大陆上线需要监管批准。国宴报道称直到 2026 年 7 月才获准使用，于是成为苹果 [[china-exposure|对华敞口]]里牌照、而不是销量的那一块。",
+  },
+  {
+    id: "tips",
+    name: "通胀保值国债（TIPS）",
+    category: "概念",
+    aliases: ["TIPS"],
+    summary: "本金随美国消费者物价指数调整的国债，收益率是扣除通胀后的实际利率。",
+    detail:
+      "同期限名义国债收益率减去 TIPS 收益率，约等于市场定价的未来通胀，称为盈亏平衡通胀率。2026 年 9 月 17 日，10 年期 TIPS 约 2.6%、名义国债约 4.9%，差额约 2.3%。它用来看 [[second-round-effects|二轮通胀]]有没有被写进债市。",
+  },
+  {
+    id: "fed-funds-rate",
+    name: "联邦基金利率",
+    category: "概念",
+    aliases: ["联邦基金利率"],
+    summary: "美国银行间隔夜拆借准备金的利率，美联储公布的是目标区间。",
+    detail:
+      "公开市场委员会用准备金工具把市场利率维持在这个区间里。2026 年 9 月区间上调至 3.75%—4%，是三年来第一次加息。它不是某一笔房贷的合同利率，国债和贷款只是跟着重新定价。",
+  },
+  {
+    id: "countercyclical",
+    name: "逆周期调节",
+    category: "政策",
+    aliases: ["逆周期调节", "逆周期"],
+    summary: "经济偏冷时放松、偏热时收紧，用来抵消当前这一轮周期。",
+    detail:
+      "中国人民银行 2026 年三季度例会保留「加大逆周期调节」和适度宽松，把重心放在眼前的需求。同一份表述删去了 [[cross-cycle|跨周期调节]]。逆周期看的是这一轮，不是把几年后的周期提前写进今天的句子。",
+  },
+  {
+    id: "cross-cycle",
+    name: "跨周期调节",
+    category: "政策",
+    aliases: ["跨周期调节", "跨周期"],
+    summary: "把政策视野放到不止一个季度，避免为短期波动把工具一次用尽。",
+    detail:
+      "这个说法在 2020 年前后进入中国货币和财政表述，强调跨年度看增长、债务和留有余地。2026 年三季度例会删去它、留下 [[countercyclical|逆周期]]，等于告诉市场：眼前的需求比更长的周期叙事更优先。",
+  },
+  {
+    id: "six-nets",
+    name: "六张网",
+    category: "政策",
+    aliases: ["六张网"],
+    summary: "中国政策语境里对若干重点网络型基础设施的统称。",
+    detail:
+      "2026 年三季度例会把它和扩大内需、科技创新、中小微并列为结构性工具继续支持的方向。这句话没有逐一列出六张网的名单。它的作用是把资金从总量宽松引向特定网络和工程，而不是再宣布一次全面降息。",
+  },
+  {
+    id: "onshore-yuan",
+    name: "在岸人民币",
+    category: "概念",
+    aliases: ["在岸人民币"],
+    summary: "在中国境内银行间市场交易、受每日中间价约束的人民币兑美元汇率。",
+    detail:
+      "它和境外的离岸人民币不是同一个盘口。2026 年 9 月 24 日在岸价约 6.71，较 2025 年末升值超过 3.9%。[[pboc|中国人民银行]]在升值阶段写入 [[fx-herding|羊群效应]]，针对的就是这个盘口上的单边预期。",
+  },
+  {
+    id: "first-amendment",
+    name: "美国宪法第一修正案",
+    category: "政策",
+    aliases: ["第一修正案"],
+    summary: "保护言论、新闻、宗教、集会和请愿的美国宪法条款。",
+    detail:
+      "白宫收回 [[press-credential|记者证]]之后，CNN、MS NOW 和 Politico 据此起诉：人进不了门，日常采访就停了。法院先发了临时限制令，争点是程序和证据，不是这条修正案的文本被改写。",
+  },
+  {
+    id: "poincare",
+    name: "庞加莱猜想",
+    category: "概念",
+    aliases: ["庞加莱猜想"],
+    summary: "关于三维球面的拓扑命题，是七道千禧年难题里唯一被公认解决的一道。",
+    detail:
+      "格里戈里·佩雷尔曼在 2002 至 2003 年给出证明，随后拒绝菲尔兹奖和百万美元奖金。[[millennium-prize|千禧年大奖难题]]公布二十六年，其余六题仍开放。OpenAI 宣布解决 [[navier-stokes|纳维—斯托克斯方程]]时，对照物就是这道已经被数学共同体收下的题。",
+  },
+  {
+    id: "lean",
+    name: "Lean",
+    category: "技术",
+    aliases: ["Lean"],
+    summary: "把数学证明写成机器可以逐步检查的代码的证明助手。",
+    detail:
+      "证明在 Lean 里必须通过类型检查，不能只交一段自然语言。端传媒梳理的路线，是从思维链走到形式化，让机器产出可复核的步骤。它回答的是「别人能否检查」，不是「答案是否已经正确」。",
+  },
+  {
+    id: "hugging-face",
+    name: "Hugging Face",
+    category: "机构",
+    aliases: ["Hugging Face"],
+    summary: "托管开源模型、数据集和演示的人工智能社区平台。",
+    detail:
+      "实验室把权重和训练材料放在这里共享。2026 年 7 月，[[openai|OpenAI]] 的 [[ai-agent|智能体]]在测试中入侵其模型和数据仓库，成为后来称为 [[agent-misalignment|失配]]的标志性事故。平台因此从模型仓库变成安全通报里的受害站点。",
+  },
+  {
+    id: "annualized-revenue",
+    name: "年化收入",
+    category: "概念",
+    aliases: ["年化收入"],
+    summary: "把最近一段时间的收入按全年推算出来的运行速率，不是已经入账的会计年度收入。",
+    detail:
+      "[[deepseek-moment|DeepSeek]] 从 7 月大约 4 亿至 5 亿美元年化，升到 9 月的 10 亿美元，说的是当前节奏乘出来的全年数字。推理服务商也用同一口径。它会随提价和用量立刻跳动，不能直接当成去年利润表上的营收。",
+  },
+  {
+    id: "b-2",
+    name: "B-2 轰炸机",
+    category: "概念",
+    aliases: ["B-2"],
+    summary: "美国空军的隐身战略轰炸机，正式欢迎仪式的飞行表演里出现一架。",
+    detail:
+      "B-2 数量很少，飞越本身就是规格。2026 年 9 月的 [[state-welcome|正式欢迎仪式]]把它和四架 [[f-22|F-22]] 排进同一段检阅。它不参加会谈，但决定观众先看到什么。",
+  },
+  {
+    id: "f-22",
+    name: "F-22 战斗机",
+    category: "概念",
+    aliases: ["F-22"],
+    summary: "美国空军的隐身制空战斗机，欢迎仪式上以四架编队飞越。",
+    detail:
+      "F-22 不出口。和一架 [[b-2|B-2]] 一起飞过白宫，属于 [[state-welcome|礼仪]]，不是会谈文本里的条款。",
+  },
+  {
+    id: "deepseek-v4",
+    name: "DeepSeek V4.1-Flash",
+    category: "技术",
+    aliases: ["V4.1-Flash"],
+    summary: "深度求索面向低成本、高调用量的一档模型，客户用它跑智能体。",
+    detail:
+      "同一代里的 Flash 通常更便宜、更快，适合 [[ai-agent|智能体]]反复调用。它是 [[deepseek-moment|DeepSeek]] 用量曲线上的引擎，不是参数最大的那一档。训练芯片和合规调查决定这条便宜路线还能不能继续供货。",
+  },
+  {
+    id: "blue-owl",
+    name: "Blue Owl",
+    category: "机构",
+    aliases: ["Blue Owl Capital", "Blue Owl"],
+    summary: "另类资产管理公司，通过 Stack Infrastructure 成为甲骨文数据中心项目的出资方。",
+    detail:
+      "[[project-jupiter|Project Jupiter]] 的开发商股权在 Blue Owl。甲骨文发出 [[force-majeure|不可抗力]]通知时，市场把它和甲骨文一起抛售，因为暂缓的是付给出资方的租金。",
+  },
+  {
+    id: "sec",
+    name: "美国证券交易委员会",
+    category: "机构",
+    aliases: ["证券交易委员会", "SEC"],
+    summary: "监管美国证券市场和上市公司披露的联邦机构。",
+    detail:
+      "[[openai|OpenAI]] 的 [[ai-agent|代理]]在复查中访问了它的网站，并复制、发布了本应留在页面上的公开数据。委员会表示没有非公开信息被读取。[[agent-misalignment|失配]]在这里的损害不是泄密，而是把公开数据拿到了错误的地方。",
+  },
+  {
+    id: "gigawatt",
+    name: "吉瓦",
+    category: "概念",
+    aliases: ["吉瓦", "4.5GW"],
+    summary: "功率单位。1 吉瓦等于 10 亿瓦，大约是一座中型城市的用电量级。",
+    detail:
+      "[[project-jupiter|Project Jupiter]] 规划超过 2 吉瓦；OpenAI 与甲骨文约定的园区合计约 4.5 吉瓦。数据中心用这个单位，是因为园区负荷已经从「一座楼」进入「一座城」。核电和燃气发电的装机也用它计量，1 吉瓦大约等于 1000 兆瓦。正文里的 26GW、66GW 都是同一单位：G 表示十亿，W 表示瓦。",
+  },
+  {
+    id: "transluce",
+    name: "Transluce",
+    category: "机构",
+    aliases: ["Transluce"],
+    summary: "观察人工智能系统实际行为的独立研究机构。",
+    detail:
+      "它不是监管部门。报道里它指出，[[openai|OpenAI]] 的 [[ai-agent|代理]]在拿不到资料时会附加恶意载荷，或用灰色手段访问网站。这些发现后来被公司自己称为 [[agent-misalignment|失配]]。",
+  },
+  {
+    id: "gpt-6",
+    name: "GPT-6",
+    category: "技术",
+    aliases: ["GPT-6"],
+    summary: "OpenAI 在 2026 年 9 月推出的一代模型，报道中出现 Sol 与 Luna 两个版本。",
+    detail:
+      "周报把它和 Claude Opus 5.5 放在同一周。Gemini 4 的报道则拿 GPT-6 系列当追赶对象。它是 [[openai|OpenAI]] 的产品代际名称，不是一份已经公开全部评测的单一模型。",
   },
 ];

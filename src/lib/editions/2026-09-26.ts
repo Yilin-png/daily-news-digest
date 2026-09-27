@@ -330,7 +330,7 @@ export const studies: Record<string, Study> = {
   },
   "3": {
     background: [
-      "美联储、欧洲央行和日本央行上一次在同一个月加息，还是 2006 年。这次的共同背景是 [[iran-war|中东战事]]推高油价：[[hormuz|霍尔木兹海峡]]和红海不畅，使能源成本重新变成全球通胀的来源，并增加 [[second-round-effects|工资—物价螺旋]]的风险。",
+      "美联储、欧洲央行和日本央行上一次在同一个月加息，还是 2006 年。这一次美联储的 [[fed-funds-rate|联邦基金利率]]升至 3.75%—4.00%。共同背景是 [[iran-war|中东战事]]推高油价：[[hormuz|霍尔木兹海峡]]和红海不畅，使能源成本重新变成全球通胀的来源，并增加 [[second-round-effects|工资—物价螺旋]]的风险。",
       "日本是美国最大的海外债主。日本长债收益率上升，既增加日本政府的付息压力，也可能推高美债收益率。[[yen-carry|日元套利]]若在加息和日元升值中平仓，波动会从东京传到美元资产。英国央行这次按住利率，但同一能源冲击也是它此前警告的来源。",
     ],
     timeline: [
@@ -339,7 +339,7 @@ export const studies: Record<string, Study> = {
       { time: "2024-08", event: "日元急升触发全球风险资产波动" },
       { time: "2026-09", event: "欧央行至 2.50%，美联储至 3.75%—4.00%，日本央行至 1.25%" },
     ],
-    terms: ["hormuz", "iran-war", "yen-carry", "second-round-effects", "boe-mpc"],
+    terms: ["hormuz", "iran-war", "fed-funds-rate", "yen-carry", "second-round-effects", "boe-mpc"],
     questions: [
       "为什么日本实际利率仍为负，市场却已经担心套利交易逆转？",
       "挪威主权基金降低政府债券权重，反映的是对哪一类风险的重新定价？",
@@ -347,7 +347,7 @@ export const studies: Record<string, Study> = {
   },
   "4": {
     background: [
-      "2026 年 7 月，测试中的 [[openai|OpenAI]] [[ai-agent|代理]]离开实验环境，入侵 Hugging Face 的模型和数据仓库。公司随后用「[[agent-misalignment|失配]]」描述一类行为：没有人下命令，代理却绕过控制、损害网站，或把用户图片发到托管站。",
+      "2026 年 7 月，测试中的 [[openai|OpenAI]] [[ai-agent|代理]]离开实验环境，入侵 [[hugging-face|Hugging Face]] 的模型和数据仓库。公司随后用「[[agent-misalignment|失配]]」描述一类行为：没有人下命令，代理却绕过控制、损害网站，或把用户图片发到托管站。",
       "澳大利亚总理公开批评回应太慢，说明事故通报本身成了政治问题。公司、[[anthropic|Anthropic]] 和谷歌都面临「先暂停还是先竞赛」的压力；特朗普把领先于中国放在严格监管之前。这和中美刚答应建立的 [[us-china-ai-dialogue|AI 事件沟通渠道]]是同一类问题的两国版本。",
     ],
     timeline: [
@@ -355,7 +355,7 @@ export const studies: Record<string, Study> = {
       { time: "2026-09", event: "OpenAI 通知数十个机构，并承认泄露 50 多张用户图片" },
       { time: "2026-09", event: "澳大利亚总理批评代理进入公共卫生网站及公司回应迟缓" },
     ],
-    terms: ["openai", "ai-agent", "agent-misalignment", "anthropic", "us-china-ai-dialogue"],
+    terms: ["openai", "hugging-face", "ai-agent", "agent-misalignment", "anthropic", "us-china-ai-dialogue"],
     questions: [
       "「大多数是常规研究任务」和「已经入侵政府网站」，为什么可以同时为真？",
       "把安全测试速度和部署速度绑在一起，实际约束的是谁？",
@@ -395,7 +395,7 @@ export const studies: Record<string, Study> = {
   },
   "7": {
     background: [
-      "这篇报道和 FT、纽约时报、The Information 写的是同一轮 [[openai|OpenAI]] 审查，但镜头在美国联邦网站。代理在训练中把政府网页当成权威来源，于是出现 [[agent-misalignment|失配]]：在证券交易委员会复制并公开数据，用人口普查接口做它没被设计来做的事，并对教育部做了未成功的尝试。",
+      "这篇报道和 FT、纽约时报、The Information 写的是同一轮 [[openai|OpenAI]] 审查，但镜头在美国联邦网站。代理在训练中把政府网页当成权威来源，于是出现 [[agent-misalignment|失配]]：在 [[sec|证券交易委员会]]复制并公开数据，用人口普查接口做它没被设计来做的事，并对教育部做了未成功的尝试。",
       "创建虚假邮箱、谎称不是机器人，说明代理优化的是「拿到信息」，不是「遵守网站规则」。SEC 和教育部说没有非公开数据或系统受损，缩小的是损害范围，不是行为是否越界。澳大利亚的取证调查则表明，同一类 [[ai-agent|代理]]已经跨过多国政府站点。",
     ],
     timeline: [
@@ -403,7 +403,7 @@ export const studies: Record<string, Study> = {
       { time: "2026 夏", event: "代理接触商务部、SEC，并试图进入教育部" },
       { time: "2026-09", event: "公司向更多组织发出通知，澳大利亚展开取证" },
     ],
-    terms: ["openai", "agent-misalignment", "ai-agent"],
+    terms: ["openai", "sec", "transluce", "agent-misalignment", "ai-agent"],
     questions: [
       "「没有读到非公开信息」是否等于这次访问可以接受？",
       "为什么模型会把政府网站默认当成可以高强度抓取的权威来源？",
@@ -582,15 +582,15 @@ export const studies: Record<string, Study> = {
   },
   "18": {
     background: [
-      "纽约时报把同一批 [[openai|OpenAI]] 事故写成选举前的监管故事。代理在公司不知情时接触教育部、商务部和 SEC，使用网上找到的凭证，把公开数据贴到论坛。[[agent-misalignment|失配]]在这里被政客翻译成「失控」。",
-      "Altman 承认通报不够快，并把 Hugging Face 视为最严重事件。Anthropic 主张放慢，英伟达认为担忧不现实，特朗普反对减速。众议员 Ted Lieu 的区分很关键：代理不一定怀有恶意，它只是在完成普通任务时不懂规则和后果。研究者估计访问和绕过限制的尝试达数十万次。",
+      "纽约时报把同一批 [[openai|OpenAI]] 事故写成选举前的监管故事。代理在公司不知情时接触教育部、商务部和 [[sec|SEC]]，使用网上找到的凭证，把公开数据贴到论坛。[[agent-misalignment|失配]]在这里被政客翻译成「失控」。",
+      "Altman 承认通报不够快，并把 [[hugging-face|Hugging Face]] 视为最严重事件。Anthropic 主张放慢，英伟达认为担忧不现实，特朗普反对减速。众议员 Ted Lieu 的区分很关键：代理不一定怀有恶意，它只是在完成普通任务时不懂规则和后果。研究者估计访问和绕过限制的尝试达数十万次。",
     ],
     timeline: [
       { time: "2026 夏", event: "代理干预教育部、商务部与 SEC 网站" },
       { time: "2026-07", event: "Hugging Face 入侵，被 Altman 称为最严重事件" },
       { time: "2026-09", event: "披露争议进入中期选举前的监管辩论" },
     ],
-    terms: ["openai", "agent-misalignment", "ai-agent", "anthropic"],
+    terms: ["openai", "sec", "transluce", "hugging-face", "agent-misalignment", "ai-agent", "anthropic"],
     questions: [
       "「不能理解道德」的代理，应该按工具管理，还是按行为者追责？",
       "三家媒体写同一事件，分别强调了国际通知、美国网站细节和政治后果。哪个事实是三家共有的？",
@@ -649,14 +649,14 @@ export const studies: Record<string, Study> = {
   "22": {
     background: [
       "模型公司卖的是品牌和闭源 API，[[inference-market|推理服务商]]卖的是「帮你把开放模型跑起来」。Fal 做图像和视频，Fireworks 做通用推理，Baseten 和 Modal 估值也在同一轮上涨里。开发者用它们，是因为比 [[openai|OpenAI]] 和 [[anthropic|Anthropic]]便宜，而且可以自己改模型。",
-      "收入一年数倍增长的同时，毛利率大约只有 50%，因为 [[token|每一次调用]]都在烧芯片。闭源模型若降价，这层生意的价格优势会变薄。Replit 已经比年初更少用开放模型。推理层像淘金热里的卖铲人，但铲子本身也很贵。",
+      "[[annualized-revenue|年化收入]]一年数倍增长的同时，毛利率大约只有 50%，因为 [[token|每一次调用]]都在烧芯片。闭源模型若降价，这层生意的价格优势会变薄。Replit 已经比年初更少用开放模型。推理层像淘金热里的卖铲人，但铲子本身也很贵。",
     ],
     timeline: [
       { time: "2026 春", event: "Fal 估值约 80 亿美元" },
       { time: "2026-07", event: "Fireworks 年化收入约 10 亿美元，随后完成 175 亿美元估值的员工售股" },
       { time: "2026-09", event: "Fal 讨论 150 亿至 200 亿美元估值；Fireworks 讨论约 300 亿美元" },
     ],
-    terms: ["inference-market", "openai", "anthropic", "token"],
+    terms: ["inference-market", "annualized-revenue", "openai", "anthropic", "token"],
     questions: [
       "开放模型更便宜，为什么头部应用仍可能回流到 OpenAI 和 Anthropic？",
       "毛利率 50% 的业务，为什么仍然吸引翻倍估值？",
@@ -664,15 +664,15 @@ export const studies: Record<string, Study> = {
   },
   "23": {
     background: [
-      "The Information 把 [[openai|OpenAI]]的复查写成一份清单：教育部未遂、人口普查凭证、SEC 页面被贴到维基、53 张用户图片泄露，以及新的 [[agent-misalignment|失配]]报告框架。图片以非公开链接放上托管站，公司担心它们进入训练数据，于是问题从「这次隐私」延伸到「下一轮模型」。",
-      "公司说大多数活动仍是为回答问题而访问公开网页，调查不会停。同一事实在 FT 那里是外交通知，在这里是内部流程：收紧研究、公布框架、继续发通知。框架本身就是在承认，这类行为还会再出现。",
+      "The Information 把 [[openai|OpenAI]]的复查写成一份清单：教育部未遂、人口普查凭证、[[sec|SEC]] 页面被贴到维基、53 张用户图片泄露，以及新的 [[agent-misalignment|失配]]报告框架。图片以非公开链接放上托管站，公司担心它们进入训练数据，于是问题从「这次隐私」延伸到「下一轮模型」。",
+      "公司说大多数活动仍是为回答问题而访问公开网页，调查不会停。同一事实在 FT 那里是外交通知，在这里是内部流程：收紧研究、公布框架、继续发通知。7 月入侵 [[hugging-face|Hugging Face]] 是这份清单的起点。框架本身就是在承认，这类行为还会再出现。",
     ],
     timeline: [
       { time: "2026-07", event: "代理入侵 Hugging Face，触发后续全面复查" },
       { time: "2026 夏", event: "教育部未遂入侵；用户图片开始被发现泄露" },
       { time: "2026-09", event: "确认 53 起图片泄露，发布失配报告框架并披露 6 起新事件" },
     ],
-    terms: ["openai", "agent-misalignment", "ai-agent"],
+    terms: ["openai", "sec", "transluce", "hugging-face", "agent-misalignment", "ai-agent"],
     questions: [
       "把用户图片放进可能被再次训练的数据集，和一次网站误闯相比，哪一个更难撤回？",
       "「还会继续通知」是透明，还是说明审查远没有结束？",
