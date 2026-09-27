@@ -258,3 +258,86 @@ html[data-align="start"] main .reading {
   text-align: start;
   text-justify: auto;
 }
+
+.moon-water {
+  --mw-sky-top: #fbf6ee;
+  --mw-sky-mid: #f3e6cf;
+  --mw-sky-low: #e7d3ae;
+  --mw-water-top: #ecd9b4;
+  --mw-water-low: #d9c09a;
+  --mw-moon: #f6e4a8;
+  --mw-line: #e7c57a;
+  display: block;
+  overflow: hidden;
+  border-radius: 1.75rem;
+}
+.dark .moon-water {
+  --mw-sky-top: #4a4036;
+  --mw-sky-mid: #3d342c;
+  --mw-sky-low: #322a24;
+  --mw-water-top: #3a3128;
+  --mw-water-low: #2a241e;
+  --mw-moon: #f3dca6;
+  --mw-line: #c6a15a;
+}
+.moon-water .mw-sky-top { stop-color: var(--mw-sky-top); }
+.moon-water .mw-sky-mid { stop-color: var(--mw-sky-mid); }
+.moon-water .mw-sky-low { stop-color: var(--mw-sky-low); }
+.moon-water .mw-water-top { stop-color: var(--mw-water-top); }
+.moon-water .mw-water-low { stop-color: var(--mw-water-low); }
+.moon-water .mw-glow-core { stop-color: var(--mw-moon); stop-opacity: 0.85; }
+.moon-water .mw-glow-fade { stop-color: var(--mw-moon); stop-opacity: 0.18; }
+.moon-water .mw-disc { fill: var(--mw-moon); }
+.moon-water .mw-shards path,
+.moon-water .mw-rings ellipse,
+.moon-water .mw-surface path {
+  fill: none;
+  stroke: var(--mw-line);
+  stroke-linecap: round;
+}
+.moon-water .mw-shards path { stroke-width: 2.4; }
+.moon-water .mw-rings ellipse { stroke-width: 1.4; opacity: 0.7; }
+.moon-water .mw-surface path { stroke-width: 1.6; opacity: 0.9; }
+
+.moon-water .mw-moon { animation: mw-float 7s ease-in-out infinite; }
+.moon-water .mw-halo { animation: mw-glow 7s ease-in-out infinite; }
+.moon-water .mw-shards path { animation: mw-shard 5.2s ease-in-out infinite; }
+.moon-water .mw-shards path:nth-child(2) { animation-delay: -0.7s; }
+.moon-water .mw-shards path:nth-child(3) { animation-delay: -1.5s; }
+.moon-water .mw-shards path:nth-child(4) { animation-delay: -2.2s; }
+.moon-water .mw-shards path:nth-child(5) { animation-delay: -3.1s; }
+.moon-water .mw-shards path:nth-child(6) { animation-delay: -4s; }
+.moon-water .mw-rings ellipse { transform-box: fill-box; transform-origin: center; animation: mw-ring 6.5s ease-out infinite; }
+.moon-water .mw-rings ellipse:nth-child(2) { animation-delay: -2.1s; }
+.moon-water .mw-rings ellipse:nth-child(3) { animation-delay: -4.2s; }
+.moon-water .mw-surface { animation: mw-drift 9s linear infinite; }
+
+@keyframes mw-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+@keyframes mw-glow {
+  0%, 100% { opacity: 0.72; }
+  50% { opacity: 1; }
+}
+@keyframes mw-shard {
+  0%, 100% { transform: translateX(0); opacity: 0.9; }
+  50% { transform: translateX(10px); opacity: 0.35; }
+}
+@keyframes mw-ring {
+  0% { transform: scale(0.45); opacity: 0.65; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+@keyframes mw-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-80px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .moon-water .mw-moon,
+  .moon-water .mw-halo,
+  .moon-water .mw-shards path,
+  .moon-water .mw-rings ellipse,
+  .moon-water .mw-surface {
+    animation: none;
+  }
+}
