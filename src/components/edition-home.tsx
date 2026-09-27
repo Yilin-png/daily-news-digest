@@ -17,6 +17,7 @@ import {
   topics,
   type Edition,
 } from "@/lib/news";
+import { SITE_NAME } from "@/lib/site";
 
 export function EditionHome({ edition }: { edition: Edition }) {
   const lead = edition.articles[0];
@@ -38,7 +39,7 @@ export function EditionHome({ edition }: { edition: Edition }) {
         <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">
           Daily News Digest · {edition.date}
         </p>
-        <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-6xl">每日聚合新闻</h1>
+        <h1 className="mt-3 text-4xl font-black tracking-tight text-balance sm:text-6xl">{SITE_NAME}</h1>
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
           {edition.label} · 共 {edition.articles.length} 条 · 八源各 3 篇 · 全文深度总结
         </p>
@@ -52,9 +53,9 @@ export function EditionHome({ edition }: { edition: Edition }) {
       </section>
 
       <section id="highlight" className="scroll-mt-20 py-10">
-        <div className="relative overflow-hidden rounded-2xl bg-foreground p-6 text-background sm:p-10">
+        <div className="relative overflow-hidden rounded-2xl bg-dusk p-6 text-dusk-foreground sm:p-10">
           <div className="absolute inset-y-0 left-0 w-1.5 bg-brand" aria-hidden />
-          <p className="text-xs font-semibold tracking-[0.25em] text-background/60">今日看点</p>
+          <p className="text-xs font-semibold tracking-[0.25em] text-dusk-foreground/65">今日看点</p>
           <p className="mt-4 font-heading text-lg leading-relaxed font-semibold sm:text-2xl sm:leading-relaxed">
             {edition.highlight}
           </p>
@@ -62,7 +63,7 @@ export function EditionHome({ edition }: { edition: Edition }) {
             {topicStats.map((item) => (
               <span
                 key={item.topic}
-                className="rounded-full border border-background/20 px-3 py-1 text-xs text-background/80"
+                className="rounded-full border border-dusk-foreground/25 px-3 py-1 text-xs text-dusk-foreground/80"
               >
                 {item.topic} · {item.count}
               </span>

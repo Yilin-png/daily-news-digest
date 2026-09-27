@@ -4,15 +4,16 @@ import { DateSwitcher } from "@/components/date-switcher";
 import { FooterSourceLinks } from "@/components/footer-sources";
 import { HeaderNav } from "@/components/header-nav";
 import { editions } from "@/lib/news";
+import { SITE_NAME } from "@/lib/site";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex min-w-0 items-center gap-3">
-          <Link href="/" className="flex shrink-0 items-center gap-2 font-heading text-lg font-black tracking-tight sm:text-xl">
-            <BrandMark className="size-8 sm:size-9" />
-            每日聚合新闻
+          <Link href="/" className="flex min-w-0 items-center gap-2 font-heading text-[15px] font-black tracking-tight whitespace-nowrap sm:text-lg">
+            <BrandMark className="size-8 shrink-0 sm:size-9" />
+            {SITE_NAME}
           </Link>
           <DateSwitcher className="hidden md:flex" />
         </div>
@@ -32,7 +33,7 @@ export function SiteFooter() {
         <div className="space-y-2">
           <p className="flex items-center gap-2 font-heading text-base font-bold text-foreground">
             <BrandMark className="size-7" />
-            每日聚合新闻
+            {SITE_NAME}
           </p>
           <p>
             已收录 {editions.length} 期 · 每期 {editions[0]?.articles.length ?? 0} 条 · 八源各 3 篇 · 标题全中文 ·

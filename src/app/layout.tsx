@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
+import Script from "next/script";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { SkyTheme } from "@/components/sky-theme";
+import { skyBootScript } from "@/lib/beijing-sky";
+import { SITE_NAME } from "@/lib/site";
 import "./globals.css";
 
 const sans = Noto_Sans_SC({
@@ -24,8 +28,8 @@ const mono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "每日聚合新闻",
-    template: "%s｜每日聚合新闻",
+    default: SITE_NAME,
+    template: `%s｜${SITE_NAME}`,
   },
   description:
     "八家国际与华文媒体每日各选三篇，中文深度总结按日期归档，可切换阅读。",
@@ -40,8 +44,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="zh-CN"
       className={`${sans.variable} ${serif.variable} ${mono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
+        <Script id="sky-theme" strategy="beforeInteractive">
+          {skyBootScript}
+        </Script>
+        <SkyTheme />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
