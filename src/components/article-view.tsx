@@ -47,12 +47,12 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
               {date} · 约 {readingMinutes(article)} 分钟读完
             </span>
           </div>
-          <h1 className="article-title mt-4 text-[1.75rem] leading-snug font-black sm:text-[2.6rem] sm:leading-[1.3]">
+          <h1 className="mt-4 text-3xl leading-tight font-black text-balance sm:text-[2.6rem] sm:leading-[1.2]">
             {article.title}
           </h1>
           <div className="mt-6 h-1 w-16 rounded-full" style={{ backgroundColor: source.color }} />
 
-          <div className="reading mt-8 max-w-[40rem] space-y-7 text-foreground/92">
+          <div className="mt-8 space-y-6 text-base leading-8 text-foreground/90 sm:text-[17px] sm:leading-9">
             {linked.map((segments, i) => (
               <p
                 key={i}

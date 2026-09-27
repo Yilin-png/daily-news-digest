@@ -18,7 +18,7 @@ export function ArticleCard({ article }: { article: Article }) {
       <h3 className="text-lg leading-snug font-bold text-balance group-hover:text-brand">
         {article.title}
       </h3>
-      <p className="mt-3 line-clamp-4 text-[15px] leading-7 text-muted-foreground">
+      <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
         {article.paragraphs[0]}
       </p>
       <div className="mt-auto flex items-center justify-between pt-4 text-xs text-muted-foreground">

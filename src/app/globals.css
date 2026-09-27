@@ -144,29 +144,3 @@
     @apply font-heading;
   }
 }
-
-@layer components {
-  .reading {
-    font-size: 1.125rem;
-    line-height: 2;
-    letter-spacing: 0.02em;
-  }
-  @media (min-width: 640px) {
-    .reading {
-      font-size: 1.25rem;
-      line-height: 2.05;
-    }
-  }
-  .article-title {
-    text-align: justify;
-    text-align-last: center;
-    text-justify: inter-character;
-  }
-  @media (min-width: 640px) {
-    .article-title {
-      text-align: start;
-      text-align-last: auto;
-      text-wrap: balance;
-    }
-  }
-}
