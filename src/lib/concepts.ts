@@ -1857,7 +1857,7 @@ export const concepts: Concept[] = [
     aliases: ["Dojo"],
     summary: "特斯拉为自动驾驶训练自研的超算项目，团队在 2025 年夏被暂时解散。",
     detail:
-      "DensityAI 的创始人来自这个团队。Dojo 的目标曾是自己跑自动驾驶模型，而不是对外卖芯片。团队解散后，同样的人把「存储叠在计算旁边」做成了新公司的卖点。",
+      "[[density-ai|DensityAI]] 的创始人来自这个团队。Dojo 的目标曾是自己跑自动驾驶模型，而不是对外卖芯片。团队解散后，同样的人把「存储叠在计算旁边」做成了新公司的卖点。",
   },
   {
     id: "dram-stack",
@@ -1866,6 +1866,51 @@ export const concepts: Concept[] = [
     aliases: ["3D DRAM"],
     summary: "把内存芯片叠在计算芯片上方，缩短数据要走的距离。",
     detail:
-      "推理慢，常常是因为数据来不及从旁边的内存送到计算核心。叠在上面可以更快、更省电。难点是内存怕热，计算芯片很烫，叠在一起会翘曲或断裂。DensityAI 把这件事当成估值的理由，芯片仍要数年才可能量产。它和 [[hbm|HBM]] 解决的是同一类距离问题，做法不同。",
+      "推理慢，常常是因为数据来不及从旁边的内存送到计算核心。叠在上面可以更快、更省电。难点是内存怕热，计算芯片很烫，叠在一起会翘曲或断裂。[[density-ai|DensityAI]] 把这件事当成估值的理由，芯片仍要数年才可能量产。它和 [[hbm|HBM]] 解决的是同一类距离问题，做法不同。",
+  },
+  {
+    id: "density-ai",
+    name: "DensityAI",
+    category: "机构",
+    aliases: ["DensityAI"],
+    summary: "前特斯拉 Dojo 负责人创办的人工智能芯片公司，成立约一年。",
+    detail:
+      "创始人是 Ganesh Venkataramanan、Bill Chang 和 Ben Floering，团队来自被解散的 [[dojo|Dojo]]。公司还没有量产芯片，融资谈判的投后估值约 100 亿美元。技术路线是 [[dram-stack|3D DRAM]]：把内存叠在计算芯片上。[[aws|AWS]] 的采购承诺附带性能条件，不是已经生效的订单。",
+  },
+  {
+    id: "aws",
+    name: "亚马逊云科技（AWS）",
+    category: "机构",
+    aliases: ["AWS"],
+    summary: "亚马逊的云计算部门，向企业出租算力、存储和各种托管服务。",
+    detail:
+      "训练和运行模型的公司如果自己不建机房，通常就向 AWS 这类云厂商租用。AWS 同时自研 [[trainium|Trainium]] 芯片，减少对英伟达的依赖，也和芯片初创签约，试验互联以及把计算和存储拆开的方案。它对 [[density-ai|DensityAI]] 的说法是：性能达标才采购。",
+  },
+  {
+    id: "a16z",
+    name: "Andreessen Horowitz（a16z）",
+    category: "机构",
+    aliases: ["Andreessen Horowitz", "a16z"],
+    summary: "硅谷风险投资机构，简称 a16z，近期把芯片和内存当成单独的投资主题。",
+    detail:
+      "它洽谈领投 [[density-ai|DensityAI]] 这一轮。上月还为投资芯片、内存等人工智能硬件的基金募资 11 亿美元。领投的意思是它出面定估值、定主要条款，其他投资人再跟进。芯片仍要数年才能量产时，这笔钱买的是团队和路线，不是已经在卖的产品。",
+  },
+  {
+    id: "trainium",
+    name: "Trainium",
+    category: "技术",
+    aliases: ["Trainium"],
+    summary: "亚马逊云科技自研的人工智能芯片，供自家云上的训练和推理使用。",
+    detail:
+      "它是 [[aws|AWS]] 用来减少外购英伟达芯片的内部路线。DensityAI 若能供货，是这条路线旁边的外部芯片，不是 Trainium 的替代品。云厂商一边自己做芯片，一边给初创下有条件的采购承诺，是为了多留一条硬件来源。",
+  },
+  {
+    id: "etched",
+    name: "Etched",
+    category: "机构",
+    aliases: ["Etched"],
+    summary: "另一家人工智能芯片初创，成立约四年，估值已经高于 DensityAI 正在谈的数字。",
+    detail:
+      "2026 年 8 月，Etched 以约 210 亿美元估值融资 7 亿美元。[[density-ai|DensityAI]] 成立只有大约一年，投后估值就谈到约 100 亿美元，所以报道用 Etched 说明这一跳更陡。两家都还处在「先有估值、后有大规模出货」的阶段。",
   },
 ];

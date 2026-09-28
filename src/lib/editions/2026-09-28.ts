@@ -678,8 +678,8 @@ export const studies: Record<string, Study> = {
   },
   "23": {
     background: [
-      "DensityAI 成立一年，谈判的投后估值约 100 亿美元，芯片还要数年才可能量产。创始团队来自被解散的 [[dojo|Dojo]]。AWS 的采购以性能达标为前提，不是已经下的订单。",
-      "[[dram-stack|3D DRAM]] 把内存叠在计算上面，缩短数据距离，也把怕热的存储贴上发烫的芯片。和把内存放在旁边的高带宽方案相比，这是另一条靠近计算的路。估值先于晶圆，是这轮硬件融资的节奏。",
+      "[[density-ai|DensityAI]] 成立一年，谈判的投后估值约 100 亿美元，芯片还要数年才可能量产。创始团队来自被解散的 [[dojo|Dojo]]。[[a16z|Andreessen Horowitz]] 洽谈领投，简称 a16z，上月还为芯片和内存基金募了 11 亿美元。",
+      "[[aws|AWS]] 的采购以性能达标为前提，不是已经下的订单。它自己有 [[trainium|Trainium]]，外部芯片是多出来的一条供应。对照是成立四年、估值更高的 [[etched|Etched]]。[[dram-stack|3D DRAM]] 把内存叠在计算上面，怕热的存储贴着发烫的芯片。估值先于晶圆，是这轮硬件融资的节奏。",
     ],
     timeline: [
       { time: "2025 年夏", event: "特斯拉暂时解散 Dojo 团队" },
@@ -687,7 +687,7 @@ export const studies: Record<string, Study> = {
       { time: "上月", event: "a16z 为芯片与内存基金募资 11 亿美元" },
       { time: "对比", event: "Etched 成立四年，8 月估值约 210 亿美元" },
     ],
-    terms: ["dojo", "dram-stack"],
+    terms: ["density-ai", "a16z", "aws", "trainium", "etched", "dojo", "dram-stack"],
     questions: [
       "AWS 说达到性能才买，为什么投资人仍愿意按百亿美元谈？",
       "内存叠在计算芯片上，先要解决的是速度，还是温度？",
