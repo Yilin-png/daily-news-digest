@@ -28,7 +28,7 @@ npm run dev      # http://localhost:4317
 npm run build    # 静态导出到 out/
 ```
 
-`.github/workflows/deploy.yml` 会在推送到 `main` 时，用仓库密钥 `CLOUDFLARE_API_TOKEN` 与 `CLOUDFLARE_ACCOUNT_ID` 自动构建并部署到 Cloudflare Workers。不要把密钥写进代码。该工作流文件需要 GitHub 令牌具备 `workflow` 权限才能推送。
+`.github/workflows/deploy.yml` 会在推送到 `main` 时，用仓库密钥 `CLOUDFLARE_API_TOKEN` 与 `CLOUDFLARE_ACCOUNT_ID` 自动构建并部署到 Cloudflare Worker `daily-news-digest`。发布前会核对账号 `e92e65d94443672fda698d100337efcf`，对不上就停止，不会发到别的账号。令牌在 https://dash.cloudflare.com/profile/api-tokens 用「Edit Cloudflare Workers」模板创建，名称为 `daily-news-digest-github`。不要把密钥写进代码。该工作流文件需要 GitHub 令牌具备 `workflow` 权限才能推送。
 
 本地手动部署：
 
