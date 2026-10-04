@@ -30,6 +30,9 @@ export function SiteHeader() {
         <Link href="/" className="ml-auto shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
           首页
         </Link>
+        <Link href="/search" className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
+          检索
+        </Link>
         <Link href="/learn" className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground sm:hidden">
           知识库
         </Link>

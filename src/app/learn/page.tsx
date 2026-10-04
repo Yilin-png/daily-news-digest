@@ -30,6 +30,17 @@ export default function LearnPage() {
         <p className="mt-4 max-w-2xl text-muted-foreground">
           {editions.length} 期报道背后的历史事件、政策、机构与术语。每个词条都记录了它链接到哪里、又被哪些日期的报道和词条引用，可以顺着链接一路读下去。
         </p>
+        <form action="/search" className="mt-6 flex max-w-xl flex-col gap-3 sm:flex-row">
+          <input
+            name="q"
+            placeholder="按问题检索全站，例如英伟达"
+            aria-label="按问题检索全站"
+            className="h-11 min-w-0 flex-1 rounded-lg border bg-card px-3 text-sm"
+          />
+          <button type="submit" className="h-11 rounded-lg bg-foreground px-5 text-sm font-medium text-background">
+            检索
+          </button>
+        </form>
         <dl className="mt-8 grid max-w-xl grid-cols-3 gap-4">
           {[
             { label: "词条", value: concepts.length },
