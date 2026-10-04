@@ -39,23 +39,52 @@ export function sanitizeBrief(raw: unknown, allowedIds: Iterable<string>): Model
   return { title, paragraphs };
 }
 
+function plain(text: string): string {
+  return text.replace(/\[\[[a-z0-9-]+\|([^\]]+)\]\]/g, "$1");
+}
+
+function withOneLink(
+  text: string,
+  source: string,
+  concepts: ModelPacket["concepts"],
+): string {
+  const ranked = [...concepts].sort((a, b) => b.name.length - a.name.length);
+  for (const concept of ranked) {
+    if (!source.includes(concept.name)) continue;
+    const index = text.indexOf(concept.name);
+    if (index < 0) continue;
+    return `${text.slice(0, index)}[[${concept.id}|${concept.name}]]${text.slice(index + concept.name.length)}`;
+  }
+  return text;
+}
+
+function groundParagraph(paragraph: string, article: ModelPacket["articles"][number], concepts: ModelPacket["concepts"]): string {
+  const source = `${article.title}\n${article.excerpt}`;
+  let text = plain(paragraph);
+  let rewrote = false;
+  for (const concept of concepts) {
+    if (concept.name.length < 2 || source.includes(concept.name) || !text.includes(concept.name)) continue;
+    text = text.split(concept.name).join("");
+    rewrote = true;
+  }
+  text = text.replace(/\s{2,}/g, " ").trim();
+  const numbers = text.match(/\d+(?:\.\d+)?/g) ?? [];
+  const invented = numbers.some((value) => value.length >= 2 && !source.includes(value));
+  if (rewrote || invented || text.length < 8) text = article.excerpt;
+  return withOneLink(text, source, concepts);
+}
+
 export function acceptBrief(raw: unknown, packet: ModelPacket): ModelBrief | null {
   const brief = sanitizeBrief(
     raw,
     packet.concepts.map((item) => item.id),
   );
-  if (!brief) return null;
-  const source = [
-    packet.query,
-    ...packet.concepts.map((item) => `${item.name}${item.summary}`),
-    ...packet.articles.map((item) => `${item.title}${item.excerpt}`),
-  ].join("\n");
-  const numbers = brief.paragraphs.join("").match(/\d+(?:\.\d+)?/g) ?? [];
-  if (numbers.some((value) => value.length >= 2 && !source.includes(value))) return null;
-  if (packet.concepts.length > 0 && !brief.paragraphs.some((paragraph) => /\[\[[a-z0-9-]+\|/.test(paragraph))) {
-    return null;
-  }
-  return brief;
+  if (!brief || packet.articles.length === 0) return null;
+  const paragraphs = packet.articles.map((article, index) =>
+    groundParagraph(brief.paragraphs[index] ?? article.excerpt, article, packet.concepts),
+  );
+  if (!paragraphs.some((paragraph) => /\[\[[a-z0-9-]+\|/.test(paragraph))) return null;
+  return { title: brief.title, paragraphs };
 }
 
 export function parseModelJson(text: string): unknown {
