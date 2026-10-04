@@ -1,4 +1,4 @@
-import { parseModelJson, sanitizeBrief, type ModelPacket } from "../src/lib/search-brief";
+import { acceptBrief, parseModelJson, type ModelPacket } from "../src/lib/search-brief";
 
 interface Env {
   AI: {
@@ -10,7 +10,7 @@ interface Env {
   ASSETS: { fetch(input: Request): Promise<Response> };
 }
 
-const MODEL = "@cf/qwen/qwen3-30b-a3b-fp8";
+const MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -57,26 +57,21 @@ function readPacket(raw: unknown): ModelPacket | null {
 }
 
 function prompt(packet: ModelPacket): string {
-  const concepts = packet.concepts
-    .map((item) => `- id=${item.id} 名称=${item.name} 摘要=${item.summary}`)
-    .join("\n");
+  const concepts = packet.concepts.map((item) => `- ${item.id} = ${item.name}：${item.summary}`).join("\n");
   const articles = packet.articles
-    .map((item) => `- ${item.date}《${item.title}》：${item.excerpt}`)
+    .map((item, index) => `${index + 1}. ${item.date}《${item.title}》：${item.excerpt}`)
     .join("\n");
   return `问题：${packet.query}
-
-可用词条（链接时只能用这些 id）：
+词条（链接只能用这些 id）：
 ${concepts || "（无）"}
-
-报道摘录：
+摘录：
 ${articles || "（无）"}
-
-请把上面的材料整理成给读者的说明，不要逐条复述目录。
-只使用摘录和摘要里已经写明的事实，不要补充数字、人名、步骤或方法。
-不要写攻击、绕过、入侵或可复现的操作。
-每段用 [[词条id|显示名]] 链到知识库，id 必须来自上面的词条。
-用中文写 2 到 3 段，每段不超过 120 字。
-只输出 JSON：{"title":"不超过20字","paragraphs":["段落"]}`;
+要求：
+- paragraphs 段数与摘录条数相同，第 n 段只改写第 n 条摘录。
+- 数字和公司名必须能在对应摘录里原样找到。
+- 每段放一个链接，格式严格是 [[id|名称]]，竖线两侧不要空格。
+- 不要写攻击、绕过或操作步骤。
+- 只输出 JSON：{"title":"20字以内","paragraphs":["..."]}`;
 }
 
 async function rewrite(packet: ModelPacket, env: Env): Promise<Response> {
@@ -91,7 +86,7 @@ async function rewrite(packet: ModelPacket, env: Env): Promise<Response> {
     max_tokens: 900,
   });
   const text = result.choices?.[0]?.message?.content || result.response || "";
-  const brief = sanitizeBrief(parseModelJson(text), packet.concepts.map((item) => item.id));
+  const brief = acceptBrief(parseModelJson(text), packet);
   if (!brief) return json({ error: "model" }, 502);
   return json(brief);
 }

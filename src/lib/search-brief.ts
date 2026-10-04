@@ -39,6 +39,25 @@ export function sanitizeBrief(raw: unknown, allowedIds: Iterable<string>): Model
   return { title, paragraphs };
 }
 
+export function acceptBrief(raw: unknown, packet: ModelPacket): ModelBrief | null {
+  const brief = sanitizeBrief(
+    raw,
+    packet.concepts.map((item) => item.id),
+  );
+  if (!brief) return null;
+  const source = [
+    packet.query,
+    ...packet.concepts.map((item) => `${item.name}${item.summary}`),
+    ...packet.articles.map((item) => `${item.title}${item.excerpt}`),
+  ].join("\n");
+  const numbers = brief.paragraphs.join("").match(/\d+(?:\.\d+)?/g) ?? [];
+  if (numbers.some((value) => value.length >= 2 && !source.includes(value))) return null;
+  if (packet.concepts.length > 0 && !brief.paragraphs.some((paragraph) => /\[\[[a-z0-9-]+\|/.test(paragraph))) {
+    return null;
+  }
+  return brief;
+}
+
 export function parseModelJson(text: string): unknown {
   const cleaned = text.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
   const fenced = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/);

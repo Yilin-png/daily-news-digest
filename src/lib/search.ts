@@ -254,7 +254,7 @@ export function searchSite(query: string): { briefing: Briefing; packet: ModelPa
           name: item.name,
           summary: pickedConcepts.find((ranked) => ranked.concept.id === item.id)?.concept.summary ?? item.reason,
         })),
-        articles: pickedArticles.slice(0, 4).map((item) => ({
+        articles: pickedArticles.slice(0, 3).map((item) => ({
           date: item.article.date,
           id: item.article.id,
           title: item.article.title,
