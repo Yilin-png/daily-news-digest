@@ -1,6 +1,7 @@
 import * as edition0924 from "@/lib/editions/2026-09-24";
 import * as edition0925 from "@/lib/editions/2026-09-25";
 import * as edition0926 from "@/lib/editions/2026-09-26";
+import * as edition1004 from "@/lib/editions/2026-10-04";
 import * as edition1003 from "@/lib/editions/2026-10-03";
 import * as edition1002 from "@/lib/editions/2026-10-02";
 import * as edition1001 from "@/lib/editions/2026-10-01";
@@ -101,7 +102,7 @@ function pack(mod: {
 }
 
 /** Newest first. Add a module under src/lib/editions and register it here. */
-export const editions: Edition[] = [pack(edition1003), pack(edition1002), pack(edition1001), pack(edition0930), pack(edition0929), pack(edition0928), pack(edition0927), pack(edition0926), pack(edition0925), pack(edition0924)].sort((a, b) =>
+export const editions: Edition[] = [pack(edition1004), pack(edition1003), pack(edition1002), pack(edition1001), pack(edition0930), pack(edition0929), pack(edition0928), pack(edition0927), pack(edition0926), pack(edition0925), pack(edition0924)].sort((a, b) =>
   b.date.localeCompare(a.date),
 );
 
