@@ -14,7 +14,6 @@ import {
   getSource,
   readingMinutes,
   sources,
-  topics,
   type Edition,
 } from "@/lib/news";
 import { SITE_NAME } from "@/lib/site";
@@ -26,13 +25,6 @@ export function EditionHome({ edition }: { edition: Edition }) {
     .map((concept) => ({ concept, n: conceptMentionCount(concept.id) }))
     .sort((a, b) => b.n - a.n)
     .slice(0, 6);
-  const topicStats = topics
-    .map((topic) => ({
-      topic,
-      count: edition.articles.filter((article) => article.topic === topic).length,
-    }))
-    .filter((item) => item.count > 0);
-
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <section className="border-b py-10 text-center sm:py-14">
@@ -52,27 +44,7 @@ export function EditionHome({ edition }: { edition: Edition }) {
         </div>
       </section>
 
-      <section id="highlight" className="scroll-mt-20 py-10">
-        <div className="relative overflow-hidden rounded-2xl bg-dusk p-6 text-dusk-foreground sm:p-10">
-          <div className="absolute inset-y-0 left-0 w-1.5 bg-brand" aria-hidden />
-          <p className="text-xs font-semibold tracking-[0.25em] text-dusk-foreground/65">今日看点</p>
-          <p className="reading reading-display mt-4 font-heading font-semibold">
-            {edition.highlight}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {topicStats.map((item) => (
-              <span
-                key={item.topic}
-                className="rounded-full border border-dusk-foreground/25 px-3 py-1 text-xs text-dusk-foreground/80"
-              >
-                {item.topic} · {item.count}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="lead" className="scroll-mt-20 grid gap-8 py-4 lg:grid-cols-[1.6fr_1fr]">
+      <section id="lead" className="scroll-mt-20 grid gap-8 py-10 lg:grid-cols-[1.6fr_1fr]">
         <article className="flex flex-col">
           <div className="flex items-center gap-3">
             <Badge className="bg-brand text-white">头条</Badge>

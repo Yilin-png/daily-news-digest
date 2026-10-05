@@ -15,7 +15,7 @@ export async function generateMetadata({
   if (!edition) return { title: "未找到这一期" };
   return {
     title: edition.label,
-    description: edition.highlight.slice(0, 140),
+    description: `${edition.label}，共 ${edition.articles.length} 条，八源各 3 篇。`,
   };
 }
 
