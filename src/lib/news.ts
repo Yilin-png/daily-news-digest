@@ -1,6 +1,7 @@
 import * as edition0924 from "@/lib/editions/2026-09-24";
 import * as edition0925 from "@/lib/editions/2026-09-25";
 import * as edition0926 from "@/lib/editions/2026-09-26";
+import * as edition1006 from "@/lib/editions/2026-10-06";
 import * as edition1005 from "@/lib/editions/2026-10-05";
 import * as edition1004 from "@/lib/editions/2026-10-04";
 import * as edition1003 from "@/lib/editions/2026-10-03";
@@ -48,7 +49,16 @@ export type ArticleInput = {
   title: string;
   paragraphs: string[];
   url: string;
+  /**
+   * Headline and standfirst only. Omit 深度学习.
+   * Older editions leave this unset, so they keep requiring a study.
+   */
+  brief?: boolean;
 };
+
+/** Exact note for editions that only have a public headline and standfirst. */
+export const INFORMATION_BRIEF_DISCLAIMER =
+  "本期未取得 The Information 全文，以下仅据官网首页公开标题与导语，非全文摘要";
 
 export interface Article extends ArticleInput {
   date: string;
@@ -103,7 +113,7 @@ function pack(mod: {
 }
 
 /** Newest first. Add a module under src/lib/editions and register it here. */
-export const editions: Edition[] = [pack(edition1005), pack(edition1004), pack(edition1003), pack(edition1002), pack(edition1001), pack(edition0930), pack(edition0929), pack(edition0928), pack(edition0927), pack(edition0926), pack(edition0925), pack(edition0924)].sort((a, b) =>
+export const editions: Edition[] = [pack(edition1006), pack(edition1005), pack(edition1004), pack(edition1003), pack(edition1002), pack(edition1001), pack(edition0930), pack(edition0929), pack(edition0928), pack(edition0927), pack(edition0926), pack(edition0925), pack(edition0924)].sort((a, b) =>
   b.date.localeCompare(a.date),
 );
 

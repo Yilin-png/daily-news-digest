@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { concepts } from "@/lib/concepts";
 import { conceptMentionCount } from "@/lib/knowledge";
 import {
+  INFORMATION_BRIEF_DISCLAIMER,
   articleHref,
   editions,
   getSource,
@@ -20,6 +21,8 @@ import { SITE_NAME } from "@/lib/site";
 
 export function EditionHome({ edition }: { edition: Edition }) {
   const lead = edition.articles[0];
+  const briefCount = edition.articles.filter((article) => article.brief).length;
+  const fullCount = edition.articles.length - briefCount;
   const summit = edition.articles.filter((article) => article.topic === "中美峰会" && article.id !== lead.id);
   const hubs = [...concepts]
     .map((concept) => ({ concept, n: conceptMentionCount(concept.id) }))
@@ -33,7 +36,9 @@ export function EditionHome({ edition }: { edition: Edition }) {
         </p>
         <h1 className="mt-3 text-4xl font-black tracking-tight text-balance sm:text-6xl">{SITE_NAME}</h1>
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          {edition.label} · 共 {edition.articles.length} 条 · 八源各 3 篇 · 全文深度总结
+          {briefCount > 0
+            ? `${edition.label} · 共 ${edition.articles.length} 条 · ${fullCount} 篇全文深度总结 · The Information ${briefCount} 条导语快讯`
+            : `${edition.label} · 共 ${edition.articles.length} 条 · 八源各 3 篇 · 全文深度总结`}
         </p>
         <DateSwitcher current={edition.date} className="mt-5 flex justify-center" />
         <p className="mt-3 text-xs text-muted-foreground">已收录 {editions.length} 期</p>
@@ -110,6 +115,11 @@ export function EditionHome({ edition }: { edition: Edition }) {
             </p>
           </div>
         </div>
+        {briefCount > 0 && (
+          <p className="mb-4 rounded-xl border border-dashed bg-card px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+            The Information：{INFORMATION_BRIEF_DISCLAIMER}
+          </p>
+        )}
         <NewsExplorer articles={edition.articles} />
       </section>
 
@@ -148,10 +158,13 @@ export function EditionHome({ edition }: { edition: Edition }) {
         <div className="grid gap-6 rounded-2xl border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <p className="text-xs font-semibold tracking-[0.25em] text-brand">DEEP LEARNING</p>
-            <h2 className="mt-1 text-2xl font-black sm:text-3xl">每篇新闻都有深度学习</h2>
+            <h2 className="mt-1 text-2xl font-black sm:text-3xl">
+              {briefCount > 0 ? "全文报道附有深度学习" : "每篇新闻都有深度学习"}
+            </h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              历史背景、来龙去脉时间线、关键术语和思考题。{concepts.length}{" "}
-              个知识库词条以双向链接串起全部 {editions.length} 期报道：从一篇新闻跳到一个概念，再从概念找到各日期提及它的报道。
+              {briefCount > 0
+                ? `历史背景、来龙去脉时间线、关键术语和思考题写在 ${fullCount} 篇全文之后。The Information 的 ${briefCount} 条只有公开标题与导语，没有深度学习。${concepts.length} 个知识库词条以双向链接串起全部 ${editions.length} 期报道：从一篇新闻跳到一个概念，再从概念找到各日期提及它的报道。`
+                : `历史背景、来龙去脉时间线、关键术语和思考题。${concepts.length} 个知识库词条以双向链接串起全部 ${editions.length} 期报道：从一篇新闻跳到一个概念，再从概念找到各日期提及它的报道。`}
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {hubs.map(({ concept, n }) => (

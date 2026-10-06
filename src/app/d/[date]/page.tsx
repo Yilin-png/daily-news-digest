@@ -13,9 +13,13 @@ export async function generateMetadata({
   const { date } = await params;
   const edition = getEdition(date);
   if (!edition) return { title: "未找到这一期" };
+  const briefCount = edition.articles.filter((article) => article.brief).length;
   return {
     title: edition.label,
-    description: `${edition.label}，共 ${edition.articles.length} 条，八源各 3 篇。`,
+    description:
+      briefCount > 0
+        ? `${edition.label}，共 ${edition.articles.length} 条，${edition.articles.length - briefCount} 篇全文深度总结，The Information ${briefCount} 条仅标题与导语。`
+        : `${edition.label}，共 ${edition.articles.length} 条，八源各 3 篇。`,
   };
 }
 

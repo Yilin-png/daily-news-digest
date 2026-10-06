@@ -22,7 +22,8 @@ for (const article of allArticles) {
   const study = getStudy(article);
   const label = `${article.date}/${article.id}`;
   if (!study) {
-    errors.push(`文章 ${label} 缺少深度学习内容`);
+    // Brief items are headline and standfirst only. Full articles still need a study.
+    if (!article.brief) errors.push(`文章 ${label} 缺少深度学习内容`);
     continue;
   }
   for (const term of study.terms) if (!ids.has(term)) errors.push(`文章 ${label} 的术语 ${term} 不存在`);
