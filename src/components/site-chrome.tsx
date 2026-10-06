@@ -51,8 +51,13 @@ export function SiteFooter() {
             {SITE_NAME}
           </p>
           <p>
-            已收录 {editions.length} 期 · 每期 {editions[0]?.articles.length ?? 0} 条 · 八源各 3 篇 · 标题全中文 ·
-            全文深度总结
+            {editions.every(
+              (edition) =>
+                edition.articles.length === editions[0]?.articles.length &&
+                edition.articles.every((article) => !article.brief),
+            )
+              ? `已收录 ${editions.length} 期 · 每期 ${editions[0]?.articles.length ?? 0} 条 · 八源各 3 篇 · 标题全中文 · 全文深度总结`
+              : `已收录 ${editions.length} 期 · 标题全中文 · 全文深度总结`}
           </p>
           <p>按日期切换阅读，往期内容会保留。</p>
           <p>本站内容为对原报道的中文摘要整理，观点与事实以原站为准。</p>

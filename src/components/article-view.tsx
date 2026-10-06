@@ -9,7 +9,15 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getConcept, getStudy, linkifyArticle } from "@/lib/knowledge";
-import { articleHref, editionHref, getArticle, getEdition, getSource, readingMinutes } from "@/lib/news";
+import {
+  INFORMATION_BRIEF_DISCLAIMER,
+  articleHref,
+  editionHref,
+  getArticle,
+  getEdition,
+  getSource,
+  readingMinutes,
+} from "@/lib/news";
 
 export function ArticleView({ date, id }: { date: string; id: string }) {
   const article = getArticle(date, id);
@@ -44,13 +52,19 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
             <SourceLabel id={article.source} className="text-sm" />
             <Badge variant="secondary">{article.topic}</Badge>
             <span className="text-xs text-muted-foreground">
-              {date} · 约 {readingMinutes(article)} 分钟读完
+              {article.brief ? `${date} · 导语快讯` : `${date} · 约 ${readingMinutes(article)} 分钟读完`}
             </span>
           </div>
           <h1 className="reading-title mt-4 leading-tight font-black text-balance">
             {article.title}
           </h1>
           <div className="mt-6 h-1 w-16 rounded-full" style={{ backgroundColor: source.color }} />
+
+          {article.brief && (
+            <p className="mt-6 rounded-xl border border-dashed bg-secondary/50 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+              {INFORMATION_BRIEF_DISCLAIMER}
+            </p>
+          )}
 
           <div className="reading reading-body mt-8 space-y-6 text-foreground/90">
             {linked.map((segments, i) => (
@@ -66,13 +80,17 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
               </p>
             ))}
           </div>
-          <p className="mt-6 text-xs text-muted-foreground">
-            虚线下划线为知识库词条，悬停可预览释义，点击查看词条与反向链接。
-          </p>
+          {study && (
+            <p className="mt-6 text-xs text-muted-foreground">
+              虚线下划线为知识库词条，悬停可预览释义，点击查看词条与反向链接。
+            </p>
+          )}
 
           <div className="mt-10 rounded-2xl border bg-card p-5">
             <p className="text-sm text-muted-foreground">
-              以上为对 {source.en} 报道的中文深度总结，完整内容请阅读原文。
+              {article.brief
+                ? INFORMATION_BRIEF_DISCLAIMER
+                : `以上为对 ${source.en} 报道的中文深度总结，完整内容请阅读原文。`}
             </p>
             <a
               href={article.url}
@@ -147,7 +165,11 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
             </div>
           )}
           <div className="rounded-2xl border bg-card p-5">
-            <p className="font-heading font-bold">{source.name}本期另两篇</p>
+            <p className="font-heading font-bold">
+              {sameSource.length === 2
+                ? `${source.name}本期另两篇`
+                : `${source.name}本期其余${sameSource.length}条`}
+            </p>
             <Separator className="my-3" />
             <ul className="space-y-3">
               {sameSource.map((item) => (
