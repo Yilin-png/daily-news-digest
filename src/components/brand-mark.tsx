@@ -9,7 +9,7 @@ export function BrandMark({ className }: { className?: string }) {
       aria-hidden
       focusable="false"
     >
-      <rect width="64" height="64" rx="16" fill="#F7F2E8" />
+      <rect width="64" height="64" fill="#F7F2E8" />
       <circle cx="32" cy="16.5" r="8.2" fill="#F6E4A8" />
       <path d="M24 33.2 Q32 31.6 40 33.2" fill="none" stroke="#F3DCA6" strokeWidth="2.3" strokeLinecap="round" />
       <path d="M27 37.4 Q33 35.8 39 37.4" fill="none" stroke="#E7C57A" strokeWidth="2" strokeLinecap="round" />
