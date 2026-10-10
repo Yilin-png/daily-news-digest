@@ -3,8 +3,8 @@ import type { Study } from "@/lib/study";
 
 export const meta = {
   date: "2026-10-10",
-  weekday: "周四",
-  label: "2026 年 10 月 10 日 · 星期四",
+  weekday: "周六",
+  label: "2026 年 10 月 10 日 · 星期六",
 } as const;
 
 export const highlight =
