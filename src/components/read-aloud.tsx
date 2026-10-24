@@ -159,15 +159,25 @@ function speakAt(token: number, index: number) {
       halt(BLOCKED);
       return;
     }
-    if (event.error === "language-unavailable" || event.error === "voice-unavailable") {
-      halt(NO_VOICE);
+    if (
+      event.error === "language-unavailable" ||
+      event.error === "voice-unavailable" ||
+      event.error === "synthesis-failed"
+    ) {
+      const voices = synth.getVoices();
+      halt(voices.length === 0 || !chineseVoice() ? NO_VOICE : FAILED);
       return;
     }
     halt(FAILED);
   };
 
   emit({ ...snapshot, index, phase: "speaking" });
-  synth.speak(utterance);
+  try {
+    synth.speak(utterance);
+  } catch {
+    halt(FAILED);
+    return;
+  }
 
   if (index !== 0) return;
   window.setTimeout(() => {
@@ -190,49 +200,64 @@ function begin(articleKey: string, track: Track, chunks: string[]) {
   invalidate();
   if (wasBusy) synth.cancel();
 
-  const voices = synth.getVoices();
-  if (voices.length > 0 && !chineseVoice()) {
-    emit({ ...IDLE, notice: NO_VOICE });
-    return;
-  }
-
-  queue = chunks.map((chunk) => chunk.trim()).filter(Boolean);
-  if (queue.length === 0) {
+  const text = chunks.map((chunk) => chunk.trim()).filter(Boolean);
+  if (text.length === 0) {
     emit(IDLE);
     return;
   }
 
   const token = session;
-  emit({
-    articleKey,
-    track,
-    phase: "speaking",
-    index: 0,
-    total: queue.length,
-    notice: null,
-  });
-
-  if (voices.length === 0) {
-    const onVoices = () => {
-      clearVoiceWait();
+  const launch = () => {
+    if (token !== session) return;
+    const voices = synth.getVoices();
+    if (voices.length === 0 || !chineseVoice()) {
+      emit({ ...IDLE, notice: NO_VOICE });
+      return;
+    }
+    queue = text;
+    emit({
+      articleKey,
+      track,
+      phase: "speaking",
+      index: 0,
+      total: text.length,
+      notice: null,
+    });
+    const start = () => {
       if (token !== session) return;
-      if (synth.getVoices().length > 0 && !chineseVoice()) {
-        invalidate();
-        synth.cancel();
-        emit({ ...IDLE, notice: NO_VOICE });
-      }
+      speakAt(token, 0);
     };
-    synth.addEventListener("voiceschanged", onVoices);
-    detachVoices = () => synth.removeEventListener("voiceschanged", onVoices);
+    // Chrome ignores speak() in the same turn as cancel().
+    if (wasBusy) window.setTimeout(start, 50);
+    else start();
+  };
+
+  if (synth.getVoices().length > 0) {
+    launch();
+    return;
   }
 
-  const start = () => {
-    if (token !== session) return;
-    speakAt(token, 0);
+  // Chrome often fills getVoices() only after voiceschanged. Wait briefly, still
+  // inside the click's user-activation window, before deciding there is no voice.
+  let settled = false;
+  const timer = window.setTimeout(() => {
+    if (settled) return;
+    settled = true;
+    clearVoiceWait();
+    launch();
+  }, 400);
+  const onVoices = () => {
+    if (settled || synth.getVoices().length === 0) return;
+    settled = true;
+    window.clearTimeout(timer);
+    clearVoiceWait();
+    launch();
   };
-  // Chrome ignores speak() in the same turn as cancel().
-  if (wasBusy) window.setTimeout(start, 50);
-  else start();
+  synth.addEventListener("voiceschanged", onVoices);
+  detachVoices = () => {
+    window.clearTimeout(timer);
+    synth.removeEventListener("voiceschanged", onVoices);
+  };
 }
 
 function pause() {
