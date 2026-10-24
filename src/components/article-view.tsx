@@ -2,13 +2,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
+import { ReadAloud } from "@/components/read-aloud";
 import { Segments } from "@/components/rich-text";
 import { StudySection, studyAnchors } from "@/components/study-section";
 import { SourceLabel } from "@/components/source-label";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { getConcept, getStudy, linkifyArticle } from "@/lib/knowledge";
+import { articleKey, getConcept, getStudy, linkifyArticle } from "@/lib/knowledge";
+import { articleSpeechChunks, studySpeechChunks } from "@/lib/speech-text";
 import {
   INFORMATION_BRIEF_DISCLAIMER,
   articleHref,
@@ -59,6 +61,12 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
             {article.title}
           </h1>
           <div className="mt-6 h-1 w-16 rounded-full" style={{ backgroundColor: source.color }} />
+
+          <ReadAloud
+            articleKey={articleKey(article)}
+            articleChunks={articleSpeechChunks(article.title, article.paragraphs)}
+            studyChunks={study ? studySpeechChunks(study) : undefined}
+          />
 
           {article.brief && (
             <p className="mt-6 rounded-xl border border-dashed bg-secondary/50 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
