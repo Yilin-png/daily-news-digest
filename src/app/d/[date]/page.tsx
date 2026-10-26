@@ -14,12 +14,22 @@ export async function generateMetadata({
   const edition = getEdition(date);
   if (!edition) return { title: "未找到这一期" };
   const briefCount = edition.articles.filter((article) => article.brief).length;
+  const sourceCount = new Set(edition.articles.map((article) => article.source)).size;
+  const balanced =
+    sourceCount > 0 &&
+    [...new Set(edition.articles.map((article) => article.source))].every(
+      (id) => edition.articles.filter((article) => article.source === id).length === 3,
+    );
+  const balanceLabel =
+    balanced && sourceCount === 8 ? "八源各 3 篇" : balanced && sourceCount === 7 ? "七源各 3 篇" : null;
   return {
     title: edition.label,
     description:
       briefCount > 0
         ? `${edition.label}，共 ${edition.articles.length} 条，${edition.articles.length - briefCount} 篇全文深度总结，The Information ${briefCount} 条仅标题与导语。`
-        : `${edition.label}，共 ${edition.articles.length} 条，八源各 3 篇。`,
+        : balanceLabel
+          ? `${edition.label}，共 ${edition.articles.length} 条，${balanceLabel}。`
+          : `${edition.label}，共 ${edition.articles.length} 条。`,
   };
 }
 
