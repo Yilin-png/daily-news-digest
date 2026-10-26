@@ -23,6 +23,12 @@ export function EditionHome({ edition }: { edition: Edition }) {
   const lead = edition.articles[0];
   const briefCount = edition.articles.filter((article) => article.brief).length;
   const fullCount = edition.articles.length - briefCount;
+  const sourceIds = [...new Set(edition.articles.map((article) => article.source))];
+  const balanced =
+    sourceIds.length > 0 &&
+    sourceIds.every((id) => edition.articles.filter((article) => article.source === id).length === 3);
+  const balanceLabel =
+    balanced && sourceIds.length === 8 ? "八源各 3 篇" : balanced && sourceIds.length === 7 ? "七源各 3 篇" : null;
   const summit = edition.articles.filter((article) => article.topic === "中美峰会" && article.id !== lead.id);
   const hubs = [...concepts]
     .map((concept) => ({ concept, n: conceptMentionCount(concept.id) }))
@@ -38,7 +44,9 @@ export function EditionHome({ edition }: { edition: Edition }) {
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
           {briefCount > 0
             ? `${edition.label} · 共 ${edition.articles.length} 条 · ${fullCount} 篇全文深度总结 · The Information ${briefCount} 条导语快讯`
-            : `${edition.label} · 共 ${edition.articles.length} 条 · 八源各 3 篇 · 全文深度总结`}
+            : balanceLabel
+              ? `${edition.label} · 共 ${edition.articles.length} 条 · ${balanceLabel} · 全文深度总结`
+              : `${edition.label} · 共 ${edition.articles.length} 条 · 全文深度总结`}
         </p>
         <DateSwitcher current={edition.date} className="mt-5 flex justify-center" />
         <p className="mt-3 text-xs text-muted-foreground">已收录 {editions.length} 期</p>
