@@ -1,6 +1,7 @@
 import * as edition0924 from "@/lib/editions/2026-09-24";
 import * as edition0925 from "@/lib/editions/2026-09-25";
 import * as edition0926 from "@/lib/editions/2026-09-26";
+import * as edition1030 from "@/lib/editions/2026-10-30";
 import * as edition1029 from "@/lib/editions/2026-10-29";
 import * as edition1028 from "@/lib/editions/2026-10-28";
 import * as edition1027 from "@/lib/editions/2026-10-27";
@@ -136,7 +137,7 @@ function pack(mod: {
 }
 
 /** Newest first. Add a module under src/lib/editions and register it here. */
-export const editions: Edition[] = [pack(edition1029), pack(edition1028), pack(edition1027), pack(edition1026), pack(edition1025), pack(edition1024), pack(edition1023), pack(edition1022), pack(edition1021), pack(edition1020), pack(edition1019), pack(edition1018), pack(edition1017), pack(edition1016), pack(edition1015), pack(edition1014), pack(edition1013), pack(edition1012), pack(edition1011), pack(edition1010), pack(edition1009), pack(edition1008), pack(edition1007), pack(edition1006), pack(edition1005), pack(edition1004), pack(edition1003), pack(edition1002), pack(edition1001), pack(edition0930), pack(edition0929), pack(edition0928), pack(edition0927), pack(edition0926), pack(edition0925), pack(edition0924)].sort((a, b) =>
+export const editions: Edition[] = [pack(edition1030), pack(edition1029), pack(edition1028), pack(edition1027), pack(edition1026), pack(edition1025), pack(edition1024), pack(edition1023), pack(edition1022), pack(edition1021), pack(edition1020), pack(edition1019), pack(edition1018), pack(edition1017), pack(edition1016), pack(edition1015), pack(edition1014), pack(edition1013), pack(edition1012), pack(edition1011), pack(edition1010), pack(edition1009), pack(edition1008), pack(edition1007), pack(edition1006), pack(edition1005), pack(edition1004), pack(edition1003), pack(edition1002), pack(edition1001), pack(edition0930), pack(edition0929), pack(edition0928), pack(edition0927), pack(edition0926), pack(edition0925), pack(edition0924)].sort((a, b) =>
   b.date.localeCompare(a.date),
 );
 
