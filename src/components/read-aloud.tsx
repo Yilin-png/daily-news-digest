@@ -4,6 +4,7 @@ import { useEffect, useId, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { PauseIcon, PlayIcon, SquareIcon, Volume2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SENTENCE_CHUNK, SHORT_CHUNK, chunkSpeech } from "@/lib/speech-chunk";
 
 type Track = "article" | "study";
 type Phase = "idle" | "speaking" | "paused";
@@ -36,6 +37,8 @@ const listeners = new Set<() => void>();
 let session = 0;
 let utteranceGen = 0;
 let queue: string[] = [];
+let parts: string[] = [];
+let activeVoice: SpeechSynthesisVoice | null = null;
 let pausedByUser = false;
 let hooksBound = false;
 let detachVoices: (() => void) | null = null;
@@ -69,34 +72,143 @@ function synthOrNull(): SpeechSynthesis | null {
   return window.speechSynthesis;
 }
 
-function voiceScore(voice: SpeechSynthesisVoice): number {
-  const lang = voice.lang.toLowerCase().replace(/_/g, "-");
-  const name = voice.name.toLowerCase();
-  let score = 100;
-  if (lang === "zh-cn" || lang.startsWith("zh-cn-")) score = 0;
-  else if (lang.startsWith("cmn-hans")) score = 1;
-  else if (lang.startsWith("zh-hans")) score = 2;
-  else if (lang.startsWith("zh") || lang.startsWith("cmn")) score = 4;
-  else if (name.includes("chinese") || name.includes("中文") || name.includes("普通话")) score = 6;
-  else return 100;
-  if (name.includes("普通话") || /xiaoxiao|xiaoyi|yunxi|ting-ting|tingting|meijia/.test(name)) score -= 0.4;
-  if (voice.default) score -= 0.1;
-  return score;
+export type VoiceOption = { id: string; label: string; rank: number; quality: number };
+type VoiceList = { options: VoiceOption[]; selected: string | null; bestQuality: number };
+
+const VOICE_KEY = "read-aloud-voice";
+const NO_VOICES: VoiceList = { options: [], selected: null, bestQuality: 0 };
+let voiceList: VoiceList = NO_VOICES;
+let voiceKey = "";
+let preferredLoaded = false;
+const voiceListeners = new Set<() => void>();
+
+function voiceId(voice: SpeechSynthesisVoice): string {
+  return voice.voiceURI || voice.name;
 }
 
-function chineseVoice(): SpeechSynthesisVoice | null {
+/** Higher is closer to Mainland Mandarin; 0 means not a Chinese voice. */
+function langTier(voice: SpeechSynthesisVoice): number {
+  const lang = voice.lang.toLowerCase().replace(/_/g, "-");
+  const name = voice.name.toLowerCase();
+  if (/^(zh-cn|cmn-hans|zh-hans|cmn-cn)/.test(lang) || lang === "zh" || lang === "cmn") return 4;
+  if (/^(zh-hk|zh-yue|yue)/.test(lang) || /cantonese|粤/.test(name)) return 1;
+  if (lang.startsWith("zh") || lang.startsWith("cmn")) return 2;
+  if (/chinese|中文|普通话|mandarin/.test(name)) return 2;
+  return 0;
+}
+
+/** Rough naturalness of the voice, judged from how browsers name their neural voices. */
+function voiceQuality(voice: SpeechSynthesisVoice): number {
+  const name = voice.name.toLowerCase();
+  if (/natural|neural/.test(name)) return 9; // Edge: "Microsoft Xiaoxiao Online (Natural)"
+  if (/premium|优化/.test(name)) return 8; // Apple downloadable premium voices
+  if (/xiaoxiao|xiaoyi|xiaochen|xiaohan|xiaomo|xiaorui|yunxi|yunjian|yunyang/.test(name)) return 7;
+  if (/online/.test(name)) return 7;
+  if (/enhanced|增强/.test(name)) return 6;
+  if (/google/.test(name)) return 5;
+  if (/huihui|kangkang|yaoyao|compact|espeak|eloquence/.test(name)) return 1; // old SAPI / robotic engines
+  return 3;
+}
+
+function voiceLabel(voice: SpeechSynthesisVoice, tier: number, quality: number): string {
+  let name = voice.name
+    .replace(/^microsoft\s+/i, "")
+    .replace(/\s+online\s*\(natural\)/i, "")
+    .replace(/\s*-\s*chinese.*$/i, "")
+    .replace(/\s*\((enhanced|premium)\)/i, "")
+    .trim();
+  if (!name) name = voice.name;
+  const tags: string[] = [];
+  if (quality >= 6) tags.push("自然");
+  if (tier < 4) tags.push(voice.lang);
+  return tags.length > 0 ? `${name}（${tags.join("，")}）` : name;
+}
+
+function readPreferred(): string | null {
+  try {
+    return localStorage.getItem(VOICE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writePreferred(id: string | null) {
+  try {
+    if (id) localStorage.setItem(VOICE_KEY, id);
+    else localStorage.removeItem(VOICE_KEY);
+  } catch {
+    /* private mode */
+  }
+}
+
+function emitVoices(next: VoiceList) {
+  voiceList = next;
+  for (const listener of voiceListeners) listener();
+}
+
+function refreshVoices() {
+  const synth = synthOrNull();
+  if (!synth) return;
+  const selected = preferredLoaded ? voiceList.selected : readPreferred();
+  preferredLoaded = true;
+  const options = synth
+    .getVoices()
+    .flatMap((voice) => {
+      const tier = langTier(voice);
+      if (tier === 0) return [];
+      const quality = voiceQuality(voice);
+      const rank = tier * 10 + quality + (voice.default ? 0.5 : 0);
+      return [{ id: voiceId(voice), label: voiceLabel(voice, tier, quality), rank, quality }];
+    })
+    .sort((x, y) => y.rank - x.rank);
+  const key = `${selected ?? ""}|${options.map((option) => option.id).join("|")}`;
+  if (key === voiceKey) return;
+  voiceKey = key;
+  const bestQuality = options.reduce((best, option) => Math.max(best, option.quality), 0);
+  emitVoices({ options, selected, bestQuality });
+}
+
+function subscribeVoices(listener: () => void) {
+  voiceListeners.add(listener);
+  return () => voiceListeners.delete(listener);
+}
+
+function getVoices() {
+  return voiceList;
+}
+
+function getServerVoices() {
+  return NO_VOICES;
+}
+
+/** The voice the reader picked, or else the most natural Mandarin voice available. */
+function pickVoice(): SpeechSynthesisVoice | null {
   const synth = synthOrNull();
   if (!synth) return null;
+  const voices = synth.getVoices();
+  const wanted = voiceList.selected;
+  if (wanted) {
+    const chosen = voices.find((voice) => voiceId(voice) === wanted);
+    if (chosen) return chosen;
+  }
   let best: SpeechSynthesisVoice | null = null;
-  let bestScore = 100;
-  for (const voice of synth.getVoices()) {
-    const score = voiceScore(voice);
-    if (score < bestScore) {
+  let bestRank = 0;
+  for (const voice of voices) {
+    const tier = langTier(voice);
+    if (tier === 0) continue;
+    const rank = tier * 10 + voiceQuality(voice) + (voice.default ? 0.5 : 0);
+    if (rank > bestRank) {
       best = voice;
-      bestScore = score;
+      bestRank = rank;
     }
   }
   return best;
+}
+
+function chunkLimit(voice: SpeechSynthesisVoice | null): number {
+  if (!voice) return SHORT_CHUNK;
+  if (!voice.localService && /google/i.test(voice.name)) return SHORT_CHUNK;
+  return SENTENCE_CHUNK;
 }
 
 function invalidate() {
@@ -104,6 +216,8 @@ function invalidate() {
   utteranceGen += 1;
   pausedByUser = false;
   queue = [];
+  parts = [];
+  activeVoice = null;
   clearVoiceWait();
 }
 
@@ -133,9 +247,9 @@ function speakAt(token: number, index: number) {
 
   const gen = ++utteranceGen;
   const utterance = new SpeechSynthesisUtterance(queue[index]);
-  utterance.lang = "zh-CN";
+  const voice = activeVoice ?? pickVoice();
+  utterance.lang = voice?.lang || "zh-CN";
   utterance.rate = 1;
-  const voice = chineseVoice();
   if (voice) utterance.voice = voice;
 
   let started = false;
@@ -165,7 +279,7 @@ function speakAt(token: number, index: number) {
       event.error === "synthesis-failed"
     ) {
       const voices = synth.getVoices();
-      halt(voices.length === 0 || !chineseVoice() ? NO_VOICE : FAILED);
+      halt(voices.length === 0 || !pickVoice() ? NO_VOICE : FAILED);
       return;
     }
     halt(FAILED);
@@ -184,11 +298,11 @@ function speakAt(token: number, index: number) {
     if (token !== session || gen !== utteranceGen || pausedByUser) return;
     if (started || synth.speaking || synth.pending || snapshot.phase !== "speaking") return;
     const voices = synth.getVoices();
-    halt(voices.length === 0 || !chineseVoice() ? NO_VOICE : FAILED);
+    halt(voices.length === 0 || !pickVoice() ? NO_VOICE : FAILED);
   }, 1200);
 }
 
-function begin(articleKey: string, track: Track, chunks: string[]) {
+function begin(articleKey: string, track: Track, source: string[]) {
   const synth = synthOrNull();
   if (!synth) {
     emit({ ...IDLE, notice: UNSUPPORTED });
@@ -200,7 +314,7 @@ function begin(articleKey: string, track: Track, chunks: string[]) {
   invalidate();
   if (wasBusy) synth.cancel();
 
-  const text = chunks.map((chunk) => chunk.trim()).filter(Boolean);
+  const text = source.map((part) => part.trim()).filter(Boolean);
   if (text.length === 0) {
     emit(IDLE);
     return;
@@ -209,18 +323,21 @@ function begin(articleKey: string, track: Track, chunks: string[]) {
   const token = session;
   const launch = () => {
     if (token !== session) return;
-    const voices = synth.getVoices();
-    if (voices.length === 0 || !chineseVoice()) {
+    refreshVoices();
+    const voice = pickVoice();
+    if (!voice) {
       emit({ ...IDLE, notice: NO_VOICE });
       return;
     }
-    queue = text;
+    parts = text;
+    activeVoice = voice;
+    queue = chunkSpeech(text, chunkLimit(voice));
     emit({
       articleKey,
       track,
       phase: "speaking",
       index: 0,
-      total: text.length,
+      total: queue.length,
       notice: null,
     });
     const start = () => {
@@ -289,6 +406,44 @@ function resume() {
   }, 250);
 }
 
+/** Switch voice; if something is being read, carry on from the same spot in the new voice. */
+function chooseVoice(id: string | null) {
+  writePreferred(id);
+  voiceKey = "";
+  emitVoices({ ...voiceList, selected: id });
+  refreshVoices();
+
+  const synth = synthOrNull();
+  if (!synth || snapshot.phase === "idle" || parts.length === 0) return;
+  const voice = pickVoice();
+  if (!voice) return;
+
+  let offset = 0;
+  for (let i = 0; i < snapshot.index && i < queue.length; i += 1) offset += queue[i].length;
+  const next = chunkSpeech(parts, chunkLimit(voice));
+  let index = 0;
+  for (let seen = 0; index < next.length - 1; index += 1) {
+    if (seen + next[index].length > offset) break;
+    seen += next[index].length;
+  }
+
+  utteranceGen += 1;
+  synth.cancel();
+  activeVoice = voice;
+  queue = next;
+  if (snapshot.phase === "paused") {
+    // resume() notices nothing is queued and restarts from this index.
+    emit({ ...snapshot, index, total: next.length });
+    return;
+  }
+  emit({ ...snapshot, index, total: next.length, phase: "speaking" });
+  const token = session;
+  window.setTimeout(() => {
+    if (token !== session) return;
+    speakAt(token, index);
+  }, 50);
+}
+
 function play(articleKey: string, track: Track, chunks: string[]) {
   if (snapshot.articleKey === articleKey && snapshot.track === track) {
     if (snapshot.phase === "speaking") {
@@ -304,33 +459,35 @@ function play(articleKey: string, track: Track, chunks: string[]) {
 }
 
 function primeVoices() {
-  const synth = synthOrNull();
-  synth?.getVoices();
+  refreshVoices();
 }
 
 export function ReadAloud({
   articleKey,
-  articleChunks,
-  studyChunks,
+  articleParts,
+  studyParts,
 }: {
   articleKey: string;
-  articleChunks: string[];
-  studyChunks?: string[];
+  articleParts: string[];
+  studyParts?: string[];
 }) {
   const pathname = usePathname();
   const hintId = useId();
   const snap = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const voices = useSyncExternalStore(subscribeVoices, getVoices, getServerVoices);
   const mine = snap.articleKey === articleKey;
   const articleOn = mine && snap.track === "article" && snap.phase !== "idle";
   const studyOn = mine && snap.track === "study" && snap.phase !== "idle";
   const busy = articleOn || studyOn;
-  const hasStudy = !!studyChunks && studyChunks.length > 0;
+  const hasStudy = !!studyParts && studyParts.length > 0;
+  const voiceValue = voices.options.some((option) => option.id === voices.selected) ? (voices.selected ?? "") : "";
+  const basicOnly = voices.options.length > 0 && voices.bestQuality < 5;
 
   useEffect(() => {
     bindHooks();
     primeVoices();
     const synth = synthOrNull();
-    const onVoices = () => synth?.getVoices();
+    const onVoices = () => refreshVoices();
     synth?.addEventListener("voiceschanged", onVoices);
     return () => {
       synth?.removeEventListener("voiceschanged", onVoices);
@@ -358,7 +515,7 @@ export function ReadAloud({
           idle="朗读"
           idleLabel="朗读标题和正文"
           activeNoun="正文"
-          onClick={() => play(articleKey, "article", articleChunks)}
+          onClick={() => play(articleKey, "article", articleParts)}
         />
         {hasStudy ? (
           <SpeakButton
@@ -367,7 +524,7 @@ export function ReadAloud({
             idle="朗读深度学习"
             idleLabel="朗读深度学习"
             activeNoun="深度学习"
-            onClick={() => play(articleKey, "study", studyChunks ?? [])}
+            onClick={() => play(articleKey, "study", studyParts ?? [])}
           />
         ) : null}
         {busy ? (
@@ -375,6 +532,24 @@ export function ReadAloud({
             <SquareIcon />
             停止
           </Button>
+        ) : null}
+        {voices.options.length > 1 ? (
+          <label className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+            声音
+            <select
+              className="h-7 max-w-[13rem] rounded-md border border-input bg-background px-1.5 text-xs text-foreground"
+              value={voiceValue}
+              onChange={(event) => chooseVoice(event.target.value || null)}
+              data-read-aloud-voice
+            >
+              <option value="">自动 · {voices.options[0].label}</option>
+              {voices.options.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
         ) : null}
         <p className="sr-only" role="status">
           {phaseText}
@@ -392,6 +567,11 @@ export function ReadAloud({
             style={{ width: `${Math.max(6, Math.round(((snap.index + 1) / snap.total) * 100))}%` }}
           />
         </div>
+      ) : null}
+      {busy && basicOnly ? (
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-read-aloud-tip>
+          这台设备只有基础中文语音，听起来会比较生硬。用 Edge 浏览器可以选「晓晓」等自然语音；Mac 或 iPhone 可以在系统设置里下载「优化」或「高级」版的中文语音。
+        </p>
       ) : null}
     </div>
   );

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { articleKey, getConcept, getStudy, linkifyArticle } from "@/lib/knowledge";
-import { articleSpeechChunks, studySpeechChunks } from "@/lib/speech-text";
+import { articleSpeechParts, studySpeechParts } from "@/lib/speech-text";
 import {
   INFORMATION_BRIEF_DISCLAIMER,
   articleHref,
@@ -64,8 +64,8 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
 
           <ReadAloud
             articleKey={articleKey(article)}
-            articleChunks={articleSpeechChunks(article.title, article.paragraphs)}
-            studyChunks={study ? studySpeechChunks(study) : undefined}
+            articleParts={articleSpeechParts(article.title, article.paragraphs)}
+            studyParts={study ? studySpeechParts(study) : undefined}
           />
 
           {article.brief && (
