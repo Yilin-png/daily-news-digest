@@ -62,7 +62,7 @@ export function ConceptDirectory({
           />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+          <div className="-mx-1 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1">
             {(["all", ...categories] as const).map((cat) => (
               <button
                 key={cat}

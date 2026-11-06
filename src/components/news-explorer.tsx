@@ -146,7 +146,7 @@ export function NewsExplorer({ articles }: { articles: Article[] }) {
 
         <div className="space-y-2">
           <p className="text-xs font-medium text-muted-foreground">来源</p>
-          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap">
+          <div className="-mx-1 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1 sm:flex-wrap">
             <Chip active={source === "all"} onClick={() => pickSource("all")} count={articles.length}>
               全部
             </Chip>
@@ -165,7 +165,7 @@ export function NewsExplorer({ articles }: { articles: Article[] }) {
 
         <div className="space-y-2">
           <p className="text-xs font-medium text-muted-foreground">主题</p>
-          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap">
+          <div className="-mx-1 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1 sm:flex-wrap">
             <Chip active={topic === "all"} onClick={() => setTopic("all")}>
               全部主题
             </Chip>

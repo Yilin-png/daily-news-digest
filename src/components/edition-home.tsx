@@ -5,7 +5,6 @@ import { NewsExplorer } from "@/components/news-explorer";
 import { SourceLabel } from "@/components/source-label";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { concepts } from "@/lib/concepts";
 import { conceptMentionCount } from "@/lib/knowledge";
 import {
@@ -29,7 +28,6 @@ export function EditionHome({ edition }: { edition: Edition }) {
     sourceIds.every((id) => edition.articles.filter((article) => article.source === id).length === 3);
   const balanceLabel =
     balanced && sourceIds.length === 8 ? "八源各 3 篇" : balanced && sourceIds.length === 7 ? "七源各 3 篇" : null;
-  const summit = edition.articles.filter((article) => article.topic === "中美峰会" && article.id !== lead.id);
   const hubs = [...concepts]
     .map((concept) => ({ concept, n: conceptMentionCount(concept.id) }))
     .sort((a, b) => b.n - a.n)
@@ -57,7 +55,7 @@ export function EditionHome({ edition }: { edition: Edition }) {
         </div>
       </section>
 
-      <section id="lead" className="scroll-mt-20 grid gap-8 py-10 lg:grid-cols-[1.6fr_1fr]">
+      <section id="lead" className="scroll-mt-20 py-10">
         <article className="flex flex-col">
           <div className="flex items-center gap-3">
             <Badge className="bg-brand text-white">头条</Badge>
@@ -88,41 +86,9 @@ export function EditionHome({ edition }: { edition: Edition }) {
           </div>
         </article>
 
-        <aside className="rounded-2xl border bg-card p-5">
-          <p className="font-heading text-base font-bold">峰会 · 多方视角</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            同一场白宫会晤，{summit.length + (lead.topic === "中美峰会" ? 1 : 0)} 家媒体的不同解读
-          </p>
-          <Separator className="my-4" />
-          <ol className="space-y-4">
-            {summit.map((article, index) => (
-              <li key={article.id}>
-                <Link href={articleHref(article)} className="group flex gap-3">
-                  <span className="font-heading text-2xl leading-none font-black text-muted-foreground/40">
-                    {index + 1}
-                  </span>
-                  <span className="space-y-1">
-                    <SourceLabel id={article.source} className="text-muted-foreground" />
-                    <span className="block leading-snug font-semibold group-hover:text-brand">
-                      {article.title}
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </aside>
       </section>
 
-      <section id="all" className="scroll-mt-20 pt-14">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-black sm:text-3xl">全部新闻</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {edition.label} · 按来源、主题筛选，或直接搜索关键词
-            </p>
-          </div>
-        </div>
+      <section id="all" className="scroll-mt-20 border-t pt-10">
         {briefCount > 0 && (
           <p className="mb-4 rounded-xl border border-dashed bg-card px-4 py-3 text-sm leading-relaxed text-muted-foreground">
             The Information：{INFORMATION_BRIEF_DISCLAIMER}
