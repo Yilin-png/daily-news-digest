@@ -12,7 +12,6 @@ export function HeaderNav() {
     { href: "/", label: "首页" },
     { href: "/search", label: "检索" },
     { href: "/learn", label: "知识库" },
-    { href: `${base}#all`, label: "全部新闻" },
     { href: `${base}#lead`, label: "头条" },
     { href: `${base}#links`, label: "原站链接" },
   ];

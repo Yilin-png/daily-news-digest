@@ -149,6 +149,20 @@ body {
   font-family: var(--font-serif), "Songti SC", serif;
 }
 
+/*
+ * Keep the page from drifting sideways on phones. `clip` (unlike `hidden`)
+ * makes no scroll container, so the sticky header keeps working; `hidden`
+ * is the fallback for browsers without `clip`. Chip rows still scroll on
+ * their own because they are their own scroll containers.
+ */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
+
 html[data-font="sans"] body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }

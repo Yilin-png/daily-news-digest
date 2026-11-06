@@ -44,7 +44,7 @@ export function ArticleView({ date, id }: { date: string; id: string }) {
           href={`${editionHref(date)}#all`}
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
         >
-          <ArrowLeftIcon className="size-4" /> 返回{date}全部新闻
+          <ArrowLeftIcon className="size-4" /> 返回{date}新闻
         </Link>
       </div>
 
