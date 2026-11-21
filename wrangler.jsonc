@@ -3,6 +3,13 @@
   "name": "daily-news-digest",
   "main": "worker/index.ts",
   "compatibility_date": "2026-09-26",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "news.nootliao.com",
+      "custom_domain": true
+    }
+  ],
   "ai": {
     "binding": "AI"
   },
