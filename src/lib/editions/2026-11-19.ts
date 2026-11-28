@@ -560,7 +560,7 @@ export const studies: Record<string, Study> = {
       { time: "n-2", event: "只允许至少落后两代的芯片进入中国" },
       { time: "十年以上", event: "中国距离商用可行EUV设备" },
     ],
-    terms: ["nvidia", "ai-data-center", "chip-export-controls", "superintelligence", "bessent"],
+    terms: ["nvidia", "ai-data-center", "chip-export-controls", "superintelligence", "bessent", "recursive-self-improvement"],
     questions: [
       "进步研究所怎么估算远程访问与走私的影响？",
       "社论提出了哪些具体管控建议？",

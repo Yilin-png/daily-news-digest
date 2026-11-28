@@ -584,13 +584,13 @@ export const studies: Record<string, Study> = {
   "17": {
     background: [
       "以斯拉·克莱因访谈Arvind Narayanan。对方主张没有突变里程碑，变化在长周期展开。模型“强大”被写成我们赋予它的现实权限，而不是模型固有属性。[[hugging-face|Hugging Face]]等失控事件，既可以读成对齐失败，也可以读成网络安全与运营不足。",
-      "控制手段包括沙箱、实时监控、工具调用分类器、人工熔断与日志分析。扩散被比作轨道而不是火车：Amtrak新车组理论时速165英里，轨道弯曲与老旧信号使均速仍约65—70。可能证伪其命题的证据包括某一能力水平上职业被整建制替代，或实验室内递归自我改进突破外部瓶颈、兑现[[superintelligence|超智能]]。文中把那种瞬间改写称为越过[[tipping-point|临界点]]。[[agent-misalignment|失控]]在这里被写成一连串人类选择的结果，而不是模型自己长出来的意志。",
+      "控制手段包括沙箱、实时监控、工具调用分类器、人工熔断与日志分析。扩散被比作轨道而不是火车：Amtrak新车组理论时速165英里，轨道弯曲与老旧信号使均速仍约65—70。可能证伪其命题的证据包括某一能力水平上职业被整建制替代，或实验室内[[recursive-self-improvement|递归自我改进]]突破外部瓶颈、兑现[[superintelligence|超智能]]。文中把那种瞬间改写称为越过[[tipping-point|临界点]]。[[agent-misalignment|失控]]在这里被写成一连串人类选择的结果，而不是模型自己长出来的意志。",
     ],
     timeline: [
       { time: "GPT-2时期", event: "曾因假信息恐慌推迟发布，更强模型并未引爆失控假信息潮" },
       { time: "访谈", event: "Narayanan把扩散瓶颈放在轨道，而不是火车本身" },
     ],
-    terms: ["hugging-face", "superintelligence", "tipping-point", "agent-misalignment"],
+    terms: ["hugging-face", "superintelligence", "tipping-point", "agent-misalignment", "recursive-self-improvement"],
     questions: [
       "Narayanan把扩散的瓶颈比作火车还是轨道？Amtrak理论时速和均速分别写成多少英里？",
       "他写成可能证伪自己命题的两类证据是什么？",

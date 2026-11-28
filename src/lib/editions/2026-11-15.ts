@@ -762,7 +762,7 @@ export const studies: Record<string, Study> = {
       { time: "数百美元", event: "一些长时程智能体测试现在每项任务的花费" },
       { time: "50家", event: "该报2026年最有前景初创公司名单的规模" },
     ],
-    terms: ["open-weight-model", "openai", "anthropic", "ai-agent", "frontier-model"],
+    terms: ["open-weight-model", "openai", "anthropic", "ai-agent", "frontier-model", "recursive-self-improvement"],
     questions: [
       "ARTEX什么时候发布，CrowdStrike说它在多少天里针对了多少家机构？",
       "希尔-史密斯如何描述“快速起飞”？使用成本每年下降多少，长时程测试现在一项要花多少？",
