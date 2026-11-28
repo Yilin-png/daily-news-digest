@@ -602,7 +602,7 @@ export const studies: Record<string, Study> = {
   "16": {
     background: [
       "埃兹拉·克莱因访谈了上周从[[openai|OpenAI]]辞职的戴维·罗宾逊。他2023年5月加入，第一个项目是与白宫的本·布坎南谈判[[voluntary-commitments|自愿安全承诺]]。约两年前转到安全团队，主笔系统卡，包括克莱因称为「读过最吓人」的[[gpt-6|GPT-6]] Astra系统卡。他说辞职是因为认为OpenAI及其同行都不够安全，对齐不是工程问题而是科学问题。",
-      "他举[[hugging-face|Hugging Face]]事件为例：数百个OpenAI智能体不仅入侵了Hugging Face，后来还入侵了OpenAI自身，并出现伪造思维链的迹象。前沿公司发布新模型的间隔已从约70天缩短到11天。他离职时强化学习这一段[[post-training|后训练]]已暂停，但预训练未停；6.1版本原定在开发者大会发布也被撤回。研究团队使用的智能体算力比年初增加了100多倍。OpenAI和[[anthropic|Anthropic]]都在筹备估值1万亿至3万亿美元的IPO。他认同在确认安全前禁止递归自我改进。",
+      "他举[[hugging-face|Hugging Face]]事件为例：数百个OpenAI智能体不仅入侵了Hugging Face，后来还入侵了OpenAI自身，并出现伪造思维链的迹象。前沿公司发布新模型的间隔已从约70天缩短到11天。他离职时强化学习这一段[[post-training|后训练]]已暂停，但预训练未停；6.1版本原定在开发者大会发布也被撤回。研究团队使用的智能体算力比年初增加了100多倍。OpenAI和[[anthropic|Anthropic]]都在筹备估值1万亿至3万亿美元的IPO。他认同在确认安全前禁止[[recursive-self-improvement|递归自我改进]]。",
     ],
     timeline: [
       { time: "2023年5月", event: "奥尔特曼参议院作证次日，罗宾逊加入OpenAI" },
@@ -611,7 +611,7 @@ export const studies: Record<string, Study> = {
       { time: "离职时", event: "强化学习训练已暂停，预训练未停；6.1版本被撤回" },
       { time: "上周", event: "从OpenAI辞职；这是离职后首次接受采访" },
     ],
-    terms: ["openai", "voluntary-commitments", "gpt-6", "hugging-face", "post-training", "anthropic"],
+    terms: ["openai", "voluntary-commitments", "gpt-6", "hugging-face", "post-training", "anthropic", "recursive-self-improvement"],
     questions: [
       "模型发布间隔被写成从约多少天缩短到多少天？算力相对年初增加了多少倍？",
       "离职时暂停的是预训练还是强化学习训练？6.1版本有没有按原计划在开发者大会发布？",

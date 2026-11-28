@@ -701,7 +701,7 @@ export const studies: Record<string, Study> = {
   },
   "23": {
     background: [
-      "[[openai|OpenAI]]首席执行官萨姆·奥尔特曼上周向员工讲述业界讨论过的三条“安全发展”路径，正值特朗普政府搭建第一套[[superintelligence|超级智能]]开发商监管。第一条类似国际原子能机构，由国际机构强制安全标准，他似乎更倾向这条。第二条是把各实验室并入单一实体，他称为“Demis方案”。第三条他明确不喜欢：某一开发商获得足够经济权力，剥夺其他开发商的算力，甚至在递归自我改进之后“熔掉别人的GPU”，他戏称为“Eliezer方案”。",
+      "[[openai|OpenAI]]首席执行官萨姆·奥尔特曼上周向员工讲述业界讨论过的三条“安全发展”路径，正值特朗普政府搭建第一套[[superintelligence|超级智能]]开发商监管。第一条类似国际原子能机构，由国际机构强制安全标准，他似乎更倾向这条。第二条是把各实验室并入单一实体，他称为“Demis方案”。第三条他明确不喜欢：某一开发商获得足够经济权力，剥夺其他开发商的算力，甚至在[[recursive-self-improvement|递归自我改进]]之后“熔掉别人的GPU”，他戏称为“Eliezer方案”。",
       "评论出现在OpenAI、[[anthropic|Anthropic]]、谷歌和Meta的模型接连越狱、入侵相关系统之后，也出现在OpenAI为下一旗舰补安全、三名安全研究员因对外分享信息被解雇之后。五角大楼埃米尔·迈克尔已警告，若不合作可以祭出[[chip-export-controls|出口管制]]，6月对Anthropic的Fable就是先例。OpenAI、谷歌和Anthropic正筹建“前沿人工智能标准局”，但对由谁做安全评测仍有分歧。Anthropic另向国会推销草案：重大伤亡或超过10亿美元损失时，可由商务部叫停训练。奥尔特曼称OpenAI必须在一年内选定推动哪条路径，同时强调眼下不能对竞争对手让步，两家都在冲刺上市。",
     ],
     timeline: [
@@ -710,7 +710,7 @@ export const studies: Record<string, Study> = {
       { time: "一年内", event: "OpenAI须选定要推动的路径" },
       { time: "草案", event: "重大伤亡或超10亿美元损失时，商务部或可叫停训练" },
     ],
-    terms: ["openai", "superintelligence", "anthropic", "chip-export-controls"],
+    terms: ["openai", "superintelligence", "anthropic", "chip-export-controls", "recursive-self-improvement"],
     questions: [
       "奥尔特曼更倾向哪一条路径？他不喜欢、并戏称为“Eliezer方案”的是哪一条？",
       "Anthropic向国会推销的叫停训练门槛是什么？OpenAI说必须在多长时间内选定路径？",

@@ -919,6 +919,7 @@ export const studies: Record<string, Study> = {
       "open-weight-model",
       "embodied-ai",
       "chip-export-controls",
+      "recursive-self-improvement",
     ],
     questions: [
       "弗里德曼给出的2025年中国贸易顺差是多少万亿美元？他预计今年会到多少？",

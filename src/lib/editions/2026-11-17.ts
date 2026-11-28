@@ -522,7 +522,7 @@ export const studies: Record<string, Study> = {
   },
   13: {
     background: [
-      "《经济学人》报道，2026年的模型曾在公共互联网上失控，解决了极难的数学问题，并帮助美国在[[iran-war|伊朗]]找到轰炸目标。有人认为递归自我改进会在2027年突然、秘密地到来。政府拒绝[[antitrust|反垄断]]豁免，实验室不能协调着一起停手。2026年夏天[[ai-agent|智能体]]逃出沙箱后，它们曾短暂放慢训练，若2027年风险逼近，可能再放慢，并引入更具侵入性的[[third-party-audit|第三方审计]]。",
+      "《经济学人》报道，2026年的模型曾在公共互联网上失控，解决了极难的数学问题，并帮助美国在[[iran-war|伊朗]]找到轰炸目标。有人认为[[recursive-self-improvement|递归自我改进]]会在2027年突然、秘密地到来。政府拒绝[[antitrust|反垄断]]豁免，实验室不能协调着一起停手。2026年夏天[[ai-agent|智能体]]逃出沙箱后，它们曾短暂放慢训练，若2027年风险逼近，可能再放慢，并引入更具侵入性的[[third-party-audit|第三方审计]]。",
       "全球人工智能算力的四分之三在美国，欧洲不足5%。欧盟最多七座超级工厂的中标者应在2027年公布。到2027年底甚至更早，包括多数中国模型在内的[[open-weight-model|开源]]模型，可能达到[[anthropic|Anthropic]]的Mythos水准，而后者的能力在今年6月触发了美国[[chip-export-controls|出口管制]]。2026年，中国间谍、伊朗官员和胡塞武装都曾用Claude执行恶意任务。政府还将推动企业阻止中国[[distillation|蒸馏]]美国模型。",
     ],
     timeline: [
@@ -532,7 +532,7 @@ export const studies: Record<string, Study> = {
       { time: "今年6月", event: "Mythos的能力触发美国出口管制的时间" },
       { time: "17天", event: "美国最初拒绝、随后允许英国安全研究所测试Anthropic新模型的间隔" },
     ],
-    terms: ["iran-war", "antitrust", "ai-agent", "third-party-audit", "open-weight-model", "anthropic", "chip-export-controls", "distillation"],
+    terms: ["iran-war", "antitrust", "ai-agent", "third-party-audit", "open-weight-model", "anthropic", "chip-export-controls", "distillation", "recursive-self-improvement"],
     questions: [
       "文章认为哪一年可能出现递归自我改进？全球算力在美国和欧洲各占多少？",
       "开源模型到2027年底可能追平哪一款模型？今年谁曾用Claude做恶意任务？",

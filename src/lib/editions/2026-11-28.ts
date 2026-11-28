@@ -584,7 +584,7 @@ export const studies: Record<string, Study> = {
       { time: "11月19日", event: "Anthropic上市敲钟；5000名员工的集体财富超过美国最贫困的1亿人总和" },
       { time: "11月下旬前后", event: "白宫施压英伟达，让黄仁勋复职" },
     ],
-    terms: ["anthropic", "p-doom", "openai", "agent-misalignment", "superintelligence", "nvidia"],
+    terms: ["anthropic", "p-doom", "openai", "agent-misalignment", "superintelligence", "nvidia", "recursive-self-improvement"],
     questions: [
       "阿莫迪去年给出的人类灭绝概率区间是多少？Anthropic上市时，多少名员工的集体财富被拿来和美国最贫困的1亿人比较？",
       "Buck Shlegeris所说的一年内无法正常生活的可能性是多少？文章用哪个词描述相信超级智能将统治的那一套想法？",

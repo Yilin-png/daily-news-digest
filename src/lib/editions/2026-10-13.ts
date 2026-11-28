@@ -572,7 +572,7 @@ export const studies: Record<string, Study> = {
   },
   "16": {
     background: [
-      "密歇根州民主党参议员提名人、医生阿卜杜勒·埃尔－萨耶德周二呼吁禁止[[superintelligence|超级智能]]，设立内阁级机构监管人工智能，并禁止用人工智能开发更复杂模型的递归自我改进。他把这称为时代的[[p-doom|生存危机]]。在《纽约时报》与[[times-siena|锡耶纳大学]]近期民调中，就“谁更擅长处理人工智能数据中心”，他领先共和党对手迈克·罗杰斯11个百分点。",
+      "密歇根州民主党参议员提名人、医生阿卜杜勒·埃尔－萨耶德周二呼吁禁止[[superintelligence|超级智能]]，设立内阁级机构监管人工智能，并禁止用人工智能开发更复杂模型的[[recursive-self-improvement|递归自我改进]]。他把这称为时代的[[p-doom|生存危机]]。在《纽约时报》与[[times-siena|锡耶纳大学]]近期民调中，就“谁更擅长处理人工智能数据中心”，他领先共和党对手迈克·罗杰斯11个百分点。",
       "罗杰斯曾警告人工智能构成国家安全威胁，并誓言把监管列为优先，但尚未发布人工智能政策平台。约一个月前，研究者警告技术或构成潜在生存威胁；[[anthropic|Anthropic]]首席执行官达里奥·阿莫代伊称担心人工智能或在明年内接管互联网。埃尔－萨耶德追随伯尼·桑德斯，后者亦呼吁暂停发展并禁止超级智能。民调显示选民对哪一党更有能力应对人工智能意见分裂。",
     ],
     timeline: [
@@ -580,7 +580,7 @@ export const studies: Record<string, Study> = {
       { time: "本周末", event: "桑德斯与特洛伊·杰克逊同台，把人工智能监管放进演讲" },
       { time: "周二", event: "埃尔－萨耶德发布禁止超级智能与递归自我改进的政纲" },
     ],
-    terms: ["superintelligence", "p-doom", "times-siena", "anthropic"],
+    terms: ["superintelligence", "p-doom", "times-siena", "anthropic", "recursive-self-improvement"],
     questions: [
       "埃尔－萨耶德呼吁禁止的两件事是什么？在数据中心问题上，他领先罗杰斯多少个百分点？",
       "阿莫代伊的警告具体是什么时间尺度？罗杰斯有没有已经发布人工智能政策平台？",
